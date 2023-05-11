@@ -1,4 +1,4 @@
-import { Container, Flex, chakra, Text, Box, Button } from "@chakra-ui/react"
+import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
 import Image from "next/image"
 
 export const Footer = () => {
@@ -7,16 +7,22 @@ export const Footer = () => {
       <Container maxW="container.xl" pt={8} pb={3} display="flex" flexDir="column">
         <Flex justifyContent="space-between" alignItems="flex-start" flexDirection={["column", "column", "column", "row", "row"]} gap={10}>
           <Flex flexDir="column" gap={8}>
-            <Flex gap={4} alignItems="center">
+            <Flex gap={4} alignItems={["flex-start", "flex-start", "center", "center", "center"]} flexDir={["column", "column", "row", "row", "row"]}>
               <Text fontSize="3xl">Верхняя Пышма</Text>
-              <Text>ул. Александра Козицына 2А</Text>
+              <Link target="_blank" rel="noreferer" href="https://yandex.ru/maps/-/CCUk5JdIsD">
+                <Text>ул. Александра Козицына 2А</Text>
+              </Link>
             </Flex>
             <Flex gap={10} flexDirection={["column", "column", "column", "row", "row"]}>
               <Flex flexDir="column" gap={2}>
                 <Text fontSize="lg" fontWeight="medium">Контакты</Text>
                 <Flex gap={5}>
-                  <Text>+7 963 850 07 58</Text>
-                  <Text>info@theatrum.center</Text>
+                  <Link href="tel:79638500758">
+                    <Text>+7 963 850 07 58</Text>
+                  </Link>
+                  <Link href="mailto:info@theatrum.center">
+                    <Text>info@theatrum.center</Text>
+                  </Link>
                 </Flex>
               </Flex>
               <Flex flexDir="column" gap={2}>
