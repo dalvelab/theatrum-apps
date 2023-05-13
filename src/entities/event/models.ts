@@ -11,9 +11,7 @@ export type Event = {
     slug: string;
     small_description: string;
     title: string;
-    banner: {
-      data: StrapiImage;
-    }
+    banner: StrapiImage;
     gallery: {
       data: StrapiImage[];
     };

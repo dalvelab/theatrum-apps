@@ -9,7 +9,7 @@ interface CardAfishaProps {
 }
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
-  const {age_limit, premiere, title} = afisha.attributes.event.data.attributes;
+  const {age_limit, premiere, title, banner } = afisha.attributes.event.data.attributes;
 
   return (
     <Flex 
@@ -20,7 +20,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
       flexDir={["column", "column", "column", "row", "row"]}>
       <chakra.div minW={["100%", "100%", "100%", "460px", "536px"]} h={["240px", "320px", "272px", "100%", "100%"]} pos="relative">
         <Image
-          src='/welcome-slider-1.jpg'
+          src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
           alt='Green double couch with wooden legs'
           style={{objectFit: "cover", borderRadius: '12px'}}
           fill

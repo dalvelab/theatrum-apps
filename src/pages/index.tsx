@@ -3,8 +3,11 @@ import { Button, Container, Grid, Heading, chakra } from '@chakra-ui/react';
 
 import { WelcomeSlider } from '@/widgets/Welcome'
 import { CardAfisha, CardNews } from '@/shared/components'
-import { getAfisha, ApiResponse, Meta,  } from '@/entities/event/api';
+import { getAfisha  } from '@/entities/event/api';
+import { getNews  } from '@/entities/post/api';
 import { Afisha } from '@/entities/event/models';
+import type {ApiResponse, Meta} from '@/shared/models/api';
+import type { News } from '@/entities/post/models';
 
 export default function Home({afisha, news}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
@@ -25,9 +28,9 @@ export default function Home({afisha, news}: InferGetServerSidePropsType<typeof 
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Новости</Heading>
             <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
-              <CardNews />
-              <CardNews />
-              <CardNews />
+              {news.data.map((post) => (
+                <CardNews key={post.id} post={post} />
+              ))}
             </Grid>
             <Button justifySelf="center" alignSelf="center" fontWeight="normal" pl={10} pr={10} borderColor="brand.300" color="brand.300" size='lg' variant="outline" _hover={{bgColor: "brand.300", color: "white"}}>Все новости</Button>
         </Container>
@@ -38,15 +41,10 @@ export default function Home({afisha, news}: InferGetServerSidePropsType<typeof 
 
 interface IProps {
   afisha: ApiResponse<Afisha[], Meta>
-  news: any[];
+  news: ApiResponse<News[], Meta>
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async (context) => {
-  async function getNews() {
-    const res = await fetch(`${process.env.DB_HOST}/posts`);
-    return res.json();
-  }
-
   const afishaData = getAfisha();
   const newsData = getNews()
   
