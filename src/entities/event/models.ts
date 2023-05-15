@@ -38,3 +38,20 @@ export type Afisha = {
     tickets: Ticket[]
   }
 }
+
+export type Slider = {
+  id: number;
+  attributes: {
+    slides: {
+      data: {
+        id: number;
+        attributes: {
+          event: {
+            data: Event;
+          };
+          title: string;
+        }
+      }[]
+    }
+  }
+}

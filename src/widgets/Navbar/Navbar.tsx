@@ -27,7 +27,15 @@ export const Navbar = () => {
   }, []); 
 
   return (
-    <chakra.nav transition="0.1s ease-in" mt={scrolled ? 0 : [0, 4]} w="full" h={20} pos="fixed" bgColor={scrolled ? 'brand.100' : 'transparent'} top={0} left={0} zIndex="docked">
+    <chakra.nav 
+      transition="0.1s ease-in" 
+      mt={scrolled ? 0 : [0, 4]} 
+      w="full" h={20} pos="fixed" 
+      borderBottom={scrolled ? "1px solid #583D3E" : "none"} 
+      bgColor={scrolled ? 'brand.100' : 'transparent'} 
+      top={0} 
+      left={0} 
+      zIndex="docked">
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">
           <Link href="/">
