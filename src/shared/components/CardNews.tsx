@@ -23,7 +23,7 @@ export const CardNews: React.FC<CardNewsProps> = ({post}) => {
       </chakra.div>
       <Flex flexDir="column" mt={3}>
         <Heading color="brand.300" fontSize="xl" fontWeight="medium">{title}</Heading>
-        <Text mt={3}>{description}</Text>
+        <Text noOfLines={3} mt={3}>{description}</Text>
         <Text color="brand.300" alignSelf="flex-end" mt={3} fontSize="sm">12 мая, 2023</Text>
       </Flex>
     </Flex>
