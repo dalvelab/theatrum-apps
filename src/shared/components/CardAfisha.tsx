@@ -9,7 +9,7 @@ interface CardAfishaProps {
 }
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
-  const {age_limit, premiere, title, banner } = afisha.attributes.event.data.attributes;
+  const {age_limit, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
 
   return (
     <Flex 
@@ -22,7 +22,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
           alt='Green double couch with wooden legs'
-          style={{objectFit: "cover", borderRadius: '12px'}}
+          style={{borderRadius: '12px'}}
           fill
         />
       </chakra.div>
@@ -48,7 +48,17 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
           <Text>16</Text>
           <Text>18 апреля</Text>
         </Stack>
-        <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
+        <Flex gap={5} alignItems="center">
+          <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
+          {pushkin_card && (
+            <Image
+            src='/pushkin-card.png'
+            alt='Пушкинская карта'
+            width={100}
+            height={32}
+          />
+          )}
+        </Flex>
       </Flex>
     </Flex>
   )

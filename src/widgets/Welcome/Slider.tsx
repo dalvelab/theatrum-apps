@@ -44,7 +44,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
         return (
           <chakra.div key={slide.id} display={slide.id === activeSlide ? 'block' : 'none'}>
             <Container maxWidth="container.xl" h="100vh" display="flex" alignItems="center" zIndex={1} pos="relative">
-              <Flex maxW="container.md" flexDir="column" gap={[4, 5]}>
+              <Flex maxW="container.md" flexDir="column" gap={[4, 5]} mt="100px">
                 <Heading as="h1" size={["xl", "2xl"]} lineHeight="shorter" color="white" fontWeight="medium">
                   {title}
                 </Heading>
