@@ -1,7 +1,28 @@
-import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
+import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
+
+import { getFooter } from "@/entities/footer/api"
+import type { Footer as FooterType } from "@/entities/footer/models"
+import type { ApiResponse, Meta } from "@/shared/models/api"
 
 export const Footer = () => {
+  const [footerData, setFooterData] = useState<null | ApiResponse<FooterType, Meta>>(null);
+  const [isLoading, setLoading] = useState(false);
+ 
+  useEffect(() => {
+    setLoading(true);
+    getFooter().then((data) => {
+      setFooterData(data);
+      setLoading(false);
+    })
+  }, []);
+
+  const contacts = footerData?.data.attributes.contacts.filter((contact) => contact.type === 'email' || contact.type === 'phone');
+  const partners = footerData?.data.attributes.partners.data;
+  
+  if (isLoading) return <p>Загрузка...</p>;
+
   return (
     <chakra.footer w="full" h="auto" minH={40} bgColor="brand.100" borderTop="1px solid #583D3E" pos="relative">
       <Container maxW="container.xl" pt={8} pb={3} display="flex" flexDir="column">
@@ -17,12 +38,11 @@ export const Footer = () => {
               <Flex flexDir="column" gap={2}>
                 <Text fontSize="lg" fontWeight="medium">Контакты</Text>
                 <Flex gap={5}>
-                  <Link href="tel:79638500758">
-                    <Text>+7 963 850 07 58</Text>
+                  {contacts?.map(({contact, type, title}) => (
+                  <Link key={title} href={type === 'phone' ? `tel:${contact}` : `mailto:${contact}`}>
+                    <Text>{contact}</Text>
                   </Link>
-                  <Link href="mailto:info@theatrum.center">
-                    <Text>info@theatrum.center</Text>
-                  </Link>
+                  ))}
                 </Flex>
               </Flex>
               <Flex flexDir="column" gap={2}>
@@ -49,10 +69,18 @@ export const Footer = () => {
             <Button size="lg" bg="brand.300" _hover={{bgColor: "#69494a"}} color="white" fontWeight="normal">Связаться с нами</Button>
           </Flex>
         </Flex>
+        {(!partners || partners.length !== 0) && (
         <Flex mt={8} gap={10} flexWrap="wrap" alignItems="center">
-          <Image src="/footer-logo-1.png" alt="Логотип партнера" width={75} height={62} />
-          <Image src="/footer-logo-2.png" alt="Логотип партнера" width={172} height={20} />
+          {partners?.map((partner) => (
+            <Image 
+              key={partner.id} 
+              src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${partner.attributes.url}`} 
+              alt="Логотип партнера" 
+              width={partner.attributes.width} 
+              height={partner.attributes.height} />
+          ))}
         </Flex>
+        )}
         <Flex mt={8} justifyContent="space-between" flexDirection={["column-reverse", "column-reverse", "column-reverse", "row", "row"]} gap={[4, 4, 4, null, null]}>
           <Text fontSize="sm" color="brand.300">Частное учреждение культуры «Универсальный гастрольный театр», 2023</Text>
           <Text fontSize="sm" color="brand.300" textDecoration="underline">Политика конфиденциальности</Text>

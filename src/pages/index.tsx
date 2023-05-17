@@ -17,7 +17,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
       <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Ближайшие мероприятия</Heading>
-            {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize="3xl">Афиша пока что пуста</Text>}
+            {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
             <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
               {afisha.data.map((event) => (
                 <CardAfisha key={event.id} afisha={event} />
@@ -31,7 +31,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
       <chakra.section pb={20} pos="relative" bgColor="brand.100">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Новости</Heading>
-            {!news.data || news.data.length === 0 && <Text mt={5} fontSize="3xl">Новостей нет</Text>}
+            {!news.data || news.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей нет</Text>}
             <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
               {news.data.map((post) => (
                 <CardNews key={post.id} post={post} />

@@ -13,7 +13,7 @@ export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getS
       <chakra.section pt={10} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto" minH="100vh">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading size="2xl" as="h1">Афиша</Heading>
-            {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize="3xl">Афиша пока что пуста</Text>}
+            {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
             <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
               {afisha.data.map((event) => (
                 <CardAfisha key={event.id} afisha={event} />
