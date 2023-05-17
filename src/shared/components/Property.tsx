@@ -16,7 +16,7 @@ const contactToTitleMap: Record<ContactType, string> = {
 
 export const Property: React.FC<PropertyProps> = ({text, type}) => {
   return (
-    <Flex pt={10} flexDir="column" gap={1}>
+    <Flex flexDir="column" gap={1}>
       <Text color="brand.300" fontSize="lg">{contactToTitleMap[type]}</Text>
       <Text color="gray.900" fontSize="2xl">{text}</Text>
     </Flex>

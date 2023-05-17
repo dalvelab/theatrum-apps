@@ -2,7 +2,7 @@ import qs from 'qs';
 
 import type {ApiResponse, Meta} from '@/shared/models/api';
 
-import { Afisha, Slider } from './models';
+import { Afisha, Perfomance, Slider } from './models';
 
 interface getAfishaParams {
   limit?: number;
@@ -31,4 +31,18 @@ export async function getSlider(): Promise<ApiResponse<Slider, Meta>> {
   const res = await fetch(`${process.env.DB_HOST}/slider?${query}`);
 
   return res.json();
+}
+
+export async function getPerfomances(params: getAfishaParams): Promise<ApiResponse<Perfomance[], Meta>> {
+  const query = qs.stringify(
+    {
+      pagination: {
+        limit: params?.limit || 100,
+      },
+      populate: ['event', 'event.banner', 'event.meta', 'tickets']
+    }
+  )
+  const res = await fetch(`${process.env.DB_HOST}/perfomances?${query}`);
+
+  return res.json()
 }

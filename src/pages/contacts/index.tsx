@@ -16,11 +16,11 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
     <chakra.section pt={10} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto" minH="100vh">
       <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" alignItems="flex-start">
         <Heading size="2xl" as="h1">Контакты</Heading>
-        <Flex gap={10} flexWrap="wrap">
+        <Flex pt={10} gap={5} flexDir="column">
           {contacts.map(({contact, type, title}) => (
             <Property key={title} text={contact} type={type} />
           ))}
-          <Property title='Адрес' text={`${address.split(',')[1]},${address.split(',')[2]}`} type='text' />
+          <Property title='Адрес' text={address} type='text' />
         </Flex>
         <Button 
           mt={6} 

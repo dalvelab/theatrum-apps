@@ -5,6 +5,8 @@ import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
 import { formatAfishaDays } from "@/shared/utils/formatDate"
 
+import { Badge } from './Badge';
+
 interface CardAfishaProps {
   afisha: Afisha;
 }
@@ -40,11 +42,11 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             alignItems="center">
               {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
           </Stack>
-          <Text>{age_limit}+</Text>
+          <Badge text={String(age_limit) + '+'}/>
         </Stack>
         <Flex display={["flex", "none", "flex", "none", "none"]} gap={4} alignItems="center">
           {premiere &&<Text fontSize="lg" color="brand.300">премьера</Text>}
-          <Text fontSize="lg" color="gray.900">{age_limit}+</Text>
+          <Badge text={String(age_limit) + '+'}/>
         </Flex>
         <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
           {title}

@@ -56,3 +56,12 @@ export type Slider = {
     }
   }
 }
+
+export type Perfomance = {
+  attributes: {
+    archived: boolean;
+    event: {
+      data: Event;
+    }
+  }
+}
