@@ -36,7 +36,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
               Архив
             </chakra.button>
           </Flex>
-            {!perfomances.data || perfomances.data.length === 0 && 
+            {!data || data.length === 0 && 
               <Text mt={5} 
                 fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}
                 >
