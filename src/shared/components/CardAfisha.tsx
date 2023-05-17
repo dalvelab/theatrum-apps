@@ -3,6 +3,7 @@ import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 
 import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
+import { formatAfishaDays } from "@/shared/utils/formatDate"
 
 interface CardAfishaProps {
   afisha: Afisha;
@@ -10,6 +11,9 @@ interface CardAfishaProps {
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
   const {age_limit, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
+
+  const dates = afisha.attributes.tickets.map((ticket) => ticket.date);
+  const formattedDate = formatAfishaDays(dates);
 
   return (
     <Flex 
@@ -22,17 +26,19 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
           alt='Green double couch with wooden legs'
-          style={{borderRadius: '12px'}}
+          style={{borderRadius: '12px', objectFit: 'cover'}}
           fill
         />
       </chakra.div>
       <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
         <Stack display={["none", "flex", "none", "flex", "flex"]} direction="row" divider={<Divider color="#171923" />} alignItems="center" gap={4}  fontSize={["xl", "xl", "xl", "xl", "2xl"]} color="gray.900">
           {premiere && <Text color="brand.300">премьера</Text>}
-          <Stack direction="row" gap={[2, 3]} divider={<Divider type='dot' color="#171923" />} alignItems="center">
-            <Text>14</Text>
-            <Text>16</Text>
-            <Text>18 апреля</Text>
+          <Stack 
+            direction="row" 
+            gap={[2, 3]} 
+            divider={<Divider type='dot' color="#171923" />} 
+            alignItems="center">
+              {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
           </Stack>
           <Text>{age_limit}+</Text>
         </Stack>
@@ -43,10 +49,13 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
         <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
           {title}
         </Heading>
-        <Stack display={["flex", "none", "flex", "none", "none"]} direction="row" gap={[2, 3]} divider={<Divider type='dot' color="#171923" />} fontSize={["lg", null, "xl", null, null]} alignItems="center">
-          <Text>14</Text>
-          <Text>16</Text>
-          <Text>18 апреля</Text>
+        <Stack 
+          display={["flex", "none", "flex", "none", "none"]}
+          direction="row" gap={[2, 3]} 
+          divider={<Divider type='dot' color="#171923" />} 
+          fontSize={["lg", null, "xl", null, null]} 
+          alignItems="center">
+            {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
         </Stack>
         <Flex gap={5} alignItems="center">
           <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
@@ -54,7 +63,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             <Image
             src='/pushkin-card.png'
             alt='Пушкинская карта'
-            width={100}
+            width={130}
             height={32}
           />
           )}

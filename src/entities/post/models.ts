@@ -1,5 +1,7 @@
 import type { StrapiImage } from "@/shared/models/image"; 
 
+export type NewsType = 'info' | 'press';
+
 export type News = {
   id: number;
   attributes: {
@@ -8,7 +10,7 @@ export type News = {
     description: string;
     slug: string;
     title: string;
-    type: 'info' | 'press';
+    type: NewsType;
     source?: {
       title: string;
       link?: string;

@@ -49,6 +49,7 @@ export type Slider = {
           event: {
             data: Event;
           };
+          tickets: Ticket[];
           title: string;
         }
       }[]

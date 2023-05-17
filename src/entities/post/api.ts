@@ -4,11 +4,15 @@ import type {ApiResponse, Meta} from '@/shared/models/api';
 
 import { News } from './models';
 
-export async function getNews(): Promise<ApiResponse<News[], Meta>> {
+interface getNewsParams {
+  limit?: number;
+}
+
+export async function getNews(params: getNewsParams): Promise<ApiResponse<News[], Meta>> {
   const query = qs.stringify(
     {
       pagination: {
-        limit: 100,
+        limit: params.limit || 100,
       },
       populate: ['source', 'image']
     }
