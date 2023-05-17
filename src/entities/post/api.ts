@@ -14,6 +14,7 @@ export async function getNews(params: getNewsParams): Promise<ApiResponse<News[]
       pagination: {
         limit: params.limit || 100,
       },
+      sort: ['createdAt:desc'],
       populate: ['source', 'image']
     }
   )

@@ -1,5 +1,6 @@
 import { Button, Container, Flex, Heading, Text, chakra, Stack } from "@chakra-ui/react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 import { Divider } from "@/shared/components/Divider"
@@ -70,7 +71,9 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                   <Text>{age_limit}+</Text>
                 </Stack>
                 <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
-                  <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
+                  <Link href="/afisha/123">
+                    <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
+                  </Link>
                   {pushkin_card && (
                     <Image
                     src='/pushkin-card.png'

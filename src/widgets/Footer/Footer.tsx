@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
+import { Container, Flex, chakra, Link, Text, Box, Button, textDecoration } from "@chakra-ui/react"
 
 import { getFooter } from "@/entities/footer/api"
 import type { Footer as FooterType } from "@/entities/footer/models"
@@ -32,8 +32,24 @@ export const Footer = () => {
           <Flex flexDir="column" gap={8}>
             <Flex gap={4} alignItems={["flex-start", "flex-start", "center", "center", "center"]} flexDir={["column", "column", "row", "row", "row"]}>
               <Text fontSize="3xl">{address?.split(',')[0]}</Text>
-              <Link target="_blank" rel="noreferer" href="https://yandex.ru/maps/-/CCUk5JdIsD">
-                <Text>{address?.split(',')[1]},{address?.split(',')[2]}</Text>
+              <Link 
+                target="_blank" 
+                rel="noreferer" 
+                href="https://yandex.ru/maps/-/CCUk5JdIsD" 
+                pos="relative" 
+                _hover={{textDecoration: 'none', color: 'brand.200'}}
+                >
+                  <Text fontSize="lg" _after={
+                    {'content': '""',
+                    'width': '100%',
+                    'height': '1px',
+                    'bgColor': 'gray.900',
+                    'pos': 'absolute',
+                    'left': 0,
+                    'bottom': '-1px',
+                    }}>
+                      {address?.split(',')[1]},{address?.split(',')[2]}
+                    </Text>
               </Link>
             </Flex>
             <Flex gap={10} flexDirection={["column", "column", "column", "row", "row"]}>
