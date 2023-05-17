@@ -1,7 +1,7 @@
-export type ContatType = 'text' | 'email' | 'phone';
+import { ContactType } from "@/shared/models/contact";
 
 export type Contact = {
-  type: ContatType;
+  type: ContactType;
   title?: string;
   contact: string;
 }
@@ -21,5 +21,7 @@ export type Footer = {
       }[]
     };
     contacts: Contact[];
+    working_time: string;
+    address: string;
   }
 } 

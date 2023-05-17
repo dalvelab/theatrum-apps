@@ -1,0 +1,1 @@
+export type ContactType = 'text' | 'email' | 'phone';

@@ -20,6 +20,8 @@ export const Footer = () => {
 
   const contacts = footerData?.data.attributes.contacts.filter((contact) => contact.type === 'email' || contact.type === 'phone');
   const partners = footerData?.data.attributes.partners.data;
+  const workingTime = footerData?.data.attributes.working_time;
+  const address = footerData?.data.attributes.address;
   
   if (isLoading) return <p>Загрузка...</p>;
 
@@ -29,9 +31,9 @@ export const Footer = () => {
         <Flex justifyContent="space-between" alignItems="flex-start" flexDirection={["column", "column", "column", "row", "row"]} gap={10}>
           <Flex flexDir="column" gap={8}>
             <Flex gap={4} alignItems={["flex-start", "flex-start", "center", "center", "center"]} flexDir={["column", "column", "row", "row", "row"]}>
-              <Text fontSize="3xl">Верхняя Пышма</Text>
+              <Text fontSize="3xl">{address?.split(',')[0]}</Text>
               <Link target="_blank" rel="noreferer" href="https://yandex.ru/maps/-/CCUk5JdIsD">
-                <Text>ул. Александра Козицына 2А</Text>
+                <Text>{address?.split(',')[1]},{address?.split(',')[2]}</Text>
               </Link>
             </Flex>
             <Flex gap={10} flexDirection={["column", "column", "column", "row", "row"]}>
@@ -49,12 +51,12 @@ export const Footer = () => {
                 <Text fontSize="lg" fontWeight="medium">Режим работы кассы:</Text>
                 <Flex gap={1} flexDir="column" alignSelf="flex-start">
                   <Flex gap={4}>
-                    <Text w="52px">вт - вс</Text>
-                    <Text>10:00 - 18:00</Text>
+                    <Text w="52px">{workingTime?.split(' ')[0]}</Text>
+                    <Text>{workingTime?.split(' ')[1]}</Text>
                   </Flex>
                   <Flex gap={4}>
-                    <Text w="52px">пн</Text>
-                    <Text>выходной</Text>
+                    <Text w="52px">{workingTime?.split(' ')[2]}</Text>
+                    <Text>{workingTime?.split(' ')[3]}</Text>
                   </Flex>
                 </Flex>
               </Flex>
