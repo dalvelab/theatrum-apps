@@ -1,3 +1,18 @@
+export const rusMonths = [
+  'январь',
+  'февраль',
+  'март',
+  'апрель',
+  'май',
+  'июнь',
+  'июль',
+  'август',
+  'сентрябрь',
+  'октябрь',
+  'ноябрь',
+  'декабрь'
+]
+
 export const genetiveRusMonths = [
   'января',
   'февраля',
@@ -25,6 +40,6 @@ export function formatAfishaDays(dates: Date[]) {
       return `${Number(dateString.substring(8, 10))} ${getGenetiveRusMonth(Number(dateString.substring(5, 7)))}`
     }
 
-    return dateString.substring(9, 10);
+    return dateString.substring(8, 10);
   })
 }
