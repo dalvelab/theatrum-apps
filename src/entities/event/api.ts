@@ -54,6 +54,7 @@ export async function getPerfomances(params: getAfishaParams): Promise<ApiRespon
       pagination: {
         limit: params?.limit || 100,
       },
+      sort: ['event.title'],
       populate: ['event', 'event.banner', 'event.meta', 'tickets']
     }
   )

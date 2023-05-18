@@ -23,11 +23,11 @@ export default function NewsDetails({post} : InferGetServerSidePropsType<typeof 
   return (
     <chakra.main mt={20} bgColor="brand.100">
       <Container pt={10} pb={20} maxWidth="container.xl" minH="100vh" h="auto" display="flex" flexDir="column" zIndex={1} pos="relative">
-        <Flex gap={7} alignItems="center">
+        <Flex gap={7} alignItems="center" flexDir={["column", "column", "column", "row", "row"]}>
           <chakra.div 
             pos="relative" 
-            minW="680px" 
-            height="480px">
+            minW={["100%", "100%", "100%", "520px", "640px"]} 
+            height={["320px", "400px", "520px", "400px", "460px"]}>
               <Image
               src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
               alt={title}
@@ -39,7 +39,7 @@ export default function NewsDetails({post} : InferGetServerSidePropsType<typeof 
             <Text color="brand.300" fontSize="lg">
             {`${Number(date.substring(8, 10))} ${getGenetiveRusMonth(Number(date.substring(5, 7)))}, ${date.substring(0, 4)}`}
             </Text>
-            <Heading as="h1" fontWeight="medium" color="gray.900">{title}</Heading>
+            <Heading as="h1" fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]} fontWeight="medium" color="gray.900">{title}</Heading>
             {isNotVoid(source) && (
               <Text fontSize="sm">
                 Опубликовано {" "}
@@ -54,7 +54,7 @@ export default function NewsDetails({post} : InferGetServerSidePropsType<typeof 
             )}
           </Flex>
         </Flex>
-        <chakra.div mt={7} w="container.lg" fontSize="lg">
+        <chakra.div mt={[5, 6, 7, 7, 7]} w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
           <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
         </chakra.div>
       </Container>
