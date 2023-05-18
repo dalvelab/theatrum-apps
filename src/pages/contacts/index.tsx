@@ -1,6 +1,6 @@
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 
-import { Button, chakra, Container, Heading, Flex} from '@chakra-ui/react';
+import { Button, chakra, Container, Heading, Flex, Link, Text} from '@chakra-ui/react';
 import { getContacts } from '@/entities/contact/api';
 import type { Contacts } from '@/entities/contact/models';
 import type { ApiResponse, Meta } from '@/shared/models/api';
@@ -33,18 +33,23 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
             Связаться с нами
           </Button>
         <Heading mt={10} as="h2" fontSize="3xl" fontWeight="medium">Схема проезда</Heading>
+        <Text mt={6}>Кликните на схему для открытия в <chakra.span color="brand.200">отдельном окне</chakra.span></Text>
         <chakra.div 
-          w="container.lg" 
-          height="520px" 
+          w={["100%", "100%", "100%", "100%", "container.lg"]} 
+          height={["260px", "340px", "440px", "440px", "520px"]} 
           pos="relative"
-          mt={6}
+          mt={2}
           >
-          <Image 
-            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
-            alt='Схема проезда'
-            fill 
-            style={{objectFit: 'cover'}}
-          />
+          <Link
+           href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
+           target='_blank'
+           >
+            <Image 
+              src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
+              alt='Схема проезда'
+              fill
+            />
+          </Link>
         </chakra.div>
       </Container>
     </chakra.section>

@@ -1,0 +1,7 @@
+.description p {
+  margin-top: 16px;
+}
+
+.description p:first-child {
+  margin-top: 0;
+}

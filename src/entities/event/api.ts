@@ -22,6 +22,21 @@ export async function getAfisha(params: getAfishaParams): Promise<ApiResponse<Af
   return res.json()
 }
 
+interface getSinglelAfisha {
+  id?: string;
+}
+
+export async function getSinglelAfisha(params: getSinglelAfisha): Promise<ApiResponse<Afisha, Meta>> {
+  const query = qs.stringify(
+    {
+      populate: ['event', 'event.banner', 'event.meta', 'tickets']
+    }
+  )
+  const res = await fetch(`${process.env.DB_HOST}/afishas/${params.id}?${query}`);
+
+  return res.json()
+}
+
 export async function getSlider(): Promise<ApiResponse<Slider, Meta>> {
   const query = qs.stringify(
     {

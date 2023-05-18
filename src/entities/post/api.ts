@@ -23,3 +23,18 @@ export async function getNews(params: getNewsParams): Promise<ApiResponse<News[]
 
   return res.json();
 }
+
+interface getSingleNews {
+  id?: string;
+}
+
+export async function getSinglelNews(params: getSingleNews): Promise<ApiResponse<News, Meta>> {
+  const query = qs.stringify(
+    {
+      populate: ['source', 'image']
+    }
+  )
+  const res = await fetch(`${process.env.DB_HOST}/posts/${params.id}?${query}`);
+
+  return res.json()
+}

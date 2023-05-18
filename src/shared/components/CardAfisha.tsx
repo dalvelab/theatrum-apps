@@ -13,7 +13,8 @@ interface CardAfishaProps {
 }
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
-  const {age_limit, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
+  const { id } = afisha
+  const {age_limit, slug, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
 
   const dates = afisha.attributes.tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
@@ -51,7 +52,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             <Badge text={String(age_limit) + '+'}/>
           </Flex>
           <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
-            <LinkOverlay as={Link} href='/afisha/123' _hover={{textDecor: 'none'}}>
+            <LinkOverlay as={Link} href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
               {title}
             </LinkOverlay>
           </Heading>
