@@ -3,15 +3,12 @@ import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import { Link, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
-import { getSinglelAfisha } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { News } from '@/entities/post/models';
 import { getSinglelNews } from '@/entities/post/api';
 import { getGenetiveRusMonth } from '@/shared/utils/formatDate';
 import { isNotVoid } from '@/shared/utils/mics';
 import styles from './styles.module.css';
-
-import { Divider } from '@/shared/components';
 
 export default function NewsDetails({post} : InferGetServerSidePropsType<typeof getServerSideProps>) {
 

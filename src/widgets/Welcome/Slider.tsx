@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
-import { Divider } from "@/shared/components/Divider"
+import { Badge, Divider } from "@/shared/components"
 import type { Slider } from "@/entities/event/models"
 import { formatAfishaDays } from "@/shared/utils/formatDate"
 
@@ -68,7 +68,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                   <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
                     {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
                   </Stack>
-                  <Text>{age_limit}+</Text>
+                  <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
                 </Stack>
                 <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
                   <Link href="/afisha/123">

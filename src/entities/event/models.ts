@@ -12,6 +12,7 @@ export type Event = {
     small_description: string;
     title: string;
     banner: StrapiImage;
+    properties: string;
     gallery: {
       data: StrapiImage[];
     };

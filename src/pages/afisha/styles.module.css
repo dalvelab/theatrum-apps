@@ -1,0 +1,12 @@
+.description p {
+  margin-top: 16px;
+}
+
+.description p:first-child {
+  margin-top: 0;
+}
+
+.properties li {
+  list-style: none;
+  margin-top: 16px;
+}

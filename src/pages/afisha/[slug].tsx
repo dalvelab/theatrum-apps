@@ -2,20 +2,27 @@ import Script from 'next/script'
 import Image from 'next/image';
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import { Button, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
+import ReactMarkdown from 'react-markdown';
 
 import { getSinglelAfisha } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 
-import { Divider } from '@/shared/components';
-import { formatAfishaDays } from '@/shared/utils/formatDate';
+import { Badge, Divider } from '@/shared/components';
+import { formatAfishaDays, getGenetiveRusMonth } from '@/shared/utils/formatDate';
+import styles from './styles.module.css';
 
 export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { banner, title, small_description, premiere, age_limit, pushkin_card } = afisha.data.attributes.event.data.attributes;
+  const { banner, title, small_description, premiere, age_limit, pushkin_card, description, properties } = afisha.data.attributes.event.data.attributes;
   const { tickets } = afisha.data.attributes;
 
   const dates = tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
+
+  const handleYAWidget = (id: string) => {
+    // @ts-ignore
+    window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
+  }
 
   return (
     <>
@@ -34,7 +41,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                 <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
                   {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
                 </Stack>
-                <Text>{age_limit}+</Text>
+                <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
               </Stack>
               <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
                 <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
@@ -74,11 +81,54 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                   />
                   )}
             </Stack>
+            <Flex mt={6} gap={7} flexWrap="wrap" flexDir="row">
+              {tickets.map((ticket) => (
+              <Flex key={ticket.id} p={5} gap={6} border="1px solid #171923" borderRadius="md" alignItems="center">
+                <Stack color="gray.900" divider={<Divider color="#171923" />} flexDir="row" gap={3} alignItems="center">
+                  <Text fontSize="4xl" fontWeight="medium">{Number(ticket.date.toString().substring(8, 10))}</Text>
+                  <Text fontSize="lg">{getGenetiveRusMonth(Number(ticket.date.toString().substring(5, 7)))}</Text>
+                  <Text fontSize="lg">TBD</Text>
+                </Stack>
+                <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить</Button>
+              </Flex>
+              ))}
+            </Flex>
+            <Flex mt={8} justifyContent="space-between" gap={10}>
+              <Flex flexDir="column" minW="380px">
+                {premiere && (<Text fontSize="5xl">Премьера</Text>)}
+                <chakra.div mt={premiere ? 6 : 0} w="100%" fontSize="lg">
+                  <chakra.li listStyleType="none" display="flex" gap={3} alignItems="center">
+                    Возрастное ограничение: <Badge text={age_limit.toString() + "+"} />
+                  </chakra.li>
+                  <ReactMarkdown className={styles.properties}>{properties}</ReactMarkdown>
+                </chakra.div>
+              </Flex>
+              <chakra.div w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
+                <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
+              </chakra.div>
+            </Flex>
           </Container>
         </chakra.section>
       </chakra.main>
       <Script id='yandex-afisha-script'>
-        
+        {`
+          /* Настройка */ 
+          var dealerName = 'YandexTicketsDealer'; 
+          var dealer = window[dealerName] = window[dealerName] || []; 
+      
+          dealer.push(['setDefaultClientKey', '1ea3ba6b-06f3-46a4-ad5b-d30251e46dce']); 
+          dealer.push(['setDefaultRegionId', 20720]); 
+      
+          /* Загрузка */ 
+          (function () { 
+              var rnd = '?' + new Date().getTime() * Math.random(); 
+              var script = document.createElement('script'); 
+              var target = document.getElementsByTagName('script')[0]; 
+              script.async = true; 
+              script.src = 'https://widget.afisha.yandex.ru/dealer/dealer.js' + rnd; 
+              target.parentNode.insertBefore(script, target); 
+          })(); 
+        `}
       </Script>
     </>
   )
