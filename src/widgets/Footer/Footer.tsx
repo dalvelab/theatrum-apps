@@ -22,6 +22,7 @@ export const Footer = () => {
   const partners = footerData?.data.attributes.partners.data;
   const workingTime = footerData?.data.attributes.working_time;
   const address = footerData?.data.attributes.address;
+  const socials = footerData?.data.attributes.socials;
   
   if (isLoading) return <p>Загрузка...</p>;
 
@@ -80,9 +81,24 @@ export const Footer = () => {
           </Flex>
           <Flex flexDir="column" gap={8}>
             <Flex gap={10}>
-              <Box display="flex" justifyContent="center" alignItems="center" w='52px' h='52px' borderRadius="full" bgColor="brand.300" color="white">ВК</Box>
-              <Box display="flex" justifyContent="center" alignItems="center" w='52px' h='52px' borderRadius="full" bgColor="brand.300" color="white">ВК</Box>
-              <Box display="flex" justifyContent="center" alignItems="center" w='52px' h='52px' borderRadius="full" bgColor="brand.300" color="white">ВК</Box>
+              {socials?.map((social) => (
+                <Link key={social.id} href={social.link} referrerPolicy="no-referrer" target="_blank">
+                  <Box 
+                    display="flex" 
+                    justifyContent="center" 
+                    alignItems="center" 
+                    w='52px' 
+                    h='52px' 
+                    borderRadius="full" 
+                    bgColor="brand.300" 
+                    color="white"
+                    pos="relative"
+                    _hover={{bgColor: "#69494a"}}
+                    >
+                      <Image width={30} height={30} src={`/${social.type}.svg`} alt={`иконка ${social.type}`} />
+                  </Box>
+                </Link>
+              ))}
             </Flex>
             <Button size="lg" bg="brand.300" _hover={{bgColor: "#69494a"}} color="white" fontWeight="normal">Связаться с нами</Button>
           </Flex>

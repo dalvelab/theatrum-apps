@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import Image from 'next/image';
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import { Button, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
+import { Button, chakra, Heading, Container, Flex, Text, Stack, Grid } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
 import { getSinglelAfisha } from '@/entities/event/api';
@@ -81,19 +81,28 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                   />
                   )}
             </Stack>
-            <Flex mt={6} gap={7} flexWrap="wrap" flexDir="row">
+            <Grid mt={6} templateColumns={["1fr", "1fr", "500px", "500px 500px", "1fr 1fr 1fr"]} gap={4}>
               {tickets.map((ticket) => (
-              <Flex key={ticket.id} p={5} gap={6} border="1px solid #171923" borderRadius="md" alignItems="center">
-                <Stack color="gray.900" divider={<Divider color="#171923" />} flexDir="row" gap={3} alignItems="center">
+              <Flex 
+                key={ticket.id} 
+                p={[3, 5, 5, 5, 5]} 
+                gap={[2, 6, 6, 6, 6]} 
+                border="1px solid #171923" 
+                borderRadius="md" 
+                alignItems={["flex-start", "center", "center", "center", "center"]} 
+                justifyContent="space-between"
+                flexDir={["column", "row", "row", "row", "row"]}
+                >
+                <Stack color="gray.900" divider={<Divider color="#171923" />} flexDir="row" gap={[2, 3, 3, 3, 3]} alignItems="center">
                   <Text fontSize="4xl" fontWeight="medium">{Number(ticket.date.toString().substring(8, 10))}</Text>
                   <Text fontSize="lg">{getGenetiveRusMonth(Number(ticket.date.toString().substring(5, 7)))}</Text>
                   <Text fontSize="lg">TBD</Text>
                 </Stack>
-                <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить</Button>
+                <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить билеты</Button>
               </Flex>
               ))}
-            </Flex>
-            <Flex mt={8} justifyContent="space-between" gap={10}>
+            </Grid>
+            <Flex mt={8} justifyContent="space-between" gap={10} flexDir={["column", "column", "column", "row", "row"]}>
               <Flex flexDir="column" minW="380px">
                 {premiere && (<Text fontSize="5xl">Премьера</Text>)}
                 <chakra.div mt={premiere ? 6 : 0} w="100%" fontSize="lg">

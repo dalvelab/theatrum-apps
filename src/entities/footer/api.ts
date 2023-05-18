@@ -7,7 +7,7 @@ import { Footer } from './models';
 export async function getFooter(): Promise<ApiResponse<Footer, Meta>> {
   const query = qs.stringify(
     {
-      populate: ['partners', 'contacts']
+      populate: ['partners', 'contacts', 'socials']
     }
   )
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/footer?${query}`);

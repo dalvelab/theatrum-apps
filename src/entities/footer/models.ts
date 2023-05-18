@@ -6,6 +6,12 @@ export type Contact = {
   contact: string;
 }
 
+export type Social = {
+  id: number;
+  type: 'vk' | 'odnoklassniki' | 'telegram';
+  link: string;
+}
+
 export type Footer = {
   id: number;
   attributes: {
@@ -23,5 +29,6 @@ export type Footer = {
     contacts: Contact[];
     working_time: string;
     address: string;
+    socials: Social[];
   }
 } 
