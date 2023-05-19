@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Link } from '@chakra-ui/next-js';
-import { chakra, Button, Flex, Heading, Stack, Text, LinkBox, LinkOverlay } from "@chakra-ui/react"
+import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 
 import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
@@ -20,7 +20,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
   const formattedDate = formatAfishaDays(dates);
 
   return (
-    <LinkBox as="article" textDecor="none" _hover={{textDecoration: 'none'}}>
+    <chakra.article>
       <Flex 
         w={['auto', 'auto', 'auto', 'auto', '1240px']} 
         h={['auto', 'auto', 'auto', '300px', '336px']} 
@@ -52,9 +52,9 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             <Badge text={String(age_limit) + '+'}/>
           </Flex>
           <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
-            <LinkOverlay as={Link} href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+            <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
               {title}
-            </LinkOverlay>
+            </Link>
           </Heading>
           <Stack 
             display={["flex", "none", "flex", "none", "none"]}
@@ -65,7 +65,9 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
               {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
           </Stack>
           <Flex gap={5} alignItems="center">
-            <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
+            <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
+            </Link>
             {pushkin_card && (
               <Image
               src='/pushkin-card.png'
@@ -77,6 +79,6 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
           </Flex>
         </Flex>
       </Flex>
-    </LinkBox>
+    </chakra.article>
   )
 }
