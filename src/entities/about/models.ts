@@ -1,4 +1,4 @@
-import { StrapiImage } from "@/shared/models/image";
+import { StrapiImage, StrapiFile } from "@/shared/models/image";
 
 type AboutDescription = {
   id: number;
@@ -14,10 +14,19 @@ type Management = {
   image: StrapiImage;
 }
 
+type Document = {
+  id: number;
+  name: string;
+  file: {
+    data: StrapiFile;
+  }
+}
+
 export type AboutPage = {
   id: number;
   attributes: {
     description: AboutDescription[];
     management: Management[];
+    registerDocuments: Document[];
   }
 }

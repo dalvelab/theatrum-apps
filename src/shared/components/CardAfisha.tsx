@@ -5,6 +5,7 @@ import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
 import { formatAfishaDays } from "@/shared/utils/formatDate"
+import { isNotVoid } from '../utils/mics';
 
 import { Badge } from './Badge';
 
@@ -38,13 +39,25 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
           <Stack display={["none", "flex", "none", "flex", "flex"]} direction="row" divider={<Divider color="#171923" />} alignItems="center" gap={4}  fontSize={["xl", "xl", "xl", "xl", "2xl"]} color="gray.900">
             {premiere && <Text color="brand.300">премьера</Text>}
-            <Stack 
-              direction="row" 
-              gap={[2, 3]} 
-              divider={<Divider type='dot' color="#171923" />} 
-              alignItems="center">
-                {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
-            </Stack>
+            {formattedDate.length === 1 && 
+              <Flex gap={2}>
+                <Text lineHeight={1}>{formattedDate[0].date}</Text>
+                <Text lineHeight={1}>{formattedDate[0].month}</Text>
+              </Flex>}
+            {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
+            {formattedDate.length > 1 && (
+              <Stack 
+                direction="row" 
+                gap={[2, 3]} 
+                divider={<Divider type='dot' color="#171923" />} 
+                alignItems="center">
+                  {formattedDate.map(({date, month}, index) => 
+                  <Flex key={index} flexDir="column" alignItems="center" gap={1}>
+                    <Text lineHeight={1}>{date}</Text>
+                    <Text lineHeight={1} fontSize="md">{month}</Text>
+                  </Flex>)}
+              </Stack>
+            )}
             <Badge text={String(age_limit) + '+'}/>
           </Stack>
           <Flex display={["flex", "none", "flex", "none", "none"]} gap={4} alignItems="center">
@@ -56,13 +69,19 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
               {title}
             </Link>
           </Heading>
+          {/* MOBILE AND TABLET */}
           <Stack 
             display={["flex", "none", "flex", "none", "none"]}
             direction="row" gap={[2, 3]} 
             divider={<Divider type='dot' color="#171923" />} 
             fontSize={["lg", null, "xl", null, null]} 
             alignItems="center">
-              {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
+              {formattedDate.map(({date, month, time}, index) => 
+                <Flex key={index} flexDir="row" gap={2}>
+                  <Text>{date}</Text>
+                  <Text>{month}</Text>
+                  <Text>{formattedDate.length === 1 ? isNotVoid(time) : null}</Text>
+                </Flex>)}
           </Stack>
           <Flex gap={5} alignItems="center">
             <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>

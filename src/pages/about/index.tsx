@@ -1,14 +1,13 @@
 import Image from "next/image"
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import { chakra, Container, Button, Flex, Text  } from "@chakra-ui/react"
-import ReactMarkdown from 'react-markdown';
+import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-ui/react"
 
 import { getAboutPage } from "@/entities/about/api";
 import type { AboutPage } from "@/entities/about/models";
 import type { ApiResponse, Meta } from "@/shared/models/api";
 
 export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const {description} = page.data.attributes;
+  const { description, registerDocuments, management } = page.data.attributes;
 
   return (
     <chakra.main mt={20} bgColor="brand.100">
@@ -79,6 +78,53 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                     style={{objectFit: 'cover', borderRadius: '12px'}}
                   />
                 </chakra.div>
+              </Flex>
+            ))}
+          </Flex>
+        </Container>
+      </chakra.section>
+      <chakra.section pt={10} pb={10}>
+        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
+          <Heading as="h3">Регистрационные документы</Heading>
+          <Flex mt={7} gap={10} flexWrap="wrap">
+            {registerDocuments.map((document) => (
+              <Link 
+                key={document.id} 
+                href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${document.file.data.attributes.url}`} 
+                target="_blank" 
+                referrerPolicy="no-referrer"
+                color="gray.900"
+                _hover={{color: 'brand.200'}}
+                >
+                <Flex w={["224px", '300px', '300px']} gap={4} alignItems="flex-start">
+                  <Image src="/pdf.png" width={40} height={52} alt="Иконка PDF"/>
+                  <Flex flexDir="column" gap={2}>
+                    <Text color="inherit" lineHeight={1.2} noOfLines={2}>{document.name}</Text>
+                    <Text color="brand.300" lineHeight={1} fontSize="md">{(document.file.data.attributes.size / 1024).toFixed(2)} мб</Text>
+                  </Flex>
+                </Flex>
+              </Link>
+            ))}
+          </Flex>
+        </Container>
+      </chakra.section>
+      <chakra.section pt={10} pb={10}>
+        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
+          <Heading as="h3">Руководство</Heading>
+          <Flex mt={7} gap={10} flexWrap="wrap">
+            {management.map((worker) => (
+              <Flex maxW="268px" key={worker.id} flexDirection="column" alignItems="flex-start">
+                <chakra.div w="240px" h="280px" pos="relative" overflow="hidden" borderRadius="12px">
+                  <Image 
+                    src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${worker.image.data.attributes.url}`}
+                    alt={worker.name}
+                    style={{objectFit: "cover"}}
+                    width={240}
+                    height={280}
+                  />
+                </chakra.div>
+                <Text mt={3} color="brand.300">{worker.job}</Text>
+                <Text color="gray.900" fontSize="lg">{worker.name}</Text>
               </Flex>
             ))}
           </Flex>

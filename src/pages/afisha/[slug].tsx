@@ -9,7 +9,9 @@ import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 
 import { Badge, Divider } from '@/shared/components';
-import { formatAfishaDays, getGenetiveRusMonth } from '@/shared/utils/formatDate';
+import { formatAfishaDays, getGenetiveRusMonth, formatDateLocale } from '@/shared/utils/formatDate';
+import { isNotVoid } from "@/shared/utils/mics"
+
 import styles from './styles.module.css';
 
 export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -38,9 +40,21 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
               </Text>
               <Stack divider={<Divider />} gap={[3, 4, 5]} fontSize="2xl" alignItems={["flex-start", "center"]} flexDir={["column", 'row']} color="brand.100">
                 {premiere && <Text>Премьера</Text>}
+                {formattedDate.length === 1 && 
+                  <Flex gap={2}>
+                    <Text lineHeight={1}>{formattedDate[0].date}</Text>
+                    <Text lineHeight={1}>{formattedDate[0].month}</Text>
+                  </Flex>}
+                  {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
+                {formattedDate.length > 1 && (
                 <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
-                  {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
+                  {formattedDate.map(({date, month}, index) => 
+                  <Flex key={index} flexDir="column" alignItems="center" gap={1}>
+                    <Text lineHeight={1}>{date}</Text>
+                    <Text lineHeight={1} fontSize="md">{month}</Text>
+                  </Flex>)}
                 </Stack>
+                )}
                 <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
               </Stack>
               <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
@@ -96,7 +110,9 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                 <Stack color="gray.900" divider={<Divider color="#171923" />} flexDir="row" gap={[2, 3, 3, 3, 3]} alignItems="center">
                   <Text fontSize="4xl" fontWeight="medium">{Number(ticket.date.toString().substring(8, 10))}</Text>
                   <Text fontSize="lg">{getGenetiveRusMonth(Number(ticket.date.toString().substring(5, 7)))}</Text>
-                  <Text fontSize="lg">TBD</Text>
+                  <Text fontSize="lg">
+                    {formatDateLocale(ticket.date)}
+                  </Text>
                 </Stack>
                 <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить билеты</Button>
               </Flex>

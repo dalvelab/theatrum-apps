@@ -9,3 +9,13 @@ export type StrapiImage = {
     }
   }
 }
+
+export type StrapiFile = {
+  id: number;
+  attributes: {
+    name: string;
+    url: string;
+    size: number;
+    mime: string;
+  }
+}

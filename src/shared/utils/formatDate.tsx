@@ -32,14 +32,42 @@ export function getGenetiveRusMonth(month: number) {
   return genetiveRusMonths[month - 1];
 }
 
-export function formatAfishaDays(dates: Date[]) {
-  return dates.map((date, index) => {
-    const dateString = date.toString()
+export function formatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
+  return new Date(date).toLocaleString('ru-RU', {timeZone}).split(',')[1].trim().substring(0, 5)
+}
 
-    if (index === dates.length - 1) {
-      return `${Number(dateString.substring(8, 10))} ${getGenetiveRusMonth(Number(dateString.substring(5, 7)))}`
+type formatAfishaDaysType = {
+  id :string;
+  date: number;
+  month: string;
+  time: string | null;
+}
+
+export function formatAfishaDays(dates: Date[]): formatAfishaDaysType[] {
+  const ids = new Set();
+
+  const formatted: formatAfishaDaysType[] = [];
+
+  for (let i = 0; i < dates.length; i++) {
+    const dateString = dates[i].toString()
+    const id = dateString.substring(0, 10);
+
+    if (ids.has(id)) {
+      const index = formatted.findIndex((date) => date.id === id);
+      formatted[index] = {
+        ...formatted[index],
+        time: null,
+      }
+    } else {
+      ids.add(id);
+      formatted.push({
+          id,
+          date: Number(dateString.substring(8, 10)),
+          month: getGenetiveRusMonth(Number(dateString.substring(5, 7))),
+          time: formatDateLocale(dates[i])
+      })
     }
+  }
 
-    return dateString.substring(8, 10);
-  })
+  return formatted
 }

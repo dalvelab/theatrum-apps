@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { Badge, Divider } from "@/shared/components"
 import type { Slider } from "@/entities/event/models"
 import { formatAfishaDays } from "@/shared/utils/formatDate"
+import { isNotVoid } from "@/shared/utils/mics"
 
 interface WelcomeSliderProps {
   slider: Slider;
@@ -48,11 +49,12 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
   return (
     <chakra.div w="full" h="auto" pos="relative">
       {data.map((slide) => {
-        const { title, small_description, premiere, age_limit, banner, pushkin_card } = slide.attributes.event.data.attributes;
+        const { id } = slide;
+        const { title, small_description, premiere, age_limit, banner, pushkin_card, slug } = slide.attributes.event.data.attributes;
 
         const dates = slide.attributes.tickets.map((ticket) => ticket.date);
         const formattedDate = formatAfishaDays(dates);
-
+        
         return (
           <chakra.div key={slide.id} display={slide.id === activeSlide ? 'block' : 'none'}>
             <Container maxWidth="container.xl" h="100vh" display="flex" alignItems="center" zIndex={1} pos="relative">
@@ -65,13 +67,25 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                 </Text>
                 <Stack divider={<Divider />} gap={[3, 4, 5]} fontSize="2xl" alignItems={["flex-start", "center"]} flexDir={["column", 'row']} color="brand.100">
                   {premiere && <Text>Премьера</Text>}
-                  <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
-                    {formattedDate.map((date, index) => <Text key={index}>{date}</Text>)}
-                  </Stack>
+                  {formattedDate.length === 1 && 
+                  <Flex gap={2}>
+                    <Text lineHeight={1}>{formattedDate[0].date}</Text>
+                    <Text lineHeight={1}>{formattedDate[0].month}</Text>
+                  </Flex>}
+                  {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
+                  {formattedDate.length > 1 && (
+                    <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
+                      {formattedDate.map(({date, month}, index) => 
+                      <Flex key={index} flexDir="column" alignItems="center" gap={1}>
+                        <Text lineHeight={1}>{date}</Text>
+                        <Text lineHeight={1} fontSize="md">{month}</Text>
+                      </Flex>)}
+                    </Stack>
+                  )}
                   <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
                 </Stack>
                 <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
-                  <Link href="/afisha/123">
+                  <Link href={`/afisha/${id}-${slug}`}>
                     <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
                   </Link>
                   {pushkin_card && (
