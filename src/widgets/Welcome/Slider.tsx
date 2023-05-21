@@ -33,7 +33,9 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
             src='/logo-theatrum-down.png'
             alt="Логотип по центру"
             fill
-            style={{objectFit: "cover"}}/>
+            priority={true}
+            style={{objectFit: "cover"}}
+          />
         </chakra.div>
         <chakra.div w="full" h="100vh" pos="absolute" left={0} top={0} zIndex='-1' >
           <Image 

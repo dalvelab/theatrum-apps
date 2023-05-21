@@ -76,7 +76,7 @@ export const Navbar = () => {
           </chakra.button>
         </Flex>
       </Container>
-      {opened && <Sidebar onClose={() => setOpened(false)} />}
+      <Sidebar onClose={() => setOpened(false)} isOpen={opened} />
     </chakra.nav>
   )
 }

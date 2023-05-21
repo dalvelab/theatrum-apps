@@ -90,17 +90,17 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
             {scenes.map((scene) => (
               <Flex 
                 key={scene.id} 
-                w={["224px", '300px', '300px']} 
+                w={["100%", "320px", "320px", '320px', '320px']} 
                 h="auto"
                 gap={3} 
                 alignItems="flex-start"
                 flexDir="column">
-                  <chakra.div w="100%" h="200px" pos="relative">
+                  <chakra.div w="100%" h={["260px", "220px", "220px", "220px", "220px"]} pos="relative">
                     <Image 
                       src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${scene.gallery.data[0].attributes.url}`}
                       fill 
                       alt={scene.title}
-                      style={{objectFit: "contain", borderRadius: "12px"}}
+                      style={{objectFit: "cover", borderRadius: "12px"}}
                     />
                   </chakra.div>
                   <Text fontSize="xl" fontWeight="medium">{scene.title}</Text>
@@ -140,7 +140,9 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                 _hover={{color: 'brand.200'}}
                 >
                 <Flex w={["224px", '300px', '300px']} gap={4} alignItems="flex-start">
-                  <Image src="/pdf.png" width={40} height={52} alt="Иконка PDF"/>
+                  <chakra.div pos="relative" minW="30px" maxW="30px" h="40px">
+                    <Image src="/pdf.png" fill alt="Иконка PDF"/>
+                  </chakra.div>
                   <Flex flexDir="column" gap={2}>
                     <Text color="inherit" lineHeight={1.2} noOfLines={2}>{document.name}</Text>
                     <Text color="brand.300" lineHeight={1} fontSize="md">{(document.file.data.attributes.size / 1024).toFixed(2)} мб</Text>
@@ -167,7 +169,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                   />
                 </chakra.div>
                 <Text mt={3} color="brand.300">{worker.job}</Text>
-                <Text color="gray.900" fontSize="lg">{worker.name}</Text>
+                <Text color="gray.900" fontSize="lg" textTransform="capitalize">{worker.name}</Text>
               </Flex>
             ))}
           </Flex>

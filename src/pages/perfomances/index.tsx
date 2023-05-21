@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { CardPerfomance } from '@/shared/components';
 import { ApiResponse } from '@/shared/models/api';
-import { getPerfomances } from '@/entities/event/api';
-import type { Perfomance } from '@/entities/event/models';
+import { getPerformances } from '@/entities/event/api';
+import type { Performance } from '@/entities/event/models';
 import type { Meta } from '@/shared/models/api';
 
 export default function Perfomances({perfomances}: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -22,6 +22,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
             <chakra.button 
               color={filter === false ? "brand.200" : "gray.900"}
               pos="relative"
+              fontWeight="medium"
               _after={{content: filter === false ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
               onClick={() => setFilter(false)}
               >
@@ -30,6 +31,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
             <chakra.button
               color={filter === true ? "brand.200" : "gray.900"} 
               pos="relative"
+              fontWeight="medium"
               _after={{content: filter === true ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
               onClick={() => setFilter(true)}
               >
@@ -54,11 +56,11 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
 }
 
 interface IProps {
-  perfomances: ApiResponse<Perfomance[], Meta>
+  perfomances: ApiResponse<Performance[], Meta>
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const perfomances = await getPerfomances({limit: 100})
+  const perfomances = await getPerformances({limit: 100})
 
   return {
     props: {perfomances}

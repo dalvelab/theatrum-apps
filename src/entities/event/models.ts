@@ -64,7 +64,8 @@ export type Slider = {
   }
 }
 
-export type Perfomance = {
+export type Performance = {
+  id: number;
   attributes: {
     archived: boolean;
     event: {

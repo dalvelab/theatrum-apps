@@ -1,16 +1,28 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { chakra, Grid, Container, Heading, Text, Flex, Button, position } from "@chakra-ui/react"
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react"
 
 import { CardNews } from '@/shared/components';
 import { ApiResponse } from '@/shared/models/api';
 import { getNews } from '@/entities/post/api';
-import type { News, NewsType } from '@/entities/post/models';
+import type { News } from '@/entities/post/models';
 import type { Meta } from '@/shared/models/api';
 
 export default function News({news}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [filter, setFilter] = useState<NewsType>('info');
+  const { query, push } = useRouter()
 
+  const [filter, setFilter] = useState<string | string[] | undefined>();
+
+  useEffect(() => {
+    if (!query.filter) {
+      push('/news?filter=info')
+      return;
+    }
+
+    setFilter(query.filter)
+  }, [push, query.filter]);
+  
   const data = news.data.filter((post) => post.attributes.type === filter);
 
   return (
@@ -25,7 +37,7 @@ export default function News({news}: InferGetServerSidePropsType<typeof getServe
             color={filter === 'info' ? "brand.200" : "gray.900"} 
             pos="relative"
             _after={{content: filter === 'info' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
-            onClick={() => setFilter('info')}
+            onClick={() => push('/news?filter=info')}
             >
             Информация
           </chakra.button>
@@ -35,7 +47,7 @@ export default function News({news}: InferGetServerSidePropsType<typeof getServe
             color={filter === 'press' ? "brand.200" : "gray.900"} 
             pos="relative"
             _after={{content: filter === 'press' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
-            onClick={() => setFilter('press')}
+            onClick={() => push('/news?filter=press')}
             >
             Пресса
           </chakra.button>

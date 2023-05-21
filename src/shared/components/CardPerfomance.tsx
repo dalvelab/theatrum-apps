@@ -1,20 +1,21 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { chakra, Button, Flex, Heading, LinkBox, LinkOverlay, Text } from "@chakra-ui/react"
+import { Link } from '@chakra-ui/next-js';
+import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react"
 
-import { Perfomance } from '@/entities/event/models';
+import { Performance } from '@/entities/event/models';
 
 import { Badge } from './Badge';
 
 interface CardPerfomanceProps {
-  perfomance: Perfomance;
+  perfomance: Performance;
 }
 
 export const CardPerfomance: React.FC<CardPerfomanceProps> = ({perfomance}) => {
-  const {age_limit, title, banner, small_description } = perfomance.attributes.event.data.attributes;
+  const { id } = perfomance;
+  const {age_limit, title, banner, small_description, slug } = perfomance.attributes.event.data.attributes;
 
   return (
-    <LinkBox as="article">
+    <chakra.article>
       <Flex 
         w={['auto', 'auto', 'auto', 'auto', '1240px']} 
         h={['auto', 'auto', 'auto', '300px', '336px']} 
@@ -32,16 +33,18 @@ export const CardPerfomance: React.FC<CardPerfomanceProps> = ({perfomance}) => {
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
           <Badge text={String(age_limit) + '+'}/>
           <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
-            <LinkOverlay as={Link} href='/perfomances/123' _hover={{textDecor: 'none'}}>
-                {title}
-            </LinkOverlay>
+            <Link href={`/perfomances/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+              {title}
+            </Link>
           </Heading>
-          <Text>{small_description}</Text>
+          <Text noOfLines={2}>{small_description}</Text>
           <Flex gap={5} alignItems="center">
-            <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
+            <Link href={`/perfomances/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
+            </Link>
           </Flex>
         </Flex>
       </Flex>
-    </LinkBox>
+    </chakra.article>
   )
 }

@@ -8,8 +8,8 @@ import { getSinglelAfisha } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 
-import { Badge, Divider, Property } from '@/shared/components';
-import { formatAfishaDays, getGenetiveRusMonth, formatDateLocale } from '@/shared/utils/formatDate';
+import { Badge, Divider } from '@/shared/components';
+import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 import { isNotVoid } from "@/shared/utils/mics"
 
 import styles from './styles.module.css';
@@ -35,6 +35,13 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
   const handleYAWidget = (id: string) => {
     // @ts-ignore
     window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
+  }
+
+  const scrollToTickets = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    })
   }
 
   return (
@@ -69,7 +76,16 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                 <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
               </Stack>
               <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
-                <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
+                <Button 
+                  size="lg" 
+                  bgColor="brand.200" 
+                  color="white" 
+                  _hover={{bgColor: "#4d8a8c"}} 
+                  alignSelf="flex-start"
+                  onClick={scrollToTickets}
+                  >
+                    Купить билеты
+                  </Button>
                 {pushkin_card && (
                   <Image
                   src='/pushkin-card.png'
@@ -122,7 +138,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                   <Text fontSize="4xl" fontWeight="medium">{Number(ticket.date.toString().substring(8, 10))}</Text>
                   <Text fontSize="lg">{getGenetiveRusMonth(Number(ticket.date.toString().substring(5, 7)))}</Text>
                   <Text fontSize="lg">
-                    {formatDateLocale(ticket.date)}
+                    {getformatDateLocaleTime(ticket.date)}
                   </Text>
                 </Stack>
                 <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить билеты</Button>
@@ -130,7 +146,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
               ))}
             </Grid>
             <Flex mt={8} justifyContent="space-between" gap={10} flexDir={["column", "column", "column", "row", "row"]}>
-              <Flex flexDir="column" minW="380px">
+              <Flex flexDir="column" minW={["100%", "100%", "380px", "380px", "380px"]}>
                 {premiere && (<Text fontSize="5xl">Премьера</Text>)}
                 <chakra.div mt={premiere ? 6 : 0} w="100%" fontSize="lg">
                   <chakra.li listStyleType="none" display="flex" gap={3} alignItems="center">
@@ -145,32 +161,36 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
             </Flex>
           </Container>
         </chakra.section>
-        <chakra.section pt={10} pb={10} bgColor="brand.100">
+        {production_team.length > 0 && (
+          <chakra.section pt={10} pb={10} bgColor="brand.100">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading size="xl" as="h4" fontWeight="medium">Постановочная группа</Heading>
             <Flex mt={7} flexWrap="wrap" gap={5}>
               {production_team.map((producer) => (
-                <Flex key={producer.id} flexDir="column" gap={2}>
+                <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
                   <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
-                  <Text color="gray.900" fontSize="xl" lineHeight={1}>{producer.name}</Text>
+                  <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
                 </Flex>
               ))}
             </Flex>
           </Container>
         </chakra.section>
-        <chakra.section pb={20} bgColor="brand.100">
+        )}
+        {roles.length > 0 && (
+          <chakra.section pb={20} bgColor="brand.100">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading size="xl" as="h4" fontWeight="medium">Действующие лица и исполнители</Heading>
             <Flex mt={7} flexWrap="wrap" gap={5}>
               {roles.map((producer) => (
                 <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
                   <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
-                  <Text color="gray.900" fontSize="xl" lineHeight={1}>{producer.name}</Text>
+                  <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
                 </Flex>
               ))}
             </Flex>
           </Container>
         </chakra.section>
+        )}
       </chakra.main>
       <Script id='yandex-afisha-script'>
         {`

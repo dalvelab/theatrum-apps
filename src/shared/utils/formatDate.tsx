@@ -32,7 +32,11 @@ export function getGenetiveRusMonth(month: number) {
   return genetiveRusMonths[month - 1];
 }
 
-export function formatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
+export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
+  return new Date(date).toLocaleString('ru-RU', {timeZone});
+}
+
+export function getformatDateLocaleTime(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
   return new Date(date).toLocaleString('ru-RU', {timeZone}).split(',')[1].trim().substring(0, 5)
 }
 
@@ -49,7 +53,7 @@ export function formatAfishaDays(dates: Date[]): formatAfishaDaysType[] {
   const formatted: formatAfishaDaysType[] = [];
 
   for (let i = 0; i < dates.length; i++) {
-    const dateString = dates[i].toString()
+    const dateString = getformatDateLocale(dates[i])
     const id = dateString.substring(0, 10);
 
     if (ids.has(id)) {
@@ -62,9 +66,9 @@ export function formatAfishaDays(dates: Date[]): formatAfishaDaysType[] {
       ids.add(id);
       formatted.push({
           id,
-          date: Number(dateString.substring(8, 10)),
-          month: getGenetiveRusMonth(Number(dateString.substring(5, 7))),
-          time: formatDateLocale(dates[i])
+          date: Number(dateString.substring(0, 2)),
+          month: getGenetiveRusMonth(Number(dateString.substring(3, 5))),
+          time: getformatDateLocaleTime(dates[i])
       })
     }
   }

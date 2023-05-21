@@ -56,9 +56,9 @@ export const Footer = () => {
             <Flex gap={10} flexDirection={["column", "column", "column", "row", "row"]}>
               <Flex flexDir="column" gap={2}>
                 <Text fontSize="lg" fontWeight="medium">Контакты</Text>
-                <Flex gap={5}>
+                <Flex gap={[2, 5, 5, 5, 5]} flexDir={["column", "row", "row", "row", "row"]}>
                   {contacts?.map(({contact, type, title}) => (
-                  <Link key={title} href={type === 'phone' ? `tel:${contact}` : `mailto:${contact}`}>
+                  <Link key={title} href={type === 'phone' ? `tel:${contact}` : `mailto:${contact}`} _hover={{color: "brand.200"}}>
                     <Text>{contact}</Text>
                   </Link>
                   ))}
