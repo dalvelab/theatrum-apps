@@ -62,7 +62,11 @@ export const Navbar = () => {
             <NavbarLink href='/news' text='Новости' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/contacts' text='Контакты' scrolled={scrolled || notWelcomePage} />
           </Flex>
-          <chakra.button display={['block', 'block', 'flex', 'none', 'none']} onClick={() => setOpened(true)}>
+          <chakra.button 
+            display={['block', 'block', 'flex', 'none', 'none']} 
+            onClick={() => setOpened(true)}
+            opacity={scrolled || notWelcomePage ? "none" : 0}
+            >
             <Image
               src="/menu.png"
               width={36}
