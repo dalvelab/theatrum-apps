@@ -33,7 +33,7 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
               Связаться с нами
             </Button>
           <Heading mt={10} as="h2" fontSize="3xl" fontWeight="medium">Схема проезда</Heading>
-          <Text mt={6}>Кликните на схему для открытия в <chakra.span color="brand.200">отдельном окне</chakra.span></Text>
+          <Text mt={6}>Нажмите на схему для открытия в <chakra.span color="brand.200">отдельном окне</chakra.span></Text>
           <chakra.div 
             w={["100%", "100%", "100%", "100%", "container.lg"]} 
             height={["260px", "340px", "440px", "440px", "520px"]} 

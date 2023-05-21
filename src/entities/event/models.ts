@@ -16,9 +16,15 @@ export type Event = {
     gallery: {
       data: StrapiImage[];
     };
-    roles: [];
-    production_team: [];
+    roles: Role[];
+    production_team: Role[];
   }
+}
+
+export type Role = {
+  id: number;
+  role: string;
+  name: string;
 }
 
 export type Ticket = {

@@ -29,7 +29,7 @@ interface getSinglelAfisha {
 export async function getSinglelAfisha(params: getSinglelAfisha): Promise<ApiResponse<Afisha, Meta>> {
   const query = qs.stringify(
     {
-      populate: ['event', 'event.banner', 'event.meta', 'tickets']
+      populate: ['event', 'event.banner', 'event.meta', 'event.production_team', 'event.roles', 'tickets']
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/afishas/${params.id}?${query}`);

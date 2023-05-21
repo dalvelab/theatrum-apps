@@ -8,14 +8,25 @@ import { getSinglelAfisha } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 
-import { Badge, Divider } from '@/shared/components';
+import { Badge, Divider, Property } from '@/shared/components';
 import { formatAfishaDays, getGenetiveRusMonth, formatDateLocale } from '@/shared/utils/formatDate';
 import { isNotVoid } from "@/shared/utils/mics"
 
 import styles from './styles.module.css';
 
 export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { banner, title, small_description, premiere, age_limit, pushkin_card, description, properties } = afisha.data.attributes.event.data.attributes;
+  const {
+    banner,
+    title,
+    small_description, 
+    premiere,
+    production_team,
+    roles,
+    age_limit, 
+    pushkin_card, 
+    description, 
+    properties,
+  } = afisha.data.attributes.event.data.attributes;
   const { tickets } = afisha.data.attributes;
 
   const dates = tickets.map((ticket) => ticket.date);
@@ -31,7 +42,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
       <chakra.main mt={20}>
         <chakra.div>
           <Container maxWidth="container.xl" h="100vh" display="flex" alignItems="center" zIndex={1} pos="relative">
-            <Flex maxW="container.md" flexDir="column" gap={[4, 6]} mt="100px">
+            <Flex maxW="container.md" flexDir="column" gap={6} mt="100px">
               <Heading as="h1" size={["xl", "2xl"]} lineHeight="shorter" color="white" fontWeight="medium">
                 {title}
               </Heading>
@@ -79,7 +90,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
             style={{objectFit: "cover"}}/>
           </chakra.div>
         </chakra.div>
-        <chakra.section pt={10} pb={20} pos="relative" bgColor="brand.100" minH="100vh">
+        <chakra.section pt={10} pb={10} pos="relative" bgColor="brand.100">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Stack 
               divider={<Divider color="#171923" />} 
@@ -131,6 +142,32 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
               <chakra.div w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
                 <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
               </chakra.div>
+            </Flex>
+          </Container>
+        </chakra.section>
+        <chakra.section pt={10} pb={10} bgColor="brand.100">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading size="xl" as="h4" fontWeight="medium">Постановочная группа</Heading>
+            <Flex mt={7} flexWrap="wrap" gap={5}>
+              {production_team.map((producer) => (
+                <Flex key={producer.id} flexDir="column" gap={2}>
+                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                  <Text color="gray.900" fontSize="xl" lineHeight={1}>{producer.name}</Text>
+                </Flex>
+              ))}
+            </Flex>
+          </Container>
+        </chakra.section>
+        <chakra.section pb={20} bgColor="brand.100">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading size="xl" as="h4" fontWeight="medium">Действующие лица и исполнители</Heading>
+            <Flex mt={7} flexWrap="wrap" gap={5}>
+              {roles.map((producer) => (
+                <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
+                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                  <Text color="gray.900" fontSize="xl" lineHeight={1}>{producer.name}</Text>
+                </Flex>
+              ))}
             </Flex>
           </Container>
         </chakra.section>

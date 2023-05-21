@@ -7,7 +7,7 @@ import type { AboutPage } from "@/entities/about/models";
 import type { ApiResponse, Meta } from "@/shared/models/api";
 
 export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { description, registerDocuments, management } = page.data.attributes;
+  const { description, registerDocuments, management, scenes} = page.data.attributes;
 
   return (
     <chakra.main mt={20} bgColor="brand.100">
@@ -54,7 +54,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                   lineHeight={[1.7, 1.7, 1.7, 1.5, 1.7]} 
                   alignItems="flex-start" 
                   gap={4}>
-                  <Text>{block.text}</Text>
+                  <Text textAlign="justify">{block.text}</Text>
                   {block.button === 'table_booking' && (
                     <Button 
                       size="lg" 
@@ -85,8 +85,51 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
       </chakra.section>
       <chakra.section pt={10} pb={10}>
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
+          <Heading as="h3">Сценические площадки</Heading>
+          <Flex mt={10} gap={10} flexWrap="wrap">
+            {scenes.map((scene) => (
+              <Flex 
+                key={scene.id} 
+                w={["224px", '300px', '300px']} 
+                h="auto"
+                gap={3} 
+                alignItems="flex-start"
+                flexDir="column">
+                  <chakra.div w="100%" h="200px" pos="relative">
+                    <Image 
+                      src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${scene.gallery.data[0].attributes.url}`}
+                      fill 
+                      alt={scene.title}
+                      style={{objectFit: "contain", borderRadius: "12px"}}
+                    />
+                  </chakra.div>
+                  <Text fontSize="xl" fontWeight="medium">{scene.title}</Text>
+                  <Text 
+                    color="brand.300" 
+                    noOfLines={3}
+                    fontSize="md"
+                    >
+                      {scene.description}
+                    </Text>
+                  <Link href={`/about/scenes/${scene.id}`} target="_blank" >
+                    <Button 
+                      size="md" 
+                      bg="brand.300" 
+                      _hover={{bgColor: "#69494a"}} 
+                      color="white" 
+                      fontWeight="normal">
+                        Подробнее
+                    </Button>
+                  </Link>
+              </Flex>
+            ))}
+          </Flex>
+        </Container>
+      </chakra.section>
+      <chakra.section pt={10} pb={10}>
+        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
           <Heading as="h3">Регистрационные документы</Heading>
-          <Flex mt={7} gap={10} flexWrap="wrap">
+          <Flex mt={10} gap={10} flexWrap="wrap">
             {registerDocuments.map((document) => (
               <Link 
                 key={document.id} 
@@ -111,7 +154,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
       <chakra.section pt={10} pb={10}>
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
           <Heading as="h3">Руководство</Heading>
-          <Flex mt={7} gap={10} flexWrap="wrap">
+          <Flex mt={10} gap={10} flexWrap="wrap">
             {management.map((worker) => (
               <Flex maxW="268px" key={worker.id} flexDirection="column" alignItems="flex-start">
                 <chakra.div w="240px" h="280px" pos="relative" overflow="hidden" borderRadius="12px">

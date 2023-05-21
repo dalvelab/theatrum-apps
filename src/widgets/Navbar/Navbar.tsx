@@ -1,13 +1,15 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-
-import { chakra, Container, Flex } from "@chakra-ui/react"
 import Link from 'next/link';
-import {NavbarLink} from './components/Link';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { chakra, Container, Flex } from "@chakra-ui/react"
+
+import { NavbarLink } from './components/Link';
+import { Sidebar } from './components/Sidebar';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   const router = useRouter();
   const notWelcomePage = router.pathname !== '/';
@@ -37,12 +39,15 @@ export const Navbar = () => {
     <chakra.nav 
       transition="0.1s ease-in" 
       mt={scrolled || notWelcomePage ? 0 : [0, 4]} 
-      w="full" h={20} pos="fixed" 
+      w="full" 
+      h={20}
+      pos="fixed" 
       borderBottom={scrolled || notWelcomePage ? "1px solid #583D3E" : "none"} 
       bgColor={scrolled || notWelcomePage ? 'brand.100' : 'transparent'} 
       top={0} 
       left={0} 
-      zIndex="docked">
+      zIndex="docked"
+      >
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">
           <Link href="/">
@@ -57,8 +62,17 @@ export const Navbar = () => {
             <NavbarLink href='/news' text='Новости' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/contacts' text='Контакты' scrolled={scrolled || notWelcomePage} />
           </Flex>
+          <chakra.button display={['block', 'block', 'flex', 'none', 'none']} onClick={() => setOpened(true)}>
+            <Image
+              src="/menu.png"
+              width={36}
+              height={36}
+              alt='Иконка мобильного меню'
+            />
+          </chakra.button>
         </Flex>
       </Container>
+      {opened && <Sidebar onClose={() => setOpened(false)} />}
     </chakra.nav>
   )
 }
