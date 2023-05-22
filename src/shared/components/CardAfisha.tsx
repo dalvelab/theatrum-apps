@@ -85,7 +85,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
           </Stack>
           <Flex gap={5} alignItems="center">
             <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
-              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Купить билеты</Button>
+              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
             </Link>
             {pushkin_card && (
               <Image

@@ -22,7 +22,7 @@ type Document = {
   }
 }
 
-type Scene = {
+export type Scene = {
   id: number;
   title: string;
   description: string;

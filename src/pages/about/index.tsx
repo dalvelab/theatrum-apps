@@ -1,16 +1,33 @@
-import Image from "next/image"
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import Image from "next/image"
+import { useState } from "react";
 import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-ui/react"
 
-import { getAboutPage } from "@/entities/about/api";
-import type { AboutPage } from "@/entities/about/models";
+import { getAboutPage, SceneModal } from "@/entities/about";
+import type { AboutPage } from "@/entities/about";
 import type { ApiResponse, Meta } from "@/shared/models/api";
+import { isNotVoid } from '@/shared/utils/mics';
 
 export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { description, registerDocuments, management, scenes} = page.data.attributes;
 
+  const [openedModal, setModalOpened] = useState(false);
+  const [selectedScene, setSelectedScene] = useState<number | null>(null);
+
+  const handleSceneModal = (id: number) => {
+    setSelectedScene(id);
+    setModalOpened(true);
+  }
+
   return (
     <chakra.main mt={20} bgColor="brand.100">
+      {openedModal && isNotVoid(selectedScene) && 
+        <SceneModal 
+          scene={scenes[selectedScene]} 
+          isOpened={openedModal} 
+          onClose={() => setModalOpened(false)} 
+        />
+      }
       <chakra.section pt={10} pb={20} pos="relative" position="relative" h="auto">
         <Container maxWidth="container.xl" h="340px" display="flex" justifyContent="center" alignItems="center" pos="relative">
           <chakra.div 
@@ -83,11 +100,11 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
           </Flex>
         </Container>
       </chakra.section>
-      <chakra.section pt={10} pb={10}>
+      <chakra.section pt={10} pb={10} id='scenes'>
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" pos="relative">
           <Heading as="h3">Сценические площадки</Heading>
           <Flex mt={10} gap={10} flexWrap="wrap">
-            {scenes.map((scene) => (
+            {scenes.map((scene, index) => (
               <Flex 
                 key={scene.id} 
                 w={["100%", "320px", "320px", '320px', '320px']} 
@@ -111,16 +128,16 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                     >
                       {scene.description}
                     </Text>
-                  <Link href={`/about/scenes/${scene.id}`} target="_blank" >
                     <Button 
                       size="md" 
                       bg="brand.300" 
                       _hover={{bgColor: "#69494a"}} 
                       color="white" 
-                      fontWeight="normal">
+                      fontWeight="normal"
+                      onClick={() => handleSceneModal(index)}
+                      >
                         Подробнее
                     </Button>
-                  </Link>
               </Flex>
             ))}
           </Flex>

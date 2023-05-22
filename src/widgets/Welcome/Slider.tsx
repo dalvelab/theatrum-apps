@@ -88,7 +88,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                 </Stack>
                 <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
                   <Link href={`/afisha/${id}-${slug}`}>
-                    <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Купить билеты</Button>
+                    <Button size="lg" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} alignSelf="flex-start">Подробнее</Button>
                   </Link>
                   {pushkin_card && (
                     <Image
