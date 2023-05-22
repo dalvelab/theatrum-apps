@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import { Button, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
+import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
 import { getSinglelPerformance } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Performance } from '@/entities/event/models';
 
-import { Badge, Divider } from '@/shared/components';
+import { Badge, Gallery } from '@/shared/components';
+import { isNotVoid } from '@/shared/utils/mics';
 
 import styles from './styles.module.css';
 
@@ -19,13 +20,11 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
     premiere,
     production_team,
     roles,
-    age_limit, 
-    pushkin_card, 
+    age_limit,
+    gallery,
     description, 
     properties,
   } = performance.data.attributes.event.data.attributes;
-
-  console.log(performance)
 
   return (
     <chakra.main mt={20}>
@@ -93,6 +92,29 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
               </Flex>
             ))}
           </Flex>
+        </Container>
+      </chakra.section>
+      )}
+      {isNotVoid(gallery.data) && gallery.data.length > 0 && (
+        <chakra.section pb={20} bgColor="brand.100">
+        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+          <Heading size="xl" as="h4" fontWeight="medium">Галерея</Heading>
+          <Gallery length={gallery.data.length}>
+            {gallery.data.map((image) => (
+              <chakra.div 
+                key={image.id} 
+                minW={["360px", "460px", "512px", "512px", "512px"]}
+                h={["300px", "320px", "360px", "360px", "360px"]}
+                pos="relative">
+              <Image 
+                src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
+                alt='Изображение галереи'
+                fill
+                style={{objectFit: "cover", borderRadius: "12px"}}
+              />
+            </chakra.div>
+            ))}
+          </Gallery>
         </Container>
       </chakra.section>
       )}

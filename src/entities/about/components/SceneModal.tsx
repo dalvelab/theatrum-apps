@@ -20,9 +20,8 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
         minW={["100%", "100%", "100%", "940px", "1200px", "1200px"]}
         bgColor="brand.100">
         {/* <ModalCloseButton size="lg" color="brand.300" /> */}
-        <ModalBody>
-          <chakra.button 
-            display={['block', 'block', 'flex', 'none', 'none']} 
+        <ModalBody pt={10}>
+          <chakra.button
             pos="absolute"
             right="16px"
             top="16px"

@@ -63,7 +63,7 @@ export async function getPerformances(params: getAfishaParams): Promise<ApiRespo
         limit: params?.limit || 100,
       },
       sort: ['event.title'],
-      populate: ['event', 'event.banner', 'event.meta', 'tickets']
+      populate: ['event', 'event.banner', 'event.meta']
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/perfomances?${query}`);
@@ -78,7 +78,7 @@ interface GetSinglelPerfomance {
 export async function getSinglelPerformance(params: GetSinglelPerfomance): Promise<ApiResponse<Performance, Meta>> {
   const query = qs.stringify(
     {
-      populate: ['event', 'event.banner', 'event.meta', 'event.production_team', 'event.roles']
+      populate: ['event', 'event.banner', 'event.gallery', 'event.meta', 'event.production_team', 'event.roles']
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/perfomances/${params.id}?${query}`);
