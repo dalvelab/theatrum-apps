@@ -11,7 +11,7 @@ interface PropertyProps {
 const contactToTitleMap: Record<ContactType, string> = {
   'email': 'E-mail',
   'phone': 'Телефон',
-  'text': 'Адрес'
+  'text': 'Почтовый адрес'
 }
 
 export const Property: React.FC<PropertyProps> = ({text, type}) => {

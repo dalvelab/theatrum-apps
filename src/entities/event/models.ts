@@ -14,7 +14,15 @@ export type Event = {
     banner: StrapiImage;
     properties: string;
     gallery: {
-      data: StrapiImage[];
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          url: string;
+          width?: number;
+          height: number;
+        }
+      }[]
     };
     roles: Role[];
     production_team: Role[];

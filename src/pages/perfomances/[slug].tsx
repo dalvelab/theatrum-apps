@@ -73,7 +73,7 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
           <Flex mt={7} flexWrap="wrap" gap={5}>
             {production_team.map((producer) => (
               <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
                 <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
               </Flex>
             ))}
@@ -88,7 +88,7 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
           <Flex mt={7} flexWrap="wrap" gap={5}>
             {roles.map((producer) => (
               <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
                 <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
               </Flex>
             ))}

@@ -9,6 +9,15 @@
 
 .description blockquote {
   margin-top: 16px;
+  position: relative;
+}
+
+.description blockquote::before {
+  content: '';
+  width: 1px;
+  height: 100%;
+  background-color: #000;
+  margin-top: 16px;
 }
 
 .description blockquote:first-child {

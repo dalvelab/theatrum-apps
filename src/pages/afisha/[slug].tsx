@@ -8,7 +8,7 @@ import { getSinglelAfisha } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 
-import { Badge, Divider } from '@/shared/components';
+import { Badge, Divider, Gallery } from '@/shared/components';
 import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 import { isNotVoid } from "@/shared/utils/mics"
 
@@ -26,8 +26,11 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
     pushkin_card, 
     description, 
     properties,
+    gallery
   } = afisha.data.attributes.event.data.attributes;
   const { tickets } = afisha.data.attributes;
+
+  console.log(afisha);
 
   const dates = tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
@@ -168,7 +171,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
             <Flex mt={7} flexWrap="wrap" gap={5}>
               {production_team.map((producer) => (
                 <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
                   <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
                 </Flex>
               ))}
@@ -183,11 +186,34 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
             <Flex mt={7} flexWrap="wrap" gap={5}>
               {roles.map((producer) => (
                 <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role.toLowerCase()}</Text>
+                  <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
                   <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
                 </Flex>
               ))}
             </Flex>
+          </Container>
+        </chakra.section>
+        )}
+        {isNotVoid(gallery.data) && gallery.data.length > 0 && (
+          <chakra.section pb={20} bgColor="brand.100">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading size="xl" as="h4" fontWeight="medium">Галерея</Heading>
+            <Gallery length={gallery.data.length}>
+              {gallery.data.map((image) => (
+                <chakra.div 
+                  key={image.id} 
+                  minW={["360px", "460px", "512px", "512px", "512px"]}
+                  h={["300px", "320px", "360px", "360px", "360px"]}
+                  pos="relative">
+                <Image 
+                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
+                  alt='Изображение галереи'
+                  fill
+                  style={{objectFit: "cover", borderRadius: "12px"}}
+                />
+              </chakra.div>
+              ))}
+            </Gallery>
           </Container>
         </chakra.section>
         )}

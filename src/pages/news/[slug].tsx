@@ -20,7 +20,7 @@ export default function NewsDetails({post} : InferGetServerSidePropsType<typeof 
   return (
     <chakra.main mt={20} bgColor="brand.100">
       <Container pt={10} pb={20} maxWidth="container.xl" minH="100vh" h="auto" display="flex" flexDir="column" zIndex={1} pos="relative">
-        <Flex gap={7} alignItems="center" flexDir={["column", "column", "column", "row", "row"]}>
+        <Flex gap={7} alignItems={["flex-start", "flex-start", "flex-start", "center", "center"]} flexDir={["column", "column", "column", "row", "row"]}>
           <chakra.div 
             pos="relative" 
             minW={["100%", "100%", "100%", "520px", "640px"]} 

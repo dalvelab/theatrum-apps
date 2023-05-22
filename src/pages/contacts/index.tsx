@@ -20,7 +20,7 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
             {contacts.map(({contact, type, title}) => (
               <Property key={title} text={contact} type={type} />
             ))}
-            <Property title='Адрес' text={address} type='text' />
+            <Property text={address} type='text' />
           </Flex>
           <Button 
             mt={6} 
