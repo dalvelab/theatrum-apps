@@ -30,8 +30,6 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
   } = afisha.data.attributes.event.data.attributes;
   const { tickets } = afisha.data.attributes;
 
-  console.log(afisha);
-
   const dates = tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
 

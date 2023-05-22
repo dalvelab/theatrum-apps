@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Container, Flex, chakra, Link, Text, Box, Button, textDecoration } from "@chakra-ui/react"
+import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
 
+import { FeedbackModal } from '@/entities/message';
 import { getFooter } from "@/entities/footer/api"
 import type { Footer as FooterType } from "@/entities/footer/models"
 import type { ApiResponse, Meta } from "@/shared/models/api"
@@ -9,6 +10,7 @@ import type { ApiResponse, Meta } from "@/shared/models/api"
 export const Footer = () => {
   const [footerData, setFooterData] = useState<null | ApiResponse<FooterType, Meta>>(null);
   const [isLoading, setLoading] = useState(false);
+  const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
  
   useEffect(() => {
     setLoading(true);
@@ -28,6 +30,9 @@ export const Footer = () => {
 
   return (
     <chakra.footer w="full" h="auto" minH={40} bgColor="brand.100" borderTop="1px solid #583D3E" pos="relative">
+      {openedFeedbackModal && (
+        <FeedbackModal isOpened={openedFeedbackModal} onClose={() => setOpenedFeedbackModal(false)} />
+      )}
       <Container maxW="container.xl" pt={8} pb={3} display="flex" flexDir="column">
         <Flex justifyContent="space-between" alignItems="flex-start" flexDirection={["column", "column", "column", "row", "row"]} gap={10}>
           <Flex flexDir="column" gap={8}>
@@ -100,7 +105,16 @@ export const Footer = () => {
                 </Link>
               ))}
             </Flex>
-            <Button size="lg" bg="brand.300" _hover={{bgColor: "#69494a"}} color="white" fontWeight="normal">Связаться с нами</Button>
+            <Button 
+              size="lg" 
+              bg="brand.300" 
+              _hover={{bgColor: "#69494a"}} 
+              color="white" 
+              fontWeight="normal"
+              onClick={() => setOpenedFeedbackModal(true)}
+              >
+                Связаться с нами
+              </Button>
           </Flex>
         </Flex>
         {(!partners || partners.length !== 0) && (

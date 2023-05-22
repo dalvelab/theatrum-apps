@@ -8,20 +8,6 @@ export async function getAboutPage(): Promise<ApiResponse<AboutPage, Meta>> {
   const query = qs.stringify(
     {
       populate: 
-      // {
-      //   registerDocuments: {
-      //     fields: ['file']
-      //   },
-      //   management: {
-      //     fields: ['image']
-      //   },
-      //   scenes: {
-      //     fields: ['documents', 'documents.file', 'gallery']
-      //   },
-      //   description: {
-      //     fields: ['image']
-      //   }
-      // }
       [
         'registerDocuments', 
         'registerDocuments.file', 
