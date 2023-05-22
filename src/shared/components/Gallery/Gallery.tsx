@@ -61,7 +61,7 @@ export const Gallery: React.FC<IProps> = (props) => {
               transform="auto"
               translateY="-50%"
               zIndex={2}
-              display="flex"
+              display={["none","none", "flex", "flex", "flex"]}
               justifyContent="center"
               alignItems="center"
             >
@@ -85,7 +85,7 @@ export const Gallery: React.FC<IProps> = (props) => {
               translateY="-50%"
               zIndex={2}
               onClick={() => handleSwipe('right')}
-              display="flex"
+              display={["none","none", "flex", "flex", "flex"]}
               justifyContent="center"
               alignItems="center"
             >

@@ -79,7 +79,18 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                 <Badge text={age_limit.toString() + "+"} color="#E9D5CD" />
               </Stack>
               <Flex flexDir={["column", "row", "row", "row", "row"]} gap={5} alignItems={["flex-start", "center", "center", "center", "center"]}>
-                <Button 
+                {tickets.length === 1 ? (
+                  <Button 
+                    onClick={() => handleYAWidget(tickets[0].link)} 
+                    size="md" 
+                    bgColor="brand.200" 
+                    color="white" 
+                    _hover={{bgColor: "#4d8a8c"}}
+                    >
+                      Купить билеты
+                    </Button>
+                ) : (
+                  <Button 
                   size="lg" 
                   bgColor="brand.200" 
                   color="white" 
@@ -89,6 +100,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                   >
                     Купить билеты
                   </Button>
+                )}
                 {pushkin_card && (
                   <Image
                   src='/pushkin-card.png'
