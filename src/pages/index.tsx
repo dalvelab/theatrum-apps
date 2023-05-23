@@ -2,7 +2,7 @@ import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
 import { Button, Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
 import {Link} from '@chakra-ui/next-js';
 
-import { WelcomeSlider } from '@/widgets/Welcome'
+import { WelcomeSlider } from '@/widgets/Slider'
 import { CardAfisha, CardNews } from '@/shared/components'
 import { getAfisha, getSlider  } from '@/entities/event/api';
 import { getNews  } from '@/entities/post/api';

@@ -6,8 +6,9 @@ import ReactMarkdown from 'react-markdown';
 import { getSinglelPerformance } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Performance } from '@/entities/event/models';
+import { SwipeGallery, Roles } from '@/entities/event';
 
-import { Badge, Gallery } from '@/shared/components';
+import { Badge } from '@/shared/components';
 import { isNotVoid } from '@/shared/utils/mics';
 
 import styles from './styles.module.css';
@@ -66,57 +67,28 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
         </Container>
       </chakra.section>
       {production_team.length > 0 && (
-        <chakra.section pt={10} pb={10} bgColor="brand.100">
+        <chakra.section pt={20} pb={10} bgColor="brand.100">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading size="xl" as="h4" fontWeight="medium">Постановочная группа</Heading>
-          <Flex mt={7} flexWrap="wrap" gap={5}>
-            {production_team.map((producer) => (
-              <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
-                <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
-              </Flex>
-            ))}
-          </Flex>
+          <Roles data={production_team} />
         </Container>
       </chakra.section>
       )}
       {roles.length > 0 && (
-        <chakra.section pb={20} bgColor="brand.100">
+        <chakra.section pb={10} bgColor="brand.100">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading size="xl" as="h4" fontWeight="medium">Действующие лица и исполнители</Heading>
-          <Flex mt={7} flexWrap="wrap" gap={5}>
-            {roles.map((producer) => (
-              <Flex w="228px" key={producer.id} flexDir="column" gap={2}>
-                <Text color="brand.300" fontSize="md" lineHeight={1}>{producer.role}</Text>
-                <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{producer.name}</Text>
-              </Flex>
-            ))}
-          </Flex>
+          <Roles data={roles} />
         </Container>
       </chakra.section>
       )}
       {isNotVoid(gallery.data) && gallery.data.length > 0 && (
         <chakra.section pb={20} bgColor="brand.100">
-        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
-          <Heading size="xl" as="h4" fontWeight="medium">Галерея</Heading>
-          <Gallery length={gallery.data.length}>
-            {gallery.data.map((image) => (
-              <chakra.div 
-                key={image.id} 
-                minW={["360px", "460px", "512px", "512px", "512px"]}
-                h={["300px", "320px", "360px", "360px", "360px"]}
-                pos="relative">
-              <Image 
-                src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
-                alt='Изображение галереи'
-                fill
-                style={{objectFit: "cover", borderRadius: "12px"}}
-              />
-            </chakra.div>
-            ))}
-          </Gallery>
-        </Container>
-      </chakra.section>
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading size="xl" as="h4" fontWeight="medium">Галерея</Heading>
+            <SwipeGallery data={gallery.data} />
+          </Container>
+        </chakra.section>
       )}
     </chakra.main>
   )

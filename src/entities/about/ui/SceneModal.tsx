@@ -44,7 +44,7 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
                 <Heading fontWeight="semibold">
                   {scene.title}
                 </Heading>
-                <Text fontSize="lg">
+                <Text fontSize="lg" textAlign="justify">
                   {scene.description}
                 </Text>
               </Flex>

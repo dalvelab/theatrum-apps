@@ -1,11 +1,11 @@
 .description p {
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: justify;
 }
 
 .description blockquote {
-  margin-top: 16px;
-  margin-left: 12px;
+  margin-top: 20px;
+  margin-left: 16px;
   position: relative;
 }
 
@@ -20,7 +20,7 @@
   background-color: #000;
   margin-top: 16px;
   position: absolute;
-  left: -12px;
+  left: -16px;
   bottom: 0;
 }
 
