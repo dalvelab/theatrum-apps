@@ -6,6 +6,7 @@ import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-u
 import { getAboutPage, SceneModal } from "@/entities/about";
 import type { AboutPage } from "@/entities/about";
 import type { ApiResponse, Meta } from "@/shared/models/api";
+import { BookingModal } from '@/entities/message';
 import { isNotVoid } from '@/shared/utils/mics';
 
 export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -13,6 +14,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
 
   const [openedModal, setModalOpened] = useState(false);
   const [selectedScene, setSelectedScene] = useState<number | null>(null);
+  const [openedBookingModal, setOpenedBookingModal] = useState(false);
 
   const handleSceneModal = (id: number) => {
     setSelectedScene(id);
@@ -28,6 +30,9 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
           onClose={() => setModalOpened(false)} 
         />
       }
+      {openedBookingModal && (
+        <BookingModal isOpened={openedBookingModal} onClose={() => setOpenedBookingModal(false)} />
+      )}
       <chakra.section pt={10} pb={20} pos="relative" position="relative" h="auto">
         <Container maxWidth="container.xl" h="340px" display="flex" justifyContent="center" alignItems="center" pos="relative">
           <chakra.div 
@@ -78,7 +83,9 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                       bg="brand.300" 
                       _hover={{bgColor: "#69494a"}} 
                       color="white" 
-                      fontWeight="normal">
+                      fontWeight="normal"
+                      onClick={() => setOpenedBookingModal(true)}
+                      >
                         Забронировать стол
                       </Button>
                   )}

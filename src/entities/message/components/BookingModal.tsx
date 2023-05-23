@@ -12,23 +12,25 @@ import {
   ModalContent,
   FormControl,
   Input,
-  Textarea,
-  useToast 
+  NumberInput,
+  useToast, 
+  NumberInputField
 } from "@chakra-ui/react"
 
 import { createMessage } from '../api';
 import type { Message } from '../models';
 
-interface FeedbackModalProps {
+interface BookingModalProps {
   isOpened: boolean;
   onClose: () => void;
 }
 
-export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose}) => {
+export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
+  const [date, setDate] = useState('');
+  const [visitors, setVisitors] = useState('');
   
   const toast = useToast()
 
@@ -36,11 +38,11 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
     e.preventDefault();
 
     const data: Message = {
-      title: 'Обратная связь',
+      title: 'Бронирование',
       name, 
       phone,
       email,
-      body,
+      body: `Дата: ${date}\n Кол-во человек: ${visitors}`,
       status: 'new'
     }
 
@@ -60,7 +62,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
       }
 
       toast({
-        title: 'Сообщение отправлено.',
+        title: 'Бронирование отправлено.',
         description: "Мы свяжемся с вами в ближайшее время",
         status: 'success',
         duration: 2500,
@@ -97,7 +99,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
                 required
                 borderColor="brand.300" 
                 _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
+                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -129,16 +131,31 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
                 />
             </FormControl>
             <FormControl>
-              <FormLabel color="brand.300">Сообщение</FormLabel>
-              <Textarea
+            <FormLabel color="brand.300">Дата и время визита</FormLabel>
+              <Input 
                 required
-                name="body"
+                name="date"
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
+                _hover={{borderColor: "brand.200"}}
+                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 />
+            </FormControl>
+            <FormControl>
+            <FormLabel color="brand.300">Количество гостей</FormLabel>
+              <NumberInput defaultValue={0}
+                isRequired
+                name="guest_amount"
+                borderColor="brand.300" 
+                value={visitors}
+                onChange={(value) => setVisitors(value)}
+                >
+                  <NumberInputField
+                    _hover={{borderColor: "brand.200"}}
+                    _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                  />
+                </NumberInput>
             </FormControl>
             <Button 
               size="lg"

@@ -7,11 +7,7 @@ export type Message = {
   status: 'new' | 'closed'
 }
 
-export type CreateMessage = {
-  data: Message;
-}
-
-export type FeedbackMessageResponse = {
+export type MessageResponse = {
   id: number;
   attributes: Message;
 }

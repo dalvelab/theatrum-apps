@@ -1,8 +1,8 @@
 import type {ApiResponse, Meta} from '@/shared/models/api';
 
-import { FeedbackMessageResponse, Message } from './models';
+import { MessageResponse, Message } from './models';
 
-export async function createFeedbackMessage(message: Message): Promise<ApiResponse<FeedbackMessageResponse, Meta>> {
+export async function createMessage(message: Message): Promise<ApiResponse<MessageResponse, Meta>> {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/messages`, {
     method: 'POST',
