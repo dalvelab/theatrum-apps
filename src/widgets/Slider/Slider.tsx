@@ -96,8 +96,8 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
             display="block"
             pos="absolute"
             left={`calc(${index * 100}%)`}
-            transform="auto"
-            translateX={`-${slides.indexOf(activeSlide) * 100}%`}
+            transform={`translate3d(-${slides.indexOf(activeSlide) * 100}%, 0, 0)`}
+            // translateX={`-${slides.indexOf(activeSlide) * 100}%`}
             transition="0.4s ease-in"
             onTouchStart={(e) => handleSwipeStart(e)}
             onTouchEnd={(e) => handleTouchEnd(e)}

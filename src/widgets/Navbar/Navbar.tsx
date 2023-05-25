@@ -43,7 +43,8 @@ export const Navbar = () => {
       w="full" 
       h={20}
       pos="fixed" 
-      borderBottom={scrolled || notWelcomePage ? "1px solid #583D3E" : "none"} 
+      borderBottom={scrolled || notWelcomePage ? "1px solid" : "none"}
+      borderColor={opened ? "transparent" : "#583D3E"} 
       bgColor={scrolled || notWelcomePage ? 'brand.100' : 'transparent'} 
       top={0} 
       left={0} 
@@ -52,8 +53,20 @@ export const Navbar = () => {
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">
           <Link href="/">
-            <chakra.div width={['200px', '272px']} height={['48px', '48px']} position="relative">
-              <Image fill src={scrolled || notWelcomePage ? '/logo-dark.svg' : "/logo-light.svg"} alt='Логотип в меню' style={{fill: "red"}}/>
+            <chakra.div 
+              opacity={opened ? "0" : "1"} 
+              transition="0.1s ease-in" 
+              width={['200px', '272px']} 
+              height={['48px', '48px']} 
+              position="relative"
+              >
+                <Image 
+                  fill 
+                  src={scrolled || notWelcomePage ? '/logo-dark.svg' : "/logo-light.svg"} 
+                  alt='Логотип в меню' 
+                  style={{fill: "red"}}
+                  priority={true}
+                  />
             </chakra.div>
           </Link>
           <Flex gap={8} display={['none', 'none', 'none', 'flex', 'flex']} color={scrolled || notWelcomePage ? 'brand.300' : 'brand.100'}>
