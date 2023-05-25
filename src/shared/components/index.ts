@@ -6,3 +6,4 @@ export * from './CardPerfomance';
 export * from './Badge';
 export * from './Gallery';
 export * from './SEO';
+export * from './YAMetrika';

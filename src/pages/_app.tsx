@@ -5,6 +5,7 @@ import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { Navbar } from '@/widgets/Navbar'
 import { Footer } from '@/widgets/Footer'
 import { GolosFont } from '@/shared/fonts';
+import { YAMetrika } from '@/shared/components'
 
 const sizes = {
   colors: {
@@ -37,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2" />
         <link rel="icon" href="/favicon.ico" />
+        <YAMetrika />
       </Head>
       <ChakraProvider theme={theme}>
         <Navbar />
