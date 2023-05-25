@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import type { TouchEvent } from "react"
 import { Button, Container, Flex, chakra } from "@chakra-ui/react"
 
 import type { Slider } from "@/entities/event/models"
@@ -12,14 +13,27 @@ interface WelcomeSliderProps {
   slider: Slider;
 }
 
-function handleSlider(slides: number[], activeSlideId: number, callback: (slide: number) => void) {
+function handleSlider(
+  slides: number[], 
+  activeSlideId: number, 
+  callback: (slide: number) => void, 
+  direction: 'forward' | 'backward' = 'forward'
+  ) {
   const activeSlideIndex = slides.indexOf(activeSlideId)
   
-  if (activeSlideIndex < slides.length - 1) {
+  if (activeSlideIndex < slides.length - 1 && direction === 'forward') {
     return callback(slides[activeSlideIndex + 1])
-  } else {
-    return callback(slides[0])
   }
+
+  if (activeSlideIndex === 0 && direction === 'backward') {
+    return callback(slides[slides.length - 1])  
+  }
+
+  if (activeSlideIndex !== 0 && direction === 'backward') {
+    return callback(slides[activeSlideIndex - 1])  
+  }
+
+  return callback(slides[0])
 }
 
 export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
@@ -28,9 +42,10 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
   const slides = data.map((slide) => slide.id);
 
   const [activeSlide, setActiveSlide] = useState(slides[0]);
+  const [clientX, setClientX] = useState<number>(0);
 
   useEffect(() => {
-    if (!slides || slides.length < 2) {
+    if (!slides || slides.length < 2 || clientX !== 0) {
       return;
     }
 
@@ -39,10 +54,24 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
     }, 4000)
 
     return () => clearInterval(interval);
-  }, [activeSlide, slides]);
+  }, [activeSlide, clientX, slides]);
 
   if (!data) {
     return <EmptySlide />
+  }
+
+  const handleSwipeStart = (e: TouchEvent<HTMLDivElement>) => {
+    setClientX(e.changedTouches[0].clientX);
+  }
+
+  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    if (e.changedTouches[0].clientX > clientX) {
+      handleSlider(slides, activeSlide, setActiveSlide, 'backward')
+      setClientX(0)
+    } else {
+      handleSlider(slides, activeSlide, setActiveSlide, 'forward')
+      setClientX(0)
+    }
   }
 
   return (
@@ -64,7 +93,10 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
             left={`${index * 100}%`}
             transform="auto"
             translateX={`-${slides.indexOf(activeSlide) * 100}%`}
-            transition="0.4s ease-in">
+            transition="0.4s ease-in"
+            onTouchStart={(e) => handleSwipeStart(e)}
+            onTouchEnd={(e) => handleTouchEnd(e)}
+            >
             <Container 
               maxWidth="container.xl" 
               h="100vh" 

@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Theatrum</title>
+        <title>Theatrum — частный универсальный гастрольный театр</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2" />
         <link rel="icon" href="/favicon.ico" />
