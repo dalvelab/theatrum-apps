@@ -11,4 +11,4 @@ export function getTicketsByMonth(afisha: Afisha[], filter?: string | string[]):
   return afisha
   .filter((event) => event.attributes.tickets
   .some((ticket) => getformatDateLocale(ticket.date).split(',').toString().substring(3, 5) === filter))
-} 
+}

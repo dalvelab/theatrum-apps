@@ -1,0 +1,25 @@
+.swiperPagination {
+  display: flex;
+}
+
+.swiper-pagination {
+  width: auto !important;
+  display: flex;
+  gap: 8px;
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  opacity: 1 !important;
+  background: white !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #477A7B !important;
+}

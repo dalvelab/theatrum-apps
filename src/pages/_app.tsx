@@ -8,6 +8,8 @@ import { Footer } from '@/widgets/Footer'
 import { GolosFont } from '@/shared/fonts';
 import { YAMetrika } from '@/shared/components'
 
+import './styles.css'
+
 const sizes = {
   colors: {
     brand: {

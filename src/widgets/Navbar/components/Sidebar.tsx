@@ -10,7 +10,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({onClose, isOpen}) => {
   return (
-    <Modal onClose={onClose} size="full" isOpen={isOpen}>
+    <Modal autoFocus={false} onClose={onClose} size="full" isOpen={isOpen}>
       <ModalContent>
       <ModalBody>
       <Flex 
