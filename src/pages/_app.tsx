@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
@@ -38,8 +39,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2" />
         <link rel="icon" href="/favicon.ico" />
-        <YAMetrika />
+        {process.env.NEXT_PUBLIC_METRIKA === 'production' && (
+          <noscript>
+            <div>
+              <img src="https://mc.yandex.ru/watch/93393151" style={{position: "absolute", left: "-9999px"}} alt="" />
+            </div>
+          </noscript>
+        )}
       </Head>
+      <YAMetrika />
       <ChakraProvider theme={theme}>
         <Navbar />
         <chakra.main>
