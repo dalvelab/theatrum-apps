@@ -68,18 +68,6 @@ export const Navbar = () => {
             >
             <MenuButton onClick={() => setOpened(!opened)} opened={opened} />
           </chakra.div>
-          {/* <chakra.button 
-            display={['block', 'block', 'flex', 'none', 'none']} 
-            onClick={() => setOpened(true)}
-            opacity={scrolled || notWelcomePage ? "none" : 0}
-            >
-            <Image
-              src="/menu.png"
-              width={36}
-              height={36}
-              alt='Иконка мобильного меню'
-            />
-          </chakra.button> */}
         </Flex>
       </Container>
       <Sidebar onClose={() => setOpened(false)} isOpen={opened} />

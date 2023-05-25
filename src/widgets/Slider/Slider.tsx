@@ -151,7 +151,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
               opacity={0.6} 
             />
             <chakra.div 
-              w="calc(100% + 1px)" 
+              w="full" 
               h="100vh" 
               pos="absolute" 
               left={0} 
@@ -163,6 +163,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                   alt={title}
                   fill
                   style={{objectFit: "cover", border: "none"}}
+                  priority={true}
                 />
             </chakra.div>
           </chakra.div>
