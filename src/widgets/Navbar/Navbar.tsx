@@ -6,6 +6,7 @@ import { chakra, Container, Flex } from "@chakra-ui/react"
 
 import { NavbarLink } from './components/Link';
 import { Sidebar } from './components/Sidebar';
+import { MenuButton } from './components/MenuButton';
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +39,7 @@ export const Navbar = () => {
   return (
     <chakra.nav 
       transition="0.1s ease-in" 
-      mt={scrolled || notWelcomePage ? 0 : [0, 4]} 
+      mt={scrolled || notWelcomePage ? 0 : [0, 4]}
       w="full" 
       h={20}
       pos="fixed" 
@@ -46,7 +47,7 @@ export const Navbar = () => {
       bgColor={scrolled || notWelcomePage ? 'brand.100' : 'transparent'} 
       top={0} 
       left={0} 
-      zIndex="docked"
+      zIndex={opened ? "toast" :"docked"}
       >
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="space-between" alignItems="center">
@@ -62,7 +63,12 @@ export const Navbar = () => {
             <NavbarLink href='/news' text='Новости' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/contacts' text='Контакты' scrolled={scrolled || notWelcomePage} />
           </Flex>
-          <chakra.button 
+          <chakra.div
+            display={['block', 'block', 'block', 'none', 'none']}
+            >
+            <MenuButton onClick={() => setOpened(!opened)} opened={opened} />
+          </chakra.div>
+          {/* <chakra.button 
             display={['block', 'block', 'flex', 'none', 'none']} 
             onClick={() => setOpened(true)}
             opacity={scrolled || notWelcomePage ? "none" : 0}
@@ -73,7 +79,7 @@ export const Navbar = () => {
               height={36}
               alt='Иконка мобильного меню'
             />
-          </chakra.button>
+          </chakra.button> */}
         </Flex>
       </Container>
       <Sidebar onClose={() => setOpened(false)} isOpen={opened} />

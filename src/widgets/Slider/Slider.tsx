@@ -65,10 +65,15 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
   }
 
   const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
-    if (e.changedTouches[0].clientX > clientX) {
+    if (e.changedTouches[0].clientX === clientX) {
+      return;
+    }
+
+    if (e.changedTouches[0].clientX > clientX && e.changedTouches[0].clientX - clientX > 40) {
       handleSlider(slides, activeSlide, setActiveSlide, 'backward')
       setClientX(0)
-    } else {
+    } 
+    if (e.changedTouches[0].clientX < clientX && clientX - e.changedTouches[0].clientX > 40) {
       handleSlider(slides, activeSlide, setActiveSlide, 'forward')
       setClientX(0)
     }
@@ -90,7 +95,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
             key={slide.id} 
             display="block"
             pos="absolute"
-            left={`${index * 100}%`}
+            left={`calc(${index * 100}%)`}
             transform="auto"
             translateX={`-${slides.indexOf(activeSlide) * 100}%`}
             transition="0.4s ease-in"
@@ -146,7 +151,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
               opacity={0.6} 
             />
             <chakra.div 
-              w="full" 
+              w="calc(100% + 1px)" 
               h="100vh" 
               pos="absolute" 
               left={0} 
@@ -157,7 +162,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                   src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
                   alt={title}
                   fill
-                  style={{objectFit: "cover"}}
+                  style={{objectFit: "cover", border: "none"}}
                 />
             </chakra.div>
           </chakra.div>

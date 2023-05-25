@@ -27,19 +27,6 @@ export const Sidebar: React.FC<SidebarProps> = ({onClose, isOpen}) => {
         pl={6}
         gap={4}
         >
-        <chakra.button 
-          display={['block', 'block', 'flex', 'none', 'none']} 
-          pos="absolute"
-          right="16px"
-          top="16px"
-          onClick={onClose}>
-          <Image
-            src="/close.png"
-            width={40}
-            height={40}
-            alt='Иконка закрытия мобильного меню'
-          />
-        </chakra.button>
         <Link href="/" onClick={onClose}>
           <Text>Главная</Text>
         </Link>
