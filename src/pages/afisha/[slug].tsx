@@ -8,7 +8,7 @@ import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 import { YAScript, SwipeGallery, Roles } from '@/entities/event';
 import { SlideContent } from '@/widgets/Slider';
-import { Badge, Divider } from '@/shared/components';
+import { Badge, Divider, SEO } from '@/shared/components';
 import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 import { isNotVoid } from "@/shared/utils/mics"
 
@@ -27,6 +27,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
     pushkin_card, 
     description, 
     properties,
+    small_description,
     gallery
   } = event;
   const { tickets } = afisha.data.attributes;
@@ -48,6 +49,14 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
 
   return (
     <>
+      <SEO>
+        <title>{`${title} - Афиша Theatrum`}</title>
+        <meta name="description" content={small_description} />
+        <meta property="og:title" content={`${title} - Афиша Theatrum`} />
+        <meta property="og:description" content={small_description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`} />
+      </SEO>
       <chakra.main mt={20}>
         <chakra.div>
           <Container maxWidth="container.xl" h="100vh" display="flex" alignItems="center" zIndex={1} pos="relative">

@@ -64,7 +64,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
             left={`${index * 100}%`}
             transform="auto"
             translateX={`-${slides.indexOf(activeSlide) * 100}%`}
-            transition="0.15s ease-in">
+            transition="0.4s ease-in">
             <Container 
               maxWidth="container.xl" 
               h="100vh" 

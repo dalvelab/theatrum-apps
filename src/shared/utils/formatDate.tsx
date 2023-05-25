@@ -60,7 +60,7 @@ export function formatAfishaDays(dates: Date[]): formatAfishaDaysType[] {
       const index = formatted.findIndex((date) => date.id === id);
       formatted[index] = {
         ...formatted[index],
-        time: null,
+        time: `${formatted[index].time} ${getformatDateLocaleTime(dates[i])}`,
       }
     } else {
       ids.add(id);

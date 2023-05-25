@@ -1,4 +1,5 @@
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import Head from 'next/head';
 import { Button, Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
 import {Link} from '@chakra-ui/next-js';
 
@@ -13,6 +14,14 @@ import type { News } from '@/entities/post/models';
 export default function Home({afisha, news, slider}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
+      <Head>
+        <meta property="og:url" content="https://theatrum.center" />
+        <meta property="og:title" content="Theatrum" />
+        <meta property="og:description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/bage.png" />
+        <link rel="canonical" href="https://theatrum.center" />
+      </Head>
       <WelcomeSlider slider={slider.data} />
       <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">

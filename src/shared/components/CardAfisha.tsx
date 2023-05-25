@@ -37,14 +37,23 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
           />
         </chakra.div>
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
-          <Stack display={["none", "flex", "none", "flex", "flex"]} direction="row" divider={<Divider color="#171923" />} alignItems="center" gap={4}  fontSize={["xl", "xl", "xl", "xl", "2xl"]} color="gray.900">
+          {/* DESKTOP */}
+          <Stack 
+            display={["none", "flex", "none", "flex", "flex"]} 
+            direction="row" divider={<Divider color="#171923" />} 
+            alignItems="center" gap={4}  
+            fontSize={["xl", "xl", "xl", "xl", "2xl"]} 
+            color="gray.900">
             {premiere && <Text color="brand.300">премьера</Text>}
             {formattedDate.length === 1 && 
               <Flex gap={2}>
                 <Text lineHeight={1}>{formattedDate[0].date}</Text>
                 <Text lineHeight={1}>{formattedDate[0].month}</Text>
               </Flex>}
-            {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
+            {formattedDate.length === 1 &&
+              <Flex flexDir="column" gap={1}>
+                {formattedDate[0].time?.split(' ').map((time) => <Text key={time} lineHeight={1}>{time}</Text>)}
+              </Flex>}
             {formattedDate.length > 1 && (
               <Stack 
                 direction="row" 
@@ -80,7 +89,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
                 <Flex key={index} flexDir="row" gap={2}>
                   <Text>{date}</Text>
                   <Text>{month}</Text>
-                  <Text>{formattedDate.length === 1 ? isNotVoid(time) : null}</Text>
+                  <Text>{formattedDate.length === 1 ? time?.split(' ').join(', ') : null}</Text>
                 </Flex>)}
           </Stack>
           <Flex gap={5} alignItems="center">

@@ -36,12 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Theatrum</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2" />
-        <meta property="og:url" content="https://theatrum.center" />
-        <meta property="og:title" content="Theatrum" />
-        <meta property="og:description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2." />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/bage.png" />
-        <link rel="canonical" href="https://theatrum.center" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ChakraProvider theme={theme}>
