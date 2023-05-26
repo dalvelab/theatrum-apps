@@ -2,6 +2,8 @@ import Image from "next/image";
 import { chakra } from "@chakra-ui/react";
 
 import { Gallery } from "@/shared/components"
+import { GalleryModal } from "./GalleryModal";
+import { useState } from "react";
 
 interface SwipeGalleryProps {
   data: {
@@ -16,22 +18,61 @@ interface SwipeGalleryProps {
 }
 
 export const SwipeGallery: React.FC<SwipeGalleryProps> = ({data}) => {
+  const [isOpened, setIsOpened] = useState(false)
+  const [activeImage, setActiveImage] = useState(0);
+
+  const handleGalleryModalOpen = (id: number) => {
+    setIsOpened(true);
+    setActiveImage(id);
+  }
+
+  const handleSlideChange = (direction: 'forward' | 'backward') => {
+    if (activeImage < data.length - 1 && direction === 'forward') {
+      setActiveImage(activeImage + 1);
+      return;
+    }
+
+    if (activeImage !== 0 && direction === 'backward') {
+      setActiveImage(activeImage - 1);
+      return;
+    }
+
+    if (activeImage === 0 && direction === 'backward') {
+      setActiveImage(data.length - 1);
+      return;
+    }
+
+    setActiveImage(0)
+  }
+
   return (
-    <Gallery length={data.length}>
-      {data.map((image) => (
-        <chakra.div 
-          key={image.id} 
-          minW={["360px", "460px", "512px", "512px", "512px"]}
-          h={["300px", "320px", "360px", "360px", "360px"]}
-          pos="relative">
-        <Image 
-          src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
-          alt='Изображение галереи'
-          fill
-          style={{objectFit: "cover", borderRadius: "12px"}}
-        />
-      </chakra.div>
-      ))}
-    </Gallery>
+    <>
+      <GalleryModal 
+        isOpened={isOpened} 
+        onClose={() => setIsOpened(false)} 
+        data={data} 
+        activeImage={activeImage}
+        onSlideChange={handleSlideChange}
+      />
+      <Gallery length={data.length}>
+        {data.map((image, index) => (
+          <chakra.div 
+            key={image.id} 
+            minW={["360px", "460px", "512px", "512px", "512px"]}
+            h={["300px", "320px", "360px", "360px", "360px"]}
+            pos="relative"
+            cursor="pointer"
+            onClick={() => handleGalleryModalOpen(index)}
+            >
+          <Image 
+            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
+            alt='Изображение галереи'
+            fill
+            style={{objectFit: "cover", borderRadius: "12px"}}
+          />
+        </chakra.div>
+        ))}
+      </Gallery>
+    </>
   )
 }

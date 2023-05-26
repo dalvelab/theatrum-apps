@@ -16,10 +16,8 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
     <Modal size={["full", "full", "full", "xl", "xl"]} isOpen={isOpened} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
-        // minW={["100%", "100%", "100%", "940px", "1200px"]}
         minW={["100%", "100%", "100%", "940px", "1200px", "1200px"]}
         bgColor="brand.100">
-        {/* <ModalCloseButton size="lg" color="brand.300" /> */}
         <ModalBody pt={10}>
           <chakra.button
             pos="absolute"
