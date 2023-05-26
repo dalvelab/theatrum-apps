@@ -5,7 +5,6 @@ import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
 import { formatAfishaDays } from "@/shared/utils/formatDate"
-import { isNotVoid } from '../utils/mics';
 
 import { Badge } from './Badge';
 

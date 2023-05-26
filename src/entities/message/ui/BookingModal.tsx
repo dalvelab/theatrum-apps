@@ -170,7 +170,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
                 Забронировать
               </Button>
               <Text fontSize="sm">
-                Нажмимая кнопку вы соглашаетесь с {" "}
+                Нажимая кнопку вы соглашаетесь с {" "}
                 <Link textDecoration="underline" href="https://admin.theatrum.center/uploads/privacy_b70387acf5.pdf" referrerPolicy="no-referrer" target="_blank">
                   политикой конфиденциальности
                 </Link>

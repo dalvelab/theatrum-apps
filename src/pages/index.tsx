@@ -10,8 +10,11 @@ import { getNews  } from '@/entities/post/api';
 import type { Afisha, Slider } from '@/entities/event/models';
 import type {ApiResponse, Meta} from '@/shared/models/api';
 import type { News } from '@/entities/post/models';
+import { isNotVoid } from '@/shared/utils/mics';
 
 export default function Home({afisha, news, slider}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const events = isNotVoid(afisha.data) ?  afisha.data.slice(0, 6) : [];
+
   return (
     <>
       <Head>
@@ -28,7 +31,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
           <Heading as="h2">Ближайшие мероприятия</Heading>
             {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
             <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
-              {afisha.data.map((event) => (
+              {events.map((event) => (
                 <CardAfisha key={event.id} afisha={event} />
               ))}
             </Grid>
@@ -73,7 +76,7 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const afishaData = getAfisha({limit: 6});
+  const afishaData = getAfisha({limit: 100});
   const newsData = getNews({limit: 6})
   const sliderData = getSlider();
   
