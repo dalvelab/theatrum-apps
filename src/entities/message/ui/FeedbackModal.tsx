@@ -12,6 +12,8 @@ import {
   ModalContent,
   FormControl,
   Input,
+  Text,
+  Link,
   Textarea,
   useToast 
 } from "@chakra-ui/react"
@@ -149,7 +151,13 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
               fontWeight="normal"
               >
                 Связаться с нами
-              </Button>
+            </Button>
+            <Text fontSize="sm">
+                Нажмимая кнопку вы соглашаетесь с {" "}
+                <Link textDecoration="underline" href="https://admin.theatrum.center/uploads/privacy_b70387acf5.pdf" referrerPolicy="no-referrer" target="_blank">
+                  политикой конфиденциальности
+                </Link>
+            </Text>
           </chakra.form>
         </ModalBody>
       </ModalContent>

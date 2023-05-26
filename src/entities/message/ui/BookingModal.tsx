@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { 
   chakra, 
   Button,
+  Link,
+  Text,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -88,7 +90,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
       <ModalContent
         bgColor="brand.100">
         <ModalHeader fontSize="3xl">
-          Связаться с нами
+          Бронирование
         </ModalHeader>
         <ModalCloseButton top="20px" size="lg" color="brand.300" />
         <ModalBody>
@@ -165,8 +167,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
               type='submit'
               fontWeight="normal"
               >
-                Связаться с нами
+                Забронировать
               </Button>
+              <Text fontSize="sm">
+                Нажмимая кнопку вы соглашаетесь с {" "}
+                <Link textDecoration="underline" href="https://admin.theatrum.center/uploads/privacy_b70387acf5.pdf" referrerPolicy="no-referrer" target="_blank">
+                  политикой конфиденциальности
+                </Link>
+            </Text>
           </chakra.form>
         </ModalBody>
       </ModalContent>

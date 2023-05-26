@@ -131,7 +131,9 @@ export const Footer = () => {
         )}
         <Flex mt={8} justifyContent="space-between" flexDirection={["column-reverse", "column-reverse", "column-reverse", "row", "row"]} gap={[4, 4, 4, null, null]}>
           <Text fontSize="sm" color="brand.300">Частное учреждение культуры «Универсальный гастрольный театр», 2023</Text>
-          <Text fontSize="sm" color="brand.300" textDecoration="underline">Политика конфиденциальности</Text>
+          <Link href="https://admin.theatrum.center/uploads/privacy_b70387acf5.pdf" referrerPolicy="no-referrer" target="_blank">
+            <Text fontSize="sm" color="brand.300" textDecoration="underline">Политика конфиденциальности</Text>
+          </Link>
         </Flex>
       </Container>
     </chakra.footer>
