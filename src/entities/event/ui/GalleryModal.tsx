@@ -49,6 +49,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                   src="/close-green-gallery.png"
                   fill
                   alt='Иконка закрытия мобильного меню'
+                  priority={true}
                 />
               </chakra.div>
             </chakra.button>
@@ -78,6 +79,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                       fill
                       alt="иконка галерии назад"
                       style={{rotate: "180deg"}}
+                      priority={true}
                     />
                 </chakra.div>
               </chakra.button>
@@ -106,6 +108,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                         src="/chevron-green-gallery.png"
                         fill
                         alt="иконка галерии вперед"
+                        priority={true}
                       />
                   </chakra.div>
               </chakra.button>
