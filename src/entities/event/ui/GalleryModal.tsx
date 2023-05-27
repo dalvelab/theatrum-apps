@@ -19,62 +19,48 @@ interface GalleryModalProps {
 
 export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, data, activeImage, onSlideChange}) => {
   return (
-    <Modal autoFocus={false} size={["xl", "xl", "xl", "xl", "xl"]} isOpen={isOpened} onClose={onClose}>
+    <Modal autoFocus={false} size={["full", "full", "full", "full", "full"]} isOpen={isOpened} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
-        minW={["100%", "90%", "90%", "940px", "1200px", "1400px"]}
-        maxW={["100%", "90%", "90%", "940px", "1200px", "1400px"]}
-        h="calc(100vh - 128px)"
-        bgColor="transparent"
+        bgColor="gray.900"
         display="flex"
         boxShadow="none"
         justifyContent="center"
         >
-          <chakra.div pos="relative">
+          <Container maxW="container.xl">
             <chakra.button
               w={["36px", "44px", "44px", "44px", "44px"]}
               h={["36px", "44px", "44px", "44px", "44px"]}
               pos="absolute"
-              right={[2, 4, 4, 4, 4]}
-              top={[2, 4, 4, 4, 4]}
+              right={4}
+              top={4}
               zIndex={2}
               onClick={onClose}
               display="flex"
               justifyContent="center"
               alignItems="center"
               borderRadius="12px"
-              bgColor="brand.100"
               >
-              <chakra.div width={["24px", "30px", "30px", "30px", "30px"]} height={["24px", "30px", "30px", "30px", "30px"]} pos="relative">
+              <chakra.div 
+                width={8} 
+                height={8} 
+                pos="relative">
                 <Image
-                  src="/close.png"
+                  src="/close-green-gallery.png"
                   fill
                   alt='Иконка закрытия мобильного меню'
                 />
               </chakra.div>
             </chakra.button>
-            <chakra.div 
-              minW="100%"
-              h={["300px", "440px", "50vh", "70vh", "80vh",]} 
-              pos="relative"
-              borderRadius={["none", "12px", "12px", "12px", "12px"]}
-              overflow="hidden"
-              >
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${data[activeImage].attributes.url}`}
-                  alt="Изображение площадки"
-                  fill
-                  style={{objectFit: 'cover'}}
-                />
-                <chakra.button
+            <chakra.button
                   onClick={() => onSlideChange('backward')}
                   w={["36px", "44px", "44px", "44px", "44px"]}
                   h={["36px", "44px", "44px", "44px", "44px"]}
                   borderRadius="12px"
-                  bgColor="brand.100"
+                  bgColor="transparent"
                   pos="absolute"
                   top="50%"
-                  left={[2, 4, 4, 4, 4]}
+                  left={[3, 4, 4, 4, 4]}
                   transform="auto"
                   translateY="-50%"
                   zIndex={2}
@@ -82,22 +68,27 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                   justifyContent="center"
                   alignItems="center"
                 >
-                <Image
-                  src="/chevron.png"
-                  width={10}
-                  height={18}
-                  alt="иконка галерии назад"
-                  style={{rotate: "180deg"}}
-                />
+                  <chakra.div 
+                    width={["16px", "20px", "20px", "20px", "20px"]} 
+                    height={["30px", "36px", "36px", "36px", "36px"]} 
+                    pos="relative"
+                    >
+                    <Image
+                      src="/chevron-green-gallery.png"
+                      fill
+                      alt="иконка галерии назад"
+                      style={{rotate: "180deg"}}
+                    />
+                </chakra.div>
               </chakra.button>
               <chakra.button
                   w={["36px", "44px", "44px", "44px", "44px"]}
                   h={["36px", "44px", "44px", "44px", "44px"]}
                   borderRadius="12px"
-                  bgColor="brand.100"
+                  bgColor="transparent"
                   pos="absolute"
                   top="50%"
-                  right={[2, 4, 4, 4, 4]}
+                  right={[3, 4, 4, 4, 4]}
                   transform="auto"
                   translateY="-50%"
                   zIndex={2}
@@ -106,15 +97,31 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                   justifyContent="center"
                   alignItems="center"
                 >
-                  <Image
-                    src="/chevron.png"
-                    width={10}
-                    height={18}
-                    alt="иконка галерии вперед"
-                  />
+                  <chakra.div 
+                    width={["16px", "20px", "20px", "20px", "20px"]} 
+                    height={["30px", "36px", "36px", "36px", "36px"]} 
+                    pos="relative"
+                    >
+                      <Image
+                        src="/chevron-green-gallery.png"
+                        fill
+                        alt="иконка галерии вперед"
+                      />
+                  </chakra.div>
               </chakra.button>
+            <chakra.div 
+              minW="100%"
+              h={["284px", "440px", "50vh", "70vh", "80vh",]} 
+              pos="relative"
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${data[activeImage].attributes.url}`}
+                  alt="Изображение площадки"
+                  fill
+                  style={{objectFit: 'cover', borderRadius: "12px"}}
+                />
             </chakra.div>
-          </chakra.div>
+          </Container>
       </ModalContent>
     </Modal>
   )
