@@ -26,25 +26,6 @@ export const SwipeGallery: React.FC<SwipeGalleryProps> = ({data}) => {
     setActiveImage(id);
   }
 
-  const handleSlideChange = (direction: 'forward' | 'backward') => {
-    if (activeImage < data.length - 1 && direction === 'forward') {
-      setActiveImage(activeImage + 1);
-      return;
-    }
-
-    if (activeImage !== 0 && direction === 'backward') {
-      setActiveImage(activeImage - 1);
-      return;
-    }
-
-    if (activeImage === 0 && direction === 'backward') {
-      setActiveImage(data.length - 1);
-      return;
-    }
-
-    setActiveImage(0)
-  }
-
   return (
     <>
       <GalleryModal 
@@ -52,7 +33,6 @@ export const SwipeGallery: React.FC<SwipeGalleryProps> = ({data}) => {
         onClose={() => setIsOpened(false)} 
         data={data} 
         activeImage={activeImage}
-        onSlideChange={handleSlideChange}
       />
       <Gallery length={data.length}>
         {data.map((image, index) => (
