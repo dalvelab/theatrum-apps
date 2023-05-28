@@ -9,7 +9,7 @@ interface RoleProps {
 export const Roles: React.FC<RoleProps> = ({data}) => {
   const [showed, setShowed] = useState(false);
 
-  const roles = data.slice(0, showed ? data.length - 1 : 5);
+  const roles = data.slice(0, showed ? data.length : 5);
 
   return (
     <Flex flexDir="column" gap={5} alignItems="flex-start">

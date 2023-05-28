@@ -41,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Theatrum — частный универсальный гастрольный театр. Верхняя Пышма, Александра Козицына, 2" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="color-scheme" content="light only" />
         {process.env.NEXT_PUBLIC_METRIKA === 'production' && (
           <noscript>
             <div>
