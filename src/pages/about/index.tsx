@@ -3,19 +3,23 @@ import Image from "next/image"
 import { useState } from "react";
 import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-ui/react"
 
-import { getAboutPage, SceneModal } from "@/entities/about";
+import { getAboutPage, SceneModal, EmptyAbout } from "@/entities/about";
 import type { AboutPage } from "@/entities/about";
 import type { ApiResponse, Meta } from "@/shared/models/api";
 import { SEO } from '@/shared/components';
 import { BookingModal } from '@/entities/message';
-import { isNotVoid } from '@/shared/utils/mics';
+import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
 export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { description, registerDocuments, management, scenes} = page.data.attributes;
-
   const [openedModal, setModalOpened] = useState(false);
   const [selectedScene, setSelectedScene] = useState<number | null>(null);
   const [openedBookingModal, setOpenedBookingModal] = useState(false);
+
+  if (isVoid(page.data)) {
+    return <EmptyAbout />
+  }
+
+  const { description, registerDocuments, management, scenes} = page.data.attributes;
 
   const handleSceneModal = (id: number) => {
     setSelectedScene(id);

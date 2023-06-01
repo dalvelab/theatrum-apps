@@ -6,6 +6,7 @@ import { FeedbackModal } from '@/entities/message';
 import { getFooter } from "@/entities/footer/api"
 import type { Footer as FooterType } from "@/entities/footer/models"
 import type { ApiResponse, Meta } from "@/shared/models/api"
+import { isNotVoid } from "@/shared/utils/mics";
 
 export const Footer = () => {
   const [footerData, setFooterData] = useState<null | ApiResponse<FooterType, Meta>>(null);
@@ -20,11 +21,15 @@ export const Footer = () => {
     })
   }, []);
 
-  const contacts = footerData?.data.attributes.contacts.filter((contact) => contact.type === 'email' || contact.type === 'phone');
-  const partners = footerData?.data.attributes.partners.data;
-  const workingTime = footerData?.data.attributes.working_time;
-  const address = footerData?.data.attributes.address;
-  const socials = footerData?.data.attributes.socials;
+  const contacts = isNotVoid(footerData?.data) ? 
+    footerData?.data.attributes.contacts.filter((contact) => 
+      contact.type === 'email' ||
+      contact.type === 'phone') 
+    : [];
+  const partners = isNotVoid(footerData?.data) ? footerData?.data.attributes.partners.data : [];
+  const workingTime = isNotVoid(footerData?.data) ? footerData?.data.attributes.working_time: '';
+  const address = isNotVoid(footerData?.data) ? footerData?.data.attributes.address : '';
+  const socials = isNotVoid(footerData?.data) ? footerData?.data.attributes.socials : [];
   
   if (isLoading) return <p>Загрузка...</p>;
 

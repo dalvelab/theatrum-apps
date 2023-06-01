@@ -7,6 +7,7 @@ import { ApiResponse } from '@/shared/models/api';
 import { getPerformances } from '@/entities/event/api';
 import type { Performance } from '@/entities/event/models';
 import type { Meta } from '@/shared/models/api';
+import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
 export default function Perfomances({perfomances}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [filter, setFilter] = useState(false);
@@ -47,7 +48,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
                 Архив
               </chakra.button>
             </Flex>
-              {!data || data.length === 0 && 
+              {isVoid(data) || isEmptyArray(data) && 
                 <Text mt={5} 
                   fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}
                   >

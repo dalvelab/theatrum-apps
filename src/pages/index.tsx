@@ -10,10 +10,10 @@ import { getNews  } from '@/entities/post/api';
 import type { Afisha, Slider } from '@/entities/event/models';
 import type {ApiResponse, Meta} from '@/shared/models/api';
 import type { News } from '@/entities/post/models';
-import { isNotVoid } from '@/shared/utils/mics';
+import { isNotVoid, isEmptyArray, isVoid } from '@/shared/utils/mics';
 
 export default function Home({afisha, news, slider}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const events = isNotVoid(afisha.data) ?  afisha.data.slice(0, 6) : [];
+  const events = isNotVoid(afisha.data) && !isEmptyArray(afisha.data) ? afisha.data.slice(0, 6) : [];
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
       <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Ближайшие мероприятия</Heading>
-            {!afisha.data || afisha.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
+            {isVoid(afisha.data) || isEmptyArray(afisha.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
             <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
               {events.map((event) => (
                 <CardAfisha key={event.id} afisha={event} />
@@ -43,7 +43,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
       <chakra.section pb={20} pos="relative" bgColor="brand.100">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Новости</Heading>
-            {!news.data || news.data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей нет</Text>}
+            {isVoid(news.data) || isEmptyArray(news.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей нет</Text>}
             <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
               {news.data.map((post) => (
                 <CardNews key={post.id} post={post} />

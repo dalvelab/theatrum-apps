@@ -5,16 +5,21 @@ import { useState } from 'react';
 import { Button, chakra, Container, Heading, Flex, Link, Text} from '@chakra-ui/react';
 
 import { getContacts } from '@/entities/contact/api';
+import { EmptyContacts } from '@/entities/contact/ui';
 import type { Contacts } from '@/entities/contact/models';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import { FeedbackModal } from '@/entities/message';
 import { Property, SEO } from '@/shared/components';
+import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
 export default function Contacts({contact}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
+
+  if (isVoid(contact.data)) {
+    return <EmptyContacts openedFeedbackModal={openedFeedbackModal} setOpenedFeedbackModal={setOpenedFeedbackModal} />
+  }
 
   const {contacts, image, address} = contact.data.attributes;
-
-  const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
 
   return (
     <>
@@ -49,26 +54,31 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
               onClick={() => setOpenedFeedbackModal(true)}
               >
                 Связаться с нами
-              </Button>
+            </Button>
             <Heading mt={10} as="h2" fontSize="3xl" fontWeight="medium">Схема проезда</Heading>
-            <Text mt={6}>Нажмите на схему для открытия в <chakra.span color="brand.200">отдельном окне</chakra.span></Text>
-            <chakra.div 
-              w={["100%", "100%", "100%", "100%", "container.lg"]} 
-              height={["260px", "340px", "440px", "440px", "520px"]} 
-              pos="relative"
-              mt={2}
-              >
-              <Link
-              href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
-              target='_blank'
-              >
-                <Image 
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
-                  alt='Схема проезда'
-                  fill
-                />
-              </Link>
-            </chakra.div>
+            {isVoid(image.data) && <Text mt={4}>Схема не добавлена</Text>}
+            {isNotVoid(image.data) && (
+              <>
+                <Text mt={6}>Нажмите на схему для открытия в <chakra.span color="brand.200">отдельном окне</chakra.span></Text>
+                <chakra.div 
+                  w={["100%", "100%", "100%", "100%", "container.lg"]} 
+                  height={["260px", "340px", "440px", "440px", "520px"]} 
+                  pos="relative"
+                  mt={2}
+                  >
+                  <Link
+                  href={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
+                  target='_blank'
+                  >
+                    <Image 
+                      src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
+                      alt='Схема проезда'
+                      fill
+                    />
+                  </Link>
+                </chakra.div>
+              </>
+            )}
           </Container>
         </chakra.section>
       </chakra.main>

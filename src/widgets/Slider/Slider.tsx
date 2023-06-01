@@ -11,6 +11,7 @@ import { SlideContent } from './SlideContent';
 
 import 'swiper/css';
 import "swiper/css/pagination";
+import { isVoid, isEmptyArray } from "@/shared/utils/mics";
 
 interface WelcomeSliderProps {
   slider: Slider;
@@ -19,7 +20,7 @@ interface WelcomeSliderProps {
 export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
   const { data } = slider.attributes.slides;
 
-  if (!data) {
+  if (isVoid(data) || isEmptyArray(data)) {
     return <EmptySlide />
   }
 

@@ -51,6 +51,7 @@ export async function getSlider(): Promise<ApiResponse<Slider, Meta>> {
       populate: ['slides', 'slides.event', 'slides.event.banner', 'slides.tickets']
     }
   )
+  
   const res = await fetch(`${process.env.DB_HOST}/slider?${query}`);
 
   return res.json();

@@ -10,6 +10,7 @@ import { getTicketsByMonth } from '@/entities/event/utils';
 import type { Afisha } from '@/entities/event/models';
 import type { Meta } from '@/shared/models/api';
 import { getformatDateLocale, rusMonths } from '@/shared/utils/formatDate';
+import { isEmptyArray } from '@/shared/utils/mics';
 
 export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {asPath, query, push} = useRouter();
@@ -51,16 +52,18 @@ export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getS
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading size="2xl" as="h1">Афиша</Heading>
             <Flex mt={6} gap={6} position="relative">
-              <chakra.button 
-                fontSize="2xl" 
-                fontWeight="medium" 
-                color={filter === 'all' ? "brand.200" : "gray.900"} 
-                pos="relative"
-                _after={{content: filter === 'all' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
-                onClick={() => push('/afisha?filter=all')}
-                >
-                  Ближайшие
-              </chakra.button>
+              {!isEmptyArray(data) && (
+                <chakra.button 
+                  fontSize="2xl" 
+                  fontWeight="medium" 
+                  color={filter === 'all' ? "brand.200" : "gray.900"} 
+                  pos="relative"
+                  _after={{content: filter === 'all' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+                  onClick={() => push('/afisha?filter=all')}
+                  >
+                    Ближайшие
+                </chakra.button>
+              )}
               {Array.from(uniqueTicketMonths).map((month) => (
                 <chakra.button 
                   key={month}

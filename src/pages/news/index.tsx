@@ -8,6 +8,7 @@ import { ApiResponse } from '@/shared/models/api';
 import { getNews } from '@/entities/post/api';
 import type { News } from '@/entities/post/models';
 import type { Meta } from '@/shared/models/api';
+import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
 export default function News({news}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { query, push } = useRouter()
@@ -61,7 +62,7 @@ export default function News({news}: InferGetServerSidePropsType<typeof getServe
               Пресса
             </chakra.button>
           </Flex>
-            {!data || data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей в данном разделе нет</Text>}
+            {isVoid(data) || isEmptyArray(data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей в данном разделе нет</Text>}
             <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
               {data.map((post) => (
                 <CardNews key={post.id} post={post} />
