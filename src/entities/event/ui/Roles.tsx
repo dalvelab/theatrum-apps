@@ -17,7 +17,7 @@ export const Roles: React.FC<RoleProps> = ({data}) => {
         {roles.map(({id, role, name}) => (
           <Flex w="228px" key={id} flexDir="column" gap={2}>
             <Text color="brand.300" fontSize="md" lineHeight={1}>{role}</Text>
-            <Text color="gray.900" fontSize="lg" textTransform="capitalize" lineHeight={1}>{name}</Text>
+            <Text color="gray.900" fontSize="lg" lineHeight={1}>{name}</Text>
           </Flex>
         ))}
       </Flex>
