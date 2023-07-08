@@ -81,3 +81,14 @@ export type Performance = {
     }
   }
 }
+
+export type Festival = {
+  id: number;
+  attributes: {
+    title: string;
+    date: Date;
+    event: {
+      data: Event;
+    }
+  }
+}

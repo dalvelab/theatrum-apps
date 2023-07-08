@@ -13,7 +13,7 @@ import { getformatDateLocale, rusMonths } from '@/shared/utils/formatDate';
 import { isEmptyArray } from '@/shared/utils/mics';
 
 export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const {asPath, query, push} = useRouter();
+  const {query, push} = useRouter();
 
   const [filter, setFilter] = useState<string | string[] | undefined>();
 

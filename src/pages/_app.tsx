@@ -5,7 +5,7 @@ import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 import { Navbar } from '@/widgets/Navbar'
 import { Footer } from '@/widgets/Footer'
-import { GolosFont } from '@/shared/fonts';
+import { GolosFont, PlayfairFont } from '@/shared/fonts';
 import { YAMetrika } from '@/shared/components'
 
 import './styles.css'
@@ -23,6 +23,7 @@ const sizes = {
     body: GolosFont.style.fontFamily,
     heading: GolosFont.style.fontFamily,
     mono: GolosFont.style.fontFamily,
+    title: PlayfairFont.style.fontFamily,
   },
   sizes: {
     container: {
