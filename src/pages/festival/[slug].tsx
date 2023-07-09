@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import { Button, chakra, Heading, Container, Flex, Text, Stack, Grid } from '@chakra-ui/react'
+import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
 import { getSingleFestival } from '@/entities/event/api';
@@ -8,8 +8,8 @@ import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Festival } from '@/entities/event/models';
 import { YAScript, SwipeGallery, Roles } from '@/entities/event';
 import { SlideContent } from '@/widgets/Slider';
-import { Badge, Divider, SEO } from '@/shared/components';
-import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
+import { Badge, SEO } from '@/shared/components';
+import { getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 import { isNotVoid } from "@/shared/utils/mics"
 
 import styles from './styles.module.css';
@@ -24,25 +24,12 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
     premiere,
     production_team,
     roles,
-    age_limit, 
-    pushkin_card, 
+    age_limit,
     description, 
     properties,
     small_description,
     gallery
   } = event;
-
-  const handleYAWidget = (id: string) => {
-    // @ts-ignore
-    window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
-  }
-
-  const scrollToTickets = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: 'smooth'
-    })
-  }
 
   return (
     <>
@@ -65,6 +52,7 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
                 date: Number(date.toString().slice(8, 10)),
               }
             ]}>
+              <Text fontSize="xl" color="brand.100">ул. Дзержинского, 2, ККТ «Космос»</Text>
             </SlideContent>
           </Container>
           <chakra.div w="full" h="100vh" pos="absolute" left={0} top={0} bg="black" opacity={0.6} />

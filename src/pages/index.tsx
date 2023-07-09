@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Button, Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
 import {Link} from '@chakra-ui/next-js';
 
-import { WelcomeSlider } from '@/widgets/Slider'
+import { FestivalSlide } from '@/widgets/Slider'
 import { CardAfisha, CardNews } from '@/shared/components'
 import { getAfisha, getSlider  } from '@/entities/event/api';
 import { getNews  } from '@/entities/post/api';
@@ -25,7 +25,10 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://theatrum.center" />
       </Head>
-      <WelcomeSlider slider={slider.data} />
+      {/* <WelcomeSlider slider={slider.data} /> */}
+      <chakra.div bgColor="brand.100">
+        <FestivalSlide isWelcomePage />
+      </chakra.div>
       <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h2">Ближайшие мероприятия</Heading>
