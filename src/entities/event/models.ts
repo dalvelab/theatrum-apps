@@ -87,6 +87,7 @@ export type Festival = {
   attributes: {
     title: string;
     date: Date;
+    duration: string;
     event: {
       data: Event;
     }

@@ -101,3 +101,14 @@ export async function getFestival(): Promise<ApiResponse<Festival[], Meta>> {
 
   return res.json()
 }
+
+export async function getSingleFestival(params: GetSinglelPerfomance): Promise<ApiResponse<Festival, Meta>> {
+  const query = qs.stringify(
+    {
+      populate: ['event', 'event.banner', 'event.gallery', 'event.meta', 'event.production_team', 'event.roles']
+    }
+  )
+  const res = await fetch(`${process.env.DB_HOST}/festivals/${params.id}?${query}`);
+
+  return res.json()
+}
