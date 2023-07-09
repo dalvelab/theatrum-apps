@@ -39,7 +39,8 @@ export const Navbar = () => {
   return (
     <chakra.nav 
       transition="0.1s ease-in" 
-      mt={scrolled || notWelcomePage ? 0 : [0, 4]}
+      // mt={scrolled || notWelcomePage ? 0 : [0, 4]}
+      mt={0}
       w="full" 
       h={20}
       pos="fixed" 

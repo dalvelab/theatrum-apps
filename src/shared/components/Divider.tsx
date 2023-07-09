@@ -16,7 +16,7 @@ export const Divider: React.FC<DividerProps> = ({color = '#E9D5CD', type = 'line
   if (type === 'big-line') {
     return (
       <svg width="100" height="4" viewBox="0 0 100 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line y1="2" x2="100" y2="2" stroke={color} stroke-width="2"/>
+        <line y1="2" x2="100" y2="2" stroke={color} strokeWidth="2"/>
       </svg>
     )
   }

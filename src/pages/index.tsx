@@ -26,48 +26,50 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
         <link rel="canonical" href="https://theatrum.center" />
       </Head>
       {/* <WelcomeSlider slider={slider.data} /> */}
-      <chakra.div bgColor="brand.100">
-        <FestivalSlide isWelcomePage />
-      </chakra.div>
-      <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
-        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
-          <Heading as="h2">Ближайшие мероприятия</Heading>
-            {isVoid(afisha.data) || isEmptyArray(afisha.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
-            <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
-              {events.map((event) => (
-                <CardAfisha key={event.id} afisha={event} />
-              ))}
-            </Grid>
-            <Link href="/afisha" justifySelf="center" alignSelf="center">
-              <Button fontWeight="normal" pl={10} pr={10} borderColor="brand.300" color="brand.300" size='lg' variant="outline" _hover={{bgColor: "brand.300", color: "white"}}>Вся афиша</Button>
-            </Link>
-        </Container>
-      </chakra.section>
-      <chakra.section pb={20} pos="relative" bgColor="brand.100">
-        <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
-          <Heading as="h2">Новости</Heading>
-            {isVoid(news.data) || isEmptyArray(news.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей нет</Text>}
-            <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
-              {news.data.map((post) => (
-                <CardNews key={post.id} post={post} />
-              ))}
-            </Grid>
-            <Link href="/news" justifySelf="center" alignSelf="center">
-              <Button 
-                fontWeight="normal" 
-                pl={10} 
-                pr={10} 
-                borderColor="brand.300" 
-                color="brand.300" 
-                size='lg' 
-                variant="outline" 
-                _hover={{bgColor: "brand.300", color: "white"}}
-                >
-                  Все новости
-                </Button>
+      <chakra.main mt={20}>
+        <chakra.div bgColor="brand.100" height="100vh">
+          <FestivalSlide isWelcomePage />
+        </chakra.div>
+        <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading as="h2">Ближайшие мероприятия</Heading>
+              {isVoid(afisha.data) || isEmptyArray(afisha.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
+              <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
+                {events.map((event) => (
+                  <CardAfisha key={event.id} afisha={event} />
+                ))}
+              </Grid>
+              <Link href="/afisha" justifySelf="center" alignSelf="center">
+                <Button fontWeight="normal" pl={10} pr={10} borderColor="brand.300" color="brand.300" size='lg' variant="outline" _hover={{bgColor: "brand.300", color: "white"}}>Вся афиша</Button>
               </Link>
-        </Container>
-      </chakra.section>
+          </Container>
+        </chakra.section>
+        <chakra.section pb={20} pos="relative" bgColor="brand.100">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading as="h2">Новости</Heading>
+              {isVoid(news.data) || isEmptyArray(news.data) && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Новостей нет</Text>}
+              <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} pb={20} gap={[4, 4, 4, 6, 10]}>
+                {news.data.map((post) => (
+                  <CardNews key={post.id} post={post} />
+                ))}
+              </Grid>
+              <Link href="/news" justifySelf="center" alignSelf="center">
+                <Button 
+                  fontWeight="normal" 
+                  pl={10} 
+                  pr={10} 
+                  borderColor="brand.300" 
+                  color="brand.300" 
+                  size='lg' 
+                  variant="outline" 
+                  _hover={{bgColor: "brand.300", color: "white"}}
+                  >
+                    Все новости
+                  </Button>
+                </Link>
+          </Container>
+        </chakra.section>
+      </chakra.main>
     </>
   )
 }

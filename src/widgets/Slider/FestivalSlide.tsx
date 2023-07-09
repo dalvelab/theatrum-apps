@@ -11,7 +11,7 @@ export const FestivalSlide: React.FC<FestivalSlideProps> = ({isWelcomePage}) => 
   return (
     <Container
       maxWidth="container.xl"
-      h={isWelcomePage ? "100vh" : "calc(95vh - 80px)"} 
+      h={isWelcomePage ? "calc(100vh - 80px)" : "calc(95vh - 80px)"} 
       display="flex"
       alignItems="center" 
       pos="relative"
@@ -20,11 +20,11 @@ export const FestivalSlide: React.FC<FestivalSlideProps> = ({isWelcomePage}) => 
       <Flex 
         w="full"
         flexDir="column"
-        gap={[6, 6, 8, 8, isWelcomePage ? 12 : 8]}
+        gap={[6, 6, 8, 8, 8]}
         >
         <chakra.div 
-          w={["100%", "100%", "700px", "700px", "700px"]} 
-          height={["200px", "300px", "300px", "300px", "300px"]} 
+          w={["100%", "100%", "660px", "660px", "660px"]} 
+          height={["200px", "280px", "280px", "280px", "280px"]} 
           pos="relative">
           <Image 
             src='/festival-logo-v3.svg'

@@ -36,7 +36,7 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
       <SEO>
         <title>{`${title} - Афиша Theatrum`}</title>
         <meta name="description" content={small_description} />
-        <meta property="og:title" content={`${title} - Афиша Theatrum`} />
+        <meta property="og:title" content={`${title} - фестиваль КиноTheatrum`} />
         <meta property="og:description" content={small_description} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`} />
