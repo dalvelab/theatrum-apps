@@ -7,6 +7,14 @@
   margin-top: 0;
 }
 
+.description li {
+  margin-top: 20px;
+}
+
+.description ol {
+  margin-left: 20px;
+}
+
 .description blockquote {
   margin-top: 16px;
   position: relative;

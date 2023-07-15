@@ -36,13 +36,13 @@ export default function Festival({festival}: InferGetServerSidePropsType<typeof 
       <chakra.section pb={20} pos="relative" bgColor="brand.100">
         <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
           <Heading as="h1" fontSize={["4xl", "5xl", "5xl", "5xl", "5xl"]}>О фестивале</Heading>
-          <Text mt={8} fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>
+          <Text mt={8} fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]} textAlign="justify">
             <chakra.span fontSize="3xl" color="brand.300" fontWeight="semibold">«КиноТеатрум»</chakra.span> – это проект частного универсального театра «Театрум», 
             реализуемый по инициативе Администрации города, как продолжение традиции 
             проведения Венского фестиваля музыкальных фильмов 
             в Екатеринбурге с 2010 по 2021 г.
           </Text>
-          <Text mt={5} fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}>
+          <Text mt={5} fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]} textAlign="justify">
             Фестиваль будет проходить на набережной Исети перед ККТ «Космос» (ул. Дзержинского, 2). 
             На территории фестиваля будет действовать фуд-зона (так же как и на Венском фестивале). 
             Для удобства зрителей будет установлено около 500 стульев.
