@@ -17,10 +17,10 @@ import styles from './styles.module.css';
 export default function FestivalDetails({festival} : InferGetServerSidePropsType<typeof getServerSideProps>) {
   const event = festival.data.attributes.event.data.attributes;
   const date = festival.data.attributes.date;
+  const title = festival.data.attributes.title;
   
   const {
     banner,
-    title,
     premiere,
     production_team,
     roles,
@@ -30,6 +30,11 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
     small_description,
     gallery
   } = event;
+
+  const eventWithAnotherTitle = {
+    ...event,
+    title
+  }
 
   return (
     <>
@@ -43,8 +48,8 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
       </SEO>
       <chakra.main mt={20}>
         <chakra.div>
-          <Container maxWidth="container.xl" h="100vh" display="flex" alignItems="center" zIndex={1} pos="relative">
-            <SlideContent event={event} formattedDate={[
+          <Container maxWidth="container.xl" h="calc(100vh - 80px)" display="flex" alignItems="center" zIndex={1} pos="relative">
+            <SlideContent event={eventWithAnotherTitle} formattedDate={[
               {
                 id: '1',
                 month: getGenetiveRusMonth(Number(date.toString().slice(5, 7))),

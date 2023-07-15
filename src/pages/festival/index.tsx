@@ -67,7 +67,7 @@ export default function Festival({festival}: InferGetServerSidePropsType<typeof 
                         date={eventIndex === 0 
                           ? `${String(event.attributes.date).slice(8, 10)}.${String(event.attributes.date).slice(5, 7)}`
                           : undefined}
-                        title={event.attributes.event.data.attributes.title}
+                        title={event.attributes.title}
                         time={getformatDateLocale(event.attributes.date).slice(11, 17)}
                         duration={event.attributes.duration}
                         id={event.id}

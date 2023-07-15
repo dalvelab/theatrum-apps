@@ -34,12 +34,12 @@ export const FestivalSlide: React.FC<FestivalSlideProps> = ({isWelcomePage}) => 
         </chakra.div>
         <Stack 
           fontSize={["3xl", "4xl", "4xl", "6xl", "6xl"]} 
-          color="brand.200" 
+          color="brand.300" 
           flexDir="row" 
           fontWeight="semibold"
           alignItems="center"
           gap={[4, 6, 6, 6, 6]}
-          divider={<Divider color="#477A7B" type="big-line" />}>
+          divider={<Divider color="#583D3E" type="big-line" />}>
           <Text>12</Text>
           <Text>19 августа</Text>
         </Stack>
