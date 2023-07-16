@@ -5,8 +5,6 @@ import { Badge } from './Badge';
 import { Divider } from './Divider';
 
 interface CardFestivalProps {
-  isFirstEvent: boolean;
-  date?: string;
   title: string;
   duration: string;
   time: string;
@@ -14,15 +12,14 @@ interface CardFestivalProps {
   age: string;
 }
 
-export const CardFestival: React.FC<CardFestivalProps> = ({isFirstEvent, date, time, title, duration, id, age}) => {
+export const CardFestival: React.FC<CardFestivalProps> = ({time, title, duration, id, age}) => {
   return (
-    <Flex flexDir="column">
-      {isFirstEvent && <Text fontSize="5xl" color="brand.300" fontWeight="semibold">{date}</Text>}
-      <Heading as="h2" fontFamily="title" mt={isFirstEvent ? 6 : 0} fontSize="3xl" fontWeight="semibold">
+    <Flex flexDir="column" h={["auto", "auto", "224px", "224px", "224px"]}>
+      <Heading as="h2" fontFamily="title" fontSize="2xl" fontWeight="semibold">
         {title}
       </Heading>
-      <Stack mt={5} flexDir="row" gap={5} alignItems="center" divider={<Divider color="#583D3E" type="big-line" />}>
-        <Text fontSize="3xl">{time}</Text>
+      <Stack mt="auto" flexDir="row" gap={5} alignItems="center" divider={<Divider color="#583D3E" type="big-line" />}>
+        <Text fontSize="2xl">{time}</Text>
         <Badge text={`${age}+`}/>
       </Stack>
       <Text mt={2}>Продолжительность: {duration}</Text>

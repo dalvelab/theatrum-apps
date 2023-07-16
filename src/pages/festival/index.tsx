@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Button, chakra, Grid, Container, Heading, Stack, Text, Flex } from "@chakra-ui/react"
+import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react"
 
-import { CardFestival, SEO, Divider } from '@/shared/components';
+import { CardFestival, SEO } from '@/shared/components';
 import { ApiResponse } from '@/shared/models/api';
 import { getFestival } from '@/entities/event/api';
 import { getFestivalGrid } from '@/entities/event/utils';
@@ -54,26 +53,31 @@ export default function Festival({festival}: InferGetServerSidePropsType<typeof 
           <Heading as="h1" fontSize={["4xl", "5xl", "5xl", "5xl", "5xl"]}>Афиша</Heading>
           <Grid 
             mt={8} 
-            gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} 
-            gap={10}
+            gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+            gap={6}
             >
               {festivalGrid.map((grid, index) => {
                 return (
-                  <Flex key={index} flexDir="column" gap={6}>
-                    {grid.map((event, eventIndex) => (
-                      <CardFestival 
-                        key={event.id} 
-                        isFirstEvent={eventIndex === 0 ? true : false} 
-                        date={eventIndex === 0 
-                          ? `${String(event.attributes.date).slice(8, 10)}.${String(event.attributes.date).slice(5, 7)}`
-                          : undefined}
-                        title={event.attributes.title}
-                        time={getformatDateLocale(event.attributes.date).slice(11, 17)}
-                        duration={event.attributes.duration}
-                        id={event.id}
-                        age={String(event.attributes.event.data.attributes.age_limit)}
-                      />
-                    ))}
+                  <Flex key={index} flexDir="column" gap={[5, 10, 10, 10, 10]}>
+                    {grid.map((event, eventIndex) => {
+                      const date = `${String(event.attributes.date).slice(8, 10)}.${String(event.attributes.date).slice(5, 7)}`;
+
+                      return (
+                        <>
+                          {eventIndex === 0 && 
+                            <Text fontSize="4xl" color="brand.300" fontWeight="semibold">{date}</Text>
+                          }
+                          <CardFestival 
+                            key={event.id}
+                            title={event.attributes.title}
+                            time={getformatDateLocale(event.attributes.date).slice(11, 17)}
+                            duration={event.attributes.duration}
+                            id={event.id}
+                            age={String(event.attributes.event.data.attributes.age_limit)}
+                          />
+                        </>
+                      )
+                    })}
                   </Flex>
                 )
               })}
