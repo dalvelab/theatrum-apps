@@ -28,6 +28,16 @@ export const genetiveRusMonths = [
   'декабря'
 ]
 
+export const shortRusDayNames = [
+  'вс',
+  'пн',
+  'вт',
+  'ср',
+  'чт',
+  'пт',
+  'сб',
+];
+
 export function getGenetiveRusMonth(month: number) {
   return genetiveRusMonths[month - 1];
 }

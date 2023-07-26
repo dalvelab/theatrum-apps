@@ -8,7 +8,7 @@ import { getFestivalGrid } from '@/entities/event/utils';
 import { FestivalSlide } from '@/widgets/Slider';
 import type { Festival } from '@/entities/event/models';
 import type { Meta } from '@/shared/models/api';
-import { getformatDateLocale } from '@/shared/utils/formatDate';
+import { getformatDateLocale, shortRusDayNames } from '@/shared/utils/formatDate';
 
 export default function Festival({festival}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
@@ -60,7 +60,10 @@ export default function Festival({festival}: InferGetServerSidePropsType<typeof 
                 return (
                   <Flex key={index} flexDir="column" gap={[5, 10, 10, 10, 10]}>
                     {grid.map((event, eventIndex) => {
-                      const date = `${String(event.attributes.date).slice(8, 10)}.${String(event.attributes.date).slice(5, 7)}`;
+                      const date = `
+                        ${String(event.attributes.date).slice(8, 10)}.${String(event.attributes.date).slice(5, 7)},
+                        ${shortRusDayNames[new Date(event.attributes.date).getDay()]}
+                        `;
 
                       return (
                         <>
