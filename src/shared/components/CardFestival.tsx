@@ -16,12 +16,12 @@ export const CardFestival: React.FC<CardFestivalProps> = ({time, title, duration
   return (
     <Flex 
       flexDir="column" 
-      h={["auto", "auto", "224px", "224px", "224px"]} 
+      h={["auto", "auto", "232px", "232px", "232px"]}
       >
       <Heading as="h2" fontFamily="title" fontSize="2xl" fontWeight="semibold">
         {title}
       </Heading>
-      <Stack mt={4} flexDir="row" gap={5} alignItems="center" divider={<Divider color="#583D3E" type="big-line" />}>
+      <Stack mt="auto" flexDir="row" gap={5} alignItems="center" divider={<Divider color="#583D3E" type="big-line" />}>
         <Text fontSize="2xl">{time}</Text>
         <Badge text={`${age}+`}/>
       </Stack>
