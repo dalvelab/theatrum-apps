@@ -26,6 +26,9 @@ export type Event = {
     };
     roles: Role[];
     production_team: Role[];
+    promoted_events: {
+      data: Afisha[];
+    };
   }
 }
 

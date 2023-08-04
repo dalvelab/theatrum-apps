@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
-import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
+import { chakra, Grid, Heading, Container, Flex, Text } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
 import { getSingleFestival } from '@/entities/event/api';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Festival } from '@/entities/event/models';
-import { YAScript, SwipeGallery, Roles } from '@/entities/event';
+import { CardPromotedEvent, Roles, SwipeGallery, YAScript } from '@/entities/event';
 import { SlideContent } from '@/widgets/Slider';
 import { Badge, SEO } from '@/shared/components';
 import { getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
@@ -28,13 +28,16 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
     description, 
     properties,
     small_description,
-    gallery
+    gallery,
+    promoted_events
   } = event;
 
   const eventWithAnotherTitle = {
     ...event,
     title
   }
+
+  console.log(promoted_events);
 
   return (
     <>
@@ -107,6 +110,34 @@ export default function FestivalDetails({festival} : InferGetServerSidePropsType
             <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
               <Heading size="xl" as="h4" fontWeight="medium">Галерея</Heading>
               <SwipeGallery data={gallery.data} />
+            </Container>
+          </chakra.section>
+        )}
+        {isNotVoid(promoted_events.data) && promoted_events.data.length > 0 && (
+          <chakra.section pb={20} bgColor="brand.100">
+            <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+              <Heading size="xl" as="h4" fontWeight="medium">Ближайшие мероприятия</Heading>
+              <Grid templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} mt={10} gap={[4, 4, 4, 6, 10]}>
+                {promoted_events.data.map((event) => {
+                  const id = event.id;
+                  const dates = event.attributes.tickets.map((ticket) => ticket.date)
+                  const { age_limit, title, slug, banner } = event.attributes.event.data.attributes;
+
+                  return (
+                    <CardPromotedEvent 
+                      key={event.id} 
+                      title={title} 
+                      link={`${id}-${slug}`} 
+                      image={{
+                        url: `${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`,
+                        alt: title
+                      }}
+                      ticket_dates={dates}
+                      age_limit={age_limit}
+                    />
+                  )
+                })}
+              </Grid>
             </Container>
           </chakra.section>
         )}

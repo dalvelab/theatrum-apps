@@ -105,7 +105,18 @@ export async function getFestival(): Promise<ApiResponse<Festival[], Meta>> {
 export async function getSingleFestival(params: GetSinglelPerfomance): Promise<ApiResponse<Festival, Meta>> {
   const query = qs.stringify(
     {
-      populate: ['event', 'event.banner', 'event.gallery', 'event.meta', 'event.production_team', 'event.roles']
+      populate: [
+        'event',
+        'event.banner',
+        'event.gallery',
+        'event.meta',
+        'event.production_team',
+        'event.roles',
+        'event.promoted_events',
+        'event.promoted_events.event',
+        'event.promoted_events.tickets',
+        'event.promoted_events.event.banner'
+      ]
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/festivals/${params.id}?${query}`);

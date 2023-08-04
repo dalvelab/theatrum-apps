@@ -1,3 +1,4 @@
+/* for [slug].tsx */
 .description p {
   margin-top: 16px;
   text-align: justify;
@@ -38,4 +39,19 @@
 .properties li {
   list-style: none;
   margin-top: 16px;
+}
+
+/* for index.tsx */
+
+.filters {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  display: none;
 }

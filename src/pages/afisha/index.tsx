@@ -12,6 +12,8 @@ import type { Meta } from '@/shared/models/api';
 import { getformatDateLocale, rusMonths } from '@/shared/utils/formatDate';
 import { isEmptyArray } from '@/shared/utils/mics';
 
+import styles from './styles.module.css';
+
 export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {query, push} = useRouter();
 
@@ -51,7 +53,7 @@ export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getS
         <chakra.section pt={10} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading size="2xl" as="h1">Афиша</Heading>
-            <Flex mt={6} gap={6} position="relative">
+            <Flex className={styles.filters} mt={6} gap={6} position="relative" overflowX="scroll">
               {!isEmptyArray(data) && (
                 <chakra.button 
                   fontSize="2xl" 
