@@ -36,7 +36,7 @@ export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({title, link, ima
           />
         </chakra.div>
         <Stack 
-            display={["none", "flex", "none", "flex", "flex"]} 
+            display="flex" 
             direction="row" divider={<Divider color="#171923" />} 
             alignItems="center" gap={4}  
             fontSize={["xl", "xl", "xl", "xl", "2xl"]} 
