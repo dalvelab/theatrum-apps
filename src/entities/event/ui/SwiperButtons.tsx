@@ -32,7 +32,7 @@ export const SwiperButtons = () => {
             src="/chevron-green-gallery.png"
             fill
             alt="иконка галерии назад"
-            style={{rotate: "180deg"}}
+            style={{ rotate: "180deg" }}
             priority={true}
           />
         </chakra.div>

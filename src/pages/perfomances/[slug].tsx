@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
@@ -13,7 +13,7 @@ import { isNotVoid } from '@/shared/utils/mics';
 
 import styles from './styles.module.css';
 
-export default function PerfomanceDetails({performance} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function PerfomanceDetails({ performance } : InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {
     banner,
     title,
@@ -55,7 +55,7 @@ export default function PerfomanceDetails({performance} : InferGetServerSideProp
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
             alt={title}
             fill
-            style={{objectFit: "cover"}}/>
+            style={{ objectFit: "cover" }}/>
           </chakra.div>
         </chakra.div>
         <chakra.section pos="relative" bgColor="brand.100">
@@ -108,8 +108,8 @@ interface IProps {
   performance: ApiResponse<Performance, Meta>
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({params}) => {
-  const performance = await getSinglelPerformance({id: params?.slug?.toString().split('-')[0]})
+export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
+  const performance = await getSinglelPerformance({ id: params?.slug?.toString().split('-')[0] })
 
   return {
     props: { performance }

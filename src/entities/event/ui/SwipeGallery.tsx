@@ -17,7 +17,7 @@ interface SwipeGalleryProps {
 }[]
 }
 
-export const SwipeGallery: React.FC<SwipeGalleryProps> = ({data}) => {
+export const SwipeGallery: React.FC<SwipeGalleryProps> = ({ data }) => {
   const [isOpened, setIsOpened] = useState(false)
   const [activeImage, setActiveImage] = useState(0);
 
@@ -48,7 +48,7 @@ export const SwipeGallery: React.FC<SwipeGalleryProps> = ({data}) => {
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
             alt='Изображение галереи'
             fill
-            style={{objectFit: "cover", borderRadius: "12px"}}
+            style={{ objectFit: "cover", borderRadius: "12px" }}
           />
         </chakra.div>
         ))}

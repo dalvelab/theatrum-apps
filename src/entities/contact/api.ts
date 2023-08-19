@@ -1,6 +1,6 @@
 import qs from 'qs';
 
-import type {ApiResponse, Meta} from '@/shared/models/api';
+import type { ApiResponse, Meta } from '@/shared/models/api';
 
 import { Contacts } from './models';
 

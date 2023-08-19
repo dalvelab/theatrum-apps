@@ -2,7 +2,7 @@ import { chakra, Modal, ModalBody, ModalOverlay, ModalContent, Flex, Text, Modal
 
 import { Scene } from "../models"
 import Image from "next/image";
-import {Link} from "@chakra-ui/next-js";
+import { Link } from "@chakra-ui/next-js";
 
 interface SceneModalProps {
   scene: Scene
@@ -10,7 +10,7 @@ interface SceneModalProps {
   onClose: () => void;
 }
 
-export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}) => {
+export const SceneModal: React.FC<SceneModalProps> = ({ scene, isOpened, onClose }) => {
 
   return (
     <Modal size={["full", "full", "full", "xl", "xl"]} isOpen={isOpened} onClose={onClose}>
@@ -55,7 +55,7 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
                   src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${scene.gallery.data[0].attributes.url}`}
                   alt="Изображение площадки"
                   fill
-                  style={{objectFit: 'cover', borderRadius: '12px'}}
+                  style={{ objectFit: 'cover', borderRadius: '12px' }}
                 />
               </chakra.div>
             </Flex>
@@ -73,7 +73,7 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
                   src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${scene.gallery.data[1].attributes.url}`}
                   alt="Изображение площадки"
                   fill
-                  style={{objectFit: 'cover', borderRadius: '12px'}}
+                  style={{ objectFit: 'cover', borderRadius: '12px' }}
                 />
               </chakra.div>
               <Flex flexDir="column">
@@ -88,7 +88,7 @@ export const SceneModal: React.FC<SceneModalProps> = ({scene, isOpened, onClose}
                       target="_blank" 
                       referrerPolicy="no-referrer"
                       color="gray.900"
-                      _hover={{color: 'brand.200'}}
+                      _hover={{ color: 'brand.200' }}
                       >
                       <Flex w={["224px", '300px', '300px']} gap={4} alignItems="flex-start">
                         <chakra.div pos="relative" minW="30px" maxW="30px" h="40px">

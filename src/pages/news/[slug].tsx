@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Link, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
@@ -12,9 +12,9 @@ import { SEO } from '@/shared/components';
 
 import styles from './styles.module.css';
 
-export default function NewsDetails({post} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function NewsDetails({ post } : InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-  const {image, title, description, createdAt, source} = post.data.attributes;
+  const { image, title, description, createdAt, source } = post.data.attributes;
 
   const date = createdAt.toString()
   const publish_date = isNotVoid(source) && isNotVoid(source.publish_date) ? source?.publish_date.toString() : '';
@@ -40,7 +40,7 @@ export default function NewsDetails({post} : InferGetServerSidePropsType<typeof 
                 src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
                 alt={title}
                 fill
-                style={{objectFit: 'cover', borderRadius: '12px'}}
+                style={{ objectFit: 'cover', borderRadius: '12px' }}
                 />
             </chakra.div>
             <Flex flexDir="column" gap={3}>
@@ -75,8 +75,8 @@ interface IProps {
   post: ApiResponse<News, Meta>
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({params}) => {
-  const post = await getSinglelNews({id: params?.slug?.toString().split('-')[0]})
+export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
+  const post = await getSinglelNews({ id: params?.slug?.toString().split('-')[0] })
 
   return {
     props: { post }

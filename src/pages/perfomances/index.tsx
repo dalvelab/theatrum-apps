@@ -9,7 +9,7 @@ import type { Performance } from '@/entities/event/models';
 import type { Meta } from '@/shared/models/api';
 import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
-export default function Perfomances({perfomances}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Perfomances({ perfomances }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [filter, setFilter] = useState(false);
 
   const data = perfomances.data.filter((perfomance) => perfomance.attributes.archived === filter);
@@ -33,7 +33,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
                 color={filter === false ? "brand.200" : "gray.900"}
                 pos="relative"
                 fontWeight="medium"
-                _after={{content: filter === false ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+                _after={{ content: filter === false ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
                 onClick={() => setFilter(false)}
                 >
                 Текущий репертуар
@@ -42,7 +42,7 @@ export default function Perfomances({perfomances}: InferGetServerSidePropsType<t
                 color={filter === true ? "brand.200" : "gray.900"} 
                 pos="relative"
                 fontWeight="medium"
-                _after={{content: filter === true ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+                _after={{ content: filter === true ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
                 onClick={() => setFilter(true)}
                 >
                 Архив
@@ -71,9 +71,9 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const perfomances = await getPerformances({limit: 100})
+  const perfomances = await getPerformances({ limit: 100 })
 
   return {
-    props: {perfomances}
+    props: { perfomances }
   }
 };

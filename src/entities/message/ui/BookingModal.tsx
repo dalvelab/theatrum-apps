@@ -27,7 +27,7 @@ interface BookingModalProps {
   onClose: () => void;
 }
 
-export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) => {
+export const BookingModal: React.FC<BookingModalProps> = ({ isOpened, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -100,8 +100,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
               <Input 
                 required
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                _hover={{ borderColor: "brand.200" }} 
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -112,8 +112,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
               <Input 
                 required
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
+                _hover={{ borderColor: "brand.200" }} 
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
                 name="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -126,8 +126,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
                 name="email"
                 type='email'
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}}
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
@@ -138,8 +138,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
                 required
                 name="date"
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}}
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 />
@@ -154,15 +154,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({isOpened, onClose}) =
                 onChange={(value) => setVisitors(value)}
                 >
                   <NumberInputField
-                    _hover={{borderColor: "brand.200"}}
-                    _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                    _hover={{ borderColor: "brand.200" }}
+                    _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
                   />
                 </NumberInput>
             </FormControl>
             <Button 
               size="lg"
               bg="brand.300"
-              _hover={{bgColor: "#69494a"}}
+              _hover={{ bgColor: "#69494a" }}
               color="white"
               type='submit'
               fontWeight="normal"

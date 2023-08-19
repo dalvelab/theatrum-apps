@@ -10,7 +10,7 @@ import type { News } from '@/entities/post/models';
 import type { Meta } from '@/shared/models/api';
 import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
-export default function News({news}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function News({ news }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { query, push } = useRouter()
 
   const [filter, setFilter] = useState<string | string[] | undefined>();
@@ -46,7 +46,7 @@ export default function News({news}: InferGetServerSidePropsType<typeof getServe
               fontWeight="medium" 
               color={filter === 'info' ? "brand.200" : "gray.900"} 
               pos="relative"
-              _after={{content: filter === 'info' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+              _after={{ content: filter === 'info' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
               onClick={() => push('/news?filter=info')}
               >
               Информация
@@ -56,7 +56,7 @@ export default function News({news}: InferGetServerSidePropsType<typeof getServe
               fontWeight="medium" 
               color={filter === 'press' ? "brand.200" : "gray.900"} 
               pos="relative"
-              _after={{content: filter === 'press' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+              _after={{ content: filter === 'press' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
               onClick={() => push('/news?filter=press')}
               >
               Пресса
@@ -80,9 +80,9 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const news = await getNews({limit: 100})
+  const news = await getNews({ limit: 100 })
 
   return {
-    props: {news}
+    props: { news }
   }
 };

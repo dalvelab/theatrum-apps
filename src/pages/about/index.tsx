@@ -1,4 +1,4 @@
-import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Image from "next/image"
 import { useState } from "react";
 import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-ui/react"
@@ -10,7 +10,7 @@ import { SEO } from '@/shared/components';
 import { BookingModal } from '@/entities/message';
 import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
-export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function AfishaDetails({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedModal, setModalOpened] = useState(false);
   const [selectedScene, setSelectedScene] = useState<number | null>(null);
   const [openedBookingModal, setOpenedBookingModal] = useState(false);
@@ -19,7 +19,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
     return <EmptyAbout />
   }
 
-  const { description, registerDocuments, management, scenes} = page.data.attributes;
+  const { description, registerDocuments, management, scenes } = page.data.attributes;
 
   const handleSceneModal = (id: number) => {
     setSelectedScene(id);
@@ -58,7 +58,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
               transform="auto" 
               translateX="-50%" 
               translateY="-50%">
-              <Image src="/letters-theatrum-about.png" fill alt="Три буквы THR" style={{objectFit: 'cover'}}/>
+              <Image src="/letters-theatrum-about.png" fill alt="Три буквы THR" style={{ objectFit: 'cover' }}/>
             </chakra.div>
             <Flex w="container.md" h="auto" zIndex={2}>
               <Text color="gray.900" textAlign="center" fontSize={["lg", "lg", "lg", "lg", "xl"]}>
@@ -95,7 +95,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                       <Button 
                         size="lg" 
                         bg="brand.300" 
-                        _hover={{bgColor: "#69494a"}} 
+                        _hover={{ bgColor: "#69494a" }} 
                         color="white" 
                         fontWeight="normal"
                         onClick={() => setOpenedBookingModal(true)}
@@ -113,7 +113,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                       src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${block.image.data.attributes.url}`}
                       alt="Изображение в блоке о нас"
                       fill
-                      style={{objectFit: 'cover', borderRadius: '12px'}}
+                      style={{ objectFit: 'cover', borderRadius: '12px' }}
                     />
                   </chakra.div>
                 </Flex>
@@ -138,7 +138,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                         src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${scene.gallery.data[0].attributes.url}`}
                         fill 
                         alt={scene.title}
-                        style={{objectFit: "cover", borderRadius: "12px"}}
+                        style={{ objectFit: "cover", borderRadius: "12px" }}
                       />
                     </chakra.div>
                     <Text fontSize="xl" fontWeight="medium">{scene.title}</Text>
@@ -152,7 +152,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                       <Button 
                         size="md" 
                         bg="brand.300" 
-                        _hover={{bgColor: "#69494a"}} 
+                        _hover={{ bgColor: "#69494a" }} 
                         color="white" 
                         fontWeight="normal"
                         onClick={() => handleSceneModal(index)}
@@ -175,7 +175,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                   target="_blank" 
                   referrerPolicy="no-referrer"
                   color="gray.900"
-                  _hover={{color: 'brand.200'}}
+                  _hover={{ color: 'brand.200' }}
                   >
                   <Flex w={["224px", '300px', '300px']} gap={4} alignItems="flex-start">
                     <chakra.div pos="relative" minW="30px" maxW="30px" h="40px">
@@ -201,7 +201,7 @@ export default function AfishaDetails({page}: InferGetServerSidePropsType<typeof
                     <Image 
                       src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${worker.image.data.attributes.url}`}
                       alt={worker.name}
-                      style={{objectFit: "cover"}}
+                      style={{ objectFit: "cover" }}
                       width={240}
                       height={280}
                     />
@@ -226,6 +226,6 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
   const page = await getAboutPage()
 
   return {
-    props: {page}
+    props: { page }
   }
 };

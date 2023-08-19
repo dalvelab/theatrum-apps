@@ -17,7 +17,7 @@ interface WelcomeSliderProps {
   slider: Slider;
 }
 
-export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
+export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({ slider }) => {
   const { data } = slider.attributes.slides;
 
   if (isVoid(data) || isEmptyArray(data)) {
@@ -72,7 +72,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                       size="lg" 
                       bgColor="brand.200" 
                       color="white"
-                      _hover={{bgColor: "#4d8a8c"}} 
+                      _hover={{ bgColor: "#4d8a8c" }} 
                       alignSelf="flex-start"
                       >
                         Подробнее
@@ -110,7 +110,7 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({slider}) => {
                   src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
                   alt={title}
                   fill
-                  style={{objectFit: "cover", border: "none"}}
+                  style={{ objectFit: "cover", border: "none" }}
                   priority={true}
                 />
             </chakra.div>

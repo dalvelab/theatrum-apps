@@ -16,7 +16,7 @@ interface CardPromotedEvent {
   age_limit: number;
 }
 
-export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({title, link, image, ticket_dates, age_limit}) => {
+export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({ title, link, image, ticket_dates, age_limit }) => {
   const formattedDate = formatAfishaDays(ticket_dates);
 
   return (
@@ -32,7 +32,7 @@ export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({title, link, ima
             src={image.url}
             alt={image.alt}
             fill
-            style={{borderRadius: "12px", objectFit: "cover"}}
+            style={{ borderRadius: "12px", objectFit: "cover" }}
           />
         </chakra.div>
         <Stack 
@@ -52,8 +52,8 @@ export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({title, link, ima
             {title}
           </Heading>
         </Flex>
-        <Link href={`/afisha/${link}`} _hover={{textDecor: 'none'}} mt={4}>
-          <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
+        <Link href={`/afisha/${link}`} _hover={{ textDecor: 'none' }} mt={4}>
+          <Button bgColor="brand.200" color="white" _hover={{ bgColor: "#4d8a8c" }} size="lg">Подробнее</Button>
         </Link>
       </Flex>
   )

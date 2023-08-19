@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import { Heading, Flex, Text, Stack } from "@chakra-ui/react"
 
 import { Event } from "@/entities/event/models";
@@ -12,8 +12,8 @@ interface SlideProps {
   formattedDate: ReturnType<typeof formatAfishaDays>
 }
 
-export const SlideContent: React.FC<SlideProps> = ({children, event, formattedDate}) => {
-  const {title, small_description, age_limit, premiere} = event;
+export const SlideContent: React.FC<SlideProps> = ({ children, event, formattedDate }) => {
+  const { title, small_description, age_limit, premiere } = event;
 
   return (
     <Flex maxW="container.md" flexDir="column" gap={6} mt="100px">
@@ -39,7 +39,7 @@ export const SlideContent: React.FC<SlideProps> = ({children, event, formattedDa
         {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
         {formattedDate.length > 1 && (
           <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
-            {formattedDate.map(({date, month}, index) => 
+            {formattedDate.map(({ date, month }, index) => 
             <Flex key={index} flexDir="column" alignItems="center" gap={1}>
               <Text lineHeight={1}>{date}</Text>
               <Text lineHeight={1} fontSize="md">{month}</Text>

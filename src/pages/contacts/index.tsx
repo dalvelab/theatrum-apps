@@ -2,7 +2,7 @@ import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { Button, chakra, Container, Heading, Flex, Link, Text} from '@chakra-ui/react';
+import { Button, chakra, Container, Heading, Flex, Link, Text } from '@chakra-ui/react';
 
 import { getContacts } from '@/entities/contact/api';
 import { EmptyContacts } from '@/entities/contact/ui';
@@ -12,14 +12,14 @@ import { FeedbackModal } from '@/entities/message';
 import { Property, SEO } from '@/shared/components';
 import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
-export default function Contacts({contact}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Contacts({ contact }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
 
   if (isVoid(contact.data)) {
     return <EmptyContacts openedFeedbackModal={openedFeedbackModal} setOpenedFeedbackModal={setOpenedFeedbackModal} />
   }
 
-  const {contacts, image, address} = contact.data.attributes;
+  const { contacts, image, address } = contact.data.attributes;
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column" alignItems="flex-start">
             <Heading size="2xl" as="h1">Контакты</Heading>
             <Flex pt={10} gap={5} flexDir="column">
-              {contacts.map(({contact, type, title}) => (
+              {contacts.map(({ contact, type, title }) => (
                 <Property key={title} text={contact} type={type} />
               ))}
               <Property text={address} type='text' />
@@ -50,7 +50,7 @@ export default function Contacts({contact}: InferGetServerSidePropsType<typeof g
               bg="brand.300"
               color="white" 
               fontWeight="normal"
-              _hover={{bgColor: "#69494a"}}
+              _hover={{ bgColor: "#69494a" }}
               onClick={() => setOpenedFeedbackModal(true)}
               >
                 Связаться с нами
@@ -94,6 +94,6 @@ export const getServerSideProps: GetServerSideProps<IProps> = async () => {
   const contact = await getContacts()
 
   return {
-    props: {contact}
+    props: { contact }
   }
 };

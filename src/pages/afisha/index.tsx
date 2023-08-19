@@ -14,8 +14,8 @@ import { isEmptyArray } from '@/shared/utils/mics';
 
 import styles from './styles.module.css';
 
-export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const {query, push} = useRouter();
+export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { query, push } = useRouter();
 
   const [filter, setFilter] = useState<string | string[] | undefined>();
 
@@ -60,7 +60,7 @@ export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getS
                   fontWeight="medium" 
                   color={filter === 'all' ? "brand.200" : "gray.900"} 
                   pos="relative"
-                  _after={{content: filter === 'all' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+                  _after={{ content: filter === 'all' ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
                   onClick={() => push('/afisha?filter=all')}
                   >
                     Ближайшие
@@ -73,7 +73,7 @@ export default function Afisha({afisha}: InferGetServerSidePropsType<typeof getS
                   fontWeight="medium" 
                   color={filter === month ? "brand.200" : "gray.900"} 
                   pos="relative"
-                  _after={{content: filter === month ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200"}}
+                  _after={{ content: filter === month ? '""' : 'none', width: '100%', height: '2px', position: 'absolute', left: 0, bottom: 0, bgColor: "brand.200" }}
                   onClick={() => push(`/afisha?filter=${month}`)}
                   textTransform="capitalize"
                   >
@@ -99,9 +99,9 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const afisha = await getAfisha({limit: 100})
+  const afisha = await getAfisha({ limit: 100 })
 
   return {
-    props: {afisha}
+    props: { afisha }
   }
 };

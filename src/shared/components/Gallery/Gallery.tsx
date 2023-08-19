@@ -70,7 +70,7 @@ export const Gallery: React.FC<IProps> = (props) => {
                 width={10}
                 height={18}
                 alt="иконка галерии назад"
-                style={{rotate: "180deg"}}
+                style={{ rotate: "180deg" }}
               />
             </chakra.button>
             <chakra.button

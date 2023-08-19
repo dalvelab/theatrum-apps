@@ -1,8 +1,8 @@
 import qs from 'qs';
 
-import type {ApiResponse, Meta} from '@/shared/models/api';
+import type { ApiResponse, Meta } from '@/shared/models/api';
 
-import { Afisha, Performance, Slider, Festival } from './models';
+import { Afisha, Performance, Slider } from './models';
 
 interface getAfishaParams {
   limit?: number;
@@ -83,43 +83,6 @@ export async function getSinglelPerformance(params: GetSinglelPerfomance): Promi
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/perfomances/${params.id}?${query}`);
-
-  return res.json()
-}
-
-export async function getFestival(): Promise<ApiResponse<Festival[], Meta>> {
-  const query = qs.stringify(
-    {
-      pagination: {
-        limit: 100,
-      },
-      sort: ['date'],
-      populate: ['event',]
-    }
-  )
-  const res = await fetch(`${process.env.DB_HOST}/festivals?${query}`);
-
-  return res.json()
-}
-
-export async function getSingleFestival(params: GetSinglelPerfomance): Promise<ApiResponse<Festival, Meta>> {
-  const query = qs.stringify(
-    {
-      populate: [
-        'event',
-        'event.banner',
-        'event.gallery',
-        'event.meta',
-        'event.production_team',
-        'event.roles',
-        'event.promoted_events',
-        'event.promoted_events.event',
-        'event.promoted_events.tickets',
-        'event.promoted_events.event.banner'
-      ]
-    }
-  )
-  const res = await fetch(`${process.env.DB_HOST}/festivals/${params.id}?${query}`);
 
   return res.json()
 }

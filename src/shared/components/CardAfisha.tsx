@@ -12,9 +12,9 @@ interface CardAfishaProps {
   afisha: Afisha;
 }
 
-export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
+export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
   const { id } = afisha
-  const {age_limit, slug, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
+  const { age_limit, slug, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
 
   const dates = afisha.attributes.tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
@@ -31,7 +31,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
             alt='Green double couch with wooden legs'
-            style={{borderRadius: '12px', objectFit: 'cover'}}
+            style={{ borderRadius: '12px', objectFit: 'cover' }}
             fill
           />
         </chakra.div>
@@ -59,7 +59,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
                 gap={[2, 3]} 
                 divider={<Divider type='dot' color="#171923" />} 
                 alignItems="center">
-                  {formattedDate.map(({date, month}, index) => 
+                  {formattedDate.map(({ date, month }, index) => 
                   <Flex key={index} flexDir="column" alignItems="center" gap={1}>
                     <Text lineHeight={1}>{date}</Text>
                     <Text lineHeight={1} fontSize="md">{month}</Text>
@@ -73,7 +73,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             <Badge text={String(age_limit) + '+'}/>
           </Flex>
           <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
-            <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+            <Link href={`/afisha/${id}-${slug}`} _hover={{ textDecor: 'none' }}>
               {title}
             </Link>
           </Heading>
@@ -84,7 +84,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
             divider={<Divider type='dot' color="#171923" />} 
             fontSize={["lg", null, "xl", null, null]} 
             alignItems="center">
-              {formattedDate.map(({date, month, time}, index) => 
+              {formattedDate.map(({ date, month, time }, index) => 
                 <Flex key={index} flexDir="row" gap={2}>
                   <Text>{date}</Text>
                   <Text>{month}</Text>
@@ -92,8 +92,8 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({afisha}) => {
                 </Flex>)}
           </Stack>
           <Flex gap={5} alignItems="center">
-            <Link href={`/afisha/${id}-${slug}`} _hover={{textDecor: 'none'}}>
-              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
+            <Link href={`/afisha/${id}-${slug}`} _hover={{ textDecor: 'none' }}>
+              <Button bgColor="brand.200" color="white" _hover={{ bgColor: "#4d8a8c" }} size="lg">Подробнее</Button>
             </Link>
             {pushkin_card && (
               <Image

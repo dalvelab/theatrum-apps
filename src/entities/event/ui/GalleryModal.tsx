@@ -20,7 +20,7 @@ interface GalleryModalProps {
   activeImage: number;
 }
 
-export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, data, activeImage}) => {
+export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpened, onClose, data, activeImage }) => {
   return (
     <Modal 
       autoFocus={false} 
@@ -79,7 +79,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({isOpened, onClose, da
                             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
                             alt="Изображение площадки"
                             fill
-                            style={{objectFit: 'cover', borderRadius: "12px"}}
+                            style={{ objectFit: 'cover', borderRadius: "12px" }}
                           />
                       </chakra.div>
                     </SwiperSlide>

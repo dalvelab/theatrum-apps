@@ -7,4 +7,3 @@ export * from './Badge';
 export * from './Gallery';
 export * from './SEO';
 export * from './YAMetrika';
-export * from './CardFestival';

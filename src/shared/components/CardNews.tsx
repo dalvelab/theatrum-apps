@@ -11,7 +11,7 @@ interface CardNewsProps {
   post: News;
 }
 
-export const CardNews: React.FC<CardNewsProps> = ({post}) => {
+export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
   const { id } = post;
   const { title, description, image, createdAt, slug } = post.attributes;
 
@@ -25,12 +25,12 @@ export const CardNews: React.FC<CardNewsProps> = ({post}) => {
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
             alt={title}
             fill
-            style={{borderRadius: "12px", objectFit: "cover"}}
+            style={{ borderRadius: "12px", objectFit: "cover" }}
           />
         </chakra.div>
         <Flex flexDir="column" mt={3}>
           <Heading color="brand.300" fontSize="xl" fontWeight="medium">
-            <LinkOverlay as={Link} href={`/news/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+            <LinkOverlay as={Link} href={`/news/${id}-${slug}`} _hover={{ textDecor: 'none' }}>
               {title}
             </LinkOverlay>
           </Heading>

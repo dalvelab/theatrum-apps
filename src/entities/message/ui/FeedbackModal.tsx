@@ -26,7 +26,7 @@ interface FeedbackModalProps {
   onClose: () => void;
 }
 
-export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose}) => {
+export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -98,8 +98,8 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
               <Input 
                 required
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
+                _hover={{ borderColor: "brand.200" }} 
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -110,8 +110,8 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
               <Input 
                 required
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
+                _hover={{ borderColor: "brand.200" }} 
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
                 name="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -124,8 +124,8 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
                 name="email"
                 type='email'
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}}
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}} 
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
@@ -136,8 +136,8 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
                 required
                 name="body"
                 borderColor="brand.300" 
-                _hover={{borderColor: "brand.200"}} 
-                _focus={{borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B"}}  
+                _hover={{ borderColor: "brand.200" }} 
+                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 />
@@ -145,7 +145,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({isOpened, onClose})
             <Button 
               size="lg"
               bg="brand.300"
-              _hover={{bgColor: "#69494a"}}
+              _hover={{ bgColor: "#69494a" }}
               color="white"
               type='submit'
               fontWeight="normal"

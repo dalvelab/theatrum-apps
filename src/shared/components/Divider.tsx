@@ -3,7 +3,7 @@ interface DividerProps {
   color?: string;
 }
 
-export const Divider: React.FC<DividerProps> = ({color = '#E9D5CD', type = 'line'}) => {
+export const Divider: React.FC<DividerProps> = ({ color = '#E9D5CD', type = 'line' }) => {
   if (type === 'dot') {
     return (
       <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">

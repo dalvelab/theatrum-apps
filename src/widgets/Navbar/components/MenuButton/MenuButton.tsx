@@ -7,7 +7,7 @@ interface MenuButtonProps {
   onClick: () => void;
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({opened, onClick}) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({ opened, onClick }) => {
   return (
     <chakra.button
     className={`${styles.sidebarButton} ${

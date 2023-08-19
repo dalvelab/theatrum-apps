@@ -43,11 +43,11 @@ export function getGenetiveRusMonth(month: number) {
 }
 
 export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
-  return new Date(date).toLocaleString('ru-RU', {timeZone});
+  return new Date(date).toLocaleString('ru-RU', { timeZone });
 }
 
 export function getformatDateLocaleTime(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
-  return new Date(date).toLocaleString('ru-RU', {timeZone}).split(',')[1].trim().substring(0, 5)
+  return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[1].trim().substring(0, 5)
 }
 
 type formatAfishaDaysType = {

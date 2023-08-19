@@ -26,7 +26,7 @@ export const EmptyAbout = () => {
               transform="auto" 
               translateX="-50%" 
               translateY="-50%">
-              <Image src="/letters-theatrum-about.png" fill alt="Три буквы THR" style={{objectFit: 'cover'}}/>
+              <Image src="/letters-theatrum-about.png" fill alt="Три буквы THR" style={{ objectFit: 'cover' }}/>
             </chakra.div>
             <Flex w="container.md" h="auto" zIndex={2}>
               <Text color="gray.900" textAlign="center" fontSize={["lg", "lg", "lg", "lg", "xl"]}>

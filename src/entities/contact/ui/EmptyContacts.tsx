@@ -8,7 +8,7 @@ interface EmptyContactsProps {
   setOpenedFeedbackModal: (opened: boolean) => void;
 }
 
-export const EmptyContacts: React.FC<EmptyContactsProps> = ({openedFeedbackModal, setOpenedFeedbackModal}) => {
+export const EmptyContacts: React.FC<EmptyContactsProps> = ({ openedFeedbackModal, setOpenedFeedbackModal }) => {
   return (
     <>
       <SEO>
@@ -32,7 +32,7 @@ export const EmptyContacts: React.FC<EmptyContactsProps> = ({openedFeedbackModal
               bg="brand.300"
               color="white" 
               fontWeight="normal"
-              _hover={{bgColor: "#69494a"}}
+              _hover={{ bgColor: "#69494a" }}
               onClick={() => setOpenedFeedbackModal(true)}
               >
                 Связаться с нами

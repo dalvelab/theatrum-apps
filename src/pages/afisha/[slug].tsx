@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Button, chakra, Heading, Container, Flex, Text, Stack, Grid } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown';
 
@@ -14,7 +14,7 @@ import { isNotVoid } from "@/shared/utils/mics"
 
 import styles from './styles.module.css';
 
-export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<typeof getServerSideProps>) {
   const event = afisha.data.attributes.event.data.attributes
   
   const {
@@ -68,7 +68,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                     size="md" 
                     bgColor="brand.200" 
                     color="white" 
-                    _hover={{bgColor: "#4d8a8c"}}
+                    _hover={{ bgColor: "#4d8a8c" }}
                     >
                       Купить билеты
                     </Button>
@@ -77,7 +77,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                     size="lg" 
                     bgColor="brand.200" 
                     color="white" 
-                    _hover={{bgColor: "#4d8a8c"}} 
+                    _hover={{ bgColor: "#4d8a8c" }} 
                     alignSelf="flex-start"
                     onClick={scrollToTickets}
                     >
@@ -101,7 +101,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
             alt={title}
             fill
-            style={{objectFit: "cover"}}/>
+            style={{ objectFit: "cover" }}/>
           </chakra.div>
         </chakra.div>
         <chakra.section pt={10} pb={10} pos="relative" bgColor="brand.100">
@@ -139,7 +139,7 @@ export default function AfishaDetails({afisha} : InferGetServerSidePropsType<typ
                     {getformatDateLocaleTime(ticket.date)}
                   </Text>
                 </Stack>
-                <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}}>Купить билеты</Button>
+                <Button onClick={() => handleYAWidget(ticket.link)} size="md" bgColor="brand.200" color="white" _hover={{ bgColor: "#4d8a8c" }}>Купить билеты</Button>
               </Flex>
               ))}
             </Grid>
@@ -193,8 +193,8 @@ interface IProps {
   afisha: ApiResponse<Afisha, Meta>
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({params}) => {
-  const afisha = await getSinglelAfisha({id: params?.slug?.toString().split('-')[0]})
+export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
+  const afisha = await getSinglelAfisha({ id: params?.slug?.toString().split('-')[0] })
 
   return {
     props: { afisha }

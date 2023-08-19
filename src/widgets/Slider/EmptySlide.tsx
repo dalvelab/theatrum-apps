@@ -28,7 +28,7 @@ export const EmptySlide = () => {
           alt="Логотип по центру"
           fill
           priority={true}
-          style={{objectFit: "cover"}}
+          style={{ objectFit: "cover" }}
         />
       </chakra.div>
       <chakra.div w="full" h="100vh" pos="absolute" left={0} top={0} zIndex='-1' >
@@ -36,7 +36,7 @@ export const EmptySlide = () => {
         src='/welcome-slider-stub.jpg'
         alt="Изображение театрального зала"
         fill
-        style={{objectFit: "cover"}}/>
+        style={{ objectFit: "cover" }}/>
       </chakra.div>
     </chakra.div>
   )

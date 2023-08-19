@@ -1,18 +1,18 @@
-import type {GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { Button, Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
-import {Link} from '@chakra-ui/next-js';
+import { Link } from '@chakra-ui/next-js';
 
-import { FestivalSlide } from '@/widgets/Slider'
 import { CardAfisha, CardNews } from '@/shared/components'
 import { getAfisha, getSlider  } from '@/entities/event/api';
 import { getNews  } from '@/entities/post/api';
 import type { Afisha, Slider } from '@/entities/event/models';
-import type {ApiResponse, Meta} from '@/shared/models/api';
+import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { News } from '@/entities/post/models';
+import { WelcomeSlider } from '@/widgets/Slider';
 import { isNotVoid, isEmptyArray, isVoid } from '@/shared/utils/mics';
 
-export default function Home({afisha, news, slider}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ afisha, news, slider }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const events = isNotVoid(afisha.data) && !isEmptyArray(afisha.data) ? afisha.data.slice(0, 6) : [];
 
   return (
@@ -25,11 +25,8 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://theatrum.center" />
       </Head>
-      {/* <WelcomeSlider slider={slider.data} /> */}
-      <chakra.main mt={20}>
-        <chakra.div bgColor="brand.100" height="100vh">
-          <FestivalSlide isWelcomePage />
-        </chakra.div>
+      <chakra.main>
+        <WelcomeSlider slider={slider.data} />
         <chakra.section pt={20} pb={20} pos="relative" bgColor="brand.100" position="relative" h="auto">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">Ближайшие мероприятия</Heading>
@@ -40,7 +37,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
                 ))}
               </Grid>
               <Link href="/afisha" justifySelf="center" alignSelf="center">
-                <Button fontWeight="normal" pl={10} pr={10} borderColor="brand.300" color="brand.300" size='lg' variant="outline" _hover={{bgColor: "brand.300", color: "white"}}>Вся афиша</Button>
+                <Button fontWeight="normal" pl={10} pr={10} borderColor="brand.300" color="brand.300" size='lg' variant="outline" _hover={{ bgColor: "brand.300", color: "white" }}>Вся афиша</Button>
               </Link>
           </Container>
         </chakra.section>
@@ -62,7 +59,7 @@ export default function Home({afisha, news, slider}: InferGetServerSidePropsType
                   color="brand.300" 
                   size='lg' 
                   variant="outline" 
-                  _hover={{bgColor: "brand.300", color: "white"}}
+                  _hover={{ bgColor: "brand.300", color: "white" }}
                   >
                     Все новости
                   </Button>
@@ -81,13 +78,13 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const afishaData = getAfisha({limit: 100});
-  const newsData = getNews({limit: 6})
+  const afishaData = getAfisha({ limit: 100 });
+  const newsData = getNews({ limit: 6 })
   const sliderData = getSlider();
   
   const [afisha, news, slider] = await Promise.all([afishaData, newsData, sliderData])
 
   return {
-    props: {afisha, news, slider}
+    props: { afisha, news, slider }
   }
 };

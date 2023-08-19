@@ -10,9 +10,9 @@ interface CardPerfomanceProps {
   perfomance: Performance;
 }
 
-export const CardPerfomance: React.FC<CardPerfomanceProps> = ({perfomance}) => {
+export const CardPerfomance: React.FC<CardPerfomanceProps> = ({ perfomance }) => {
   const { id } = perfomance;
-  const {age_limit, title, banner, small_description, slug } = perfomance.attributes.event.data.attributes;
+  const { age_limit, title, banner, small_description, slug } = perfomance.attributes.event.data.attributes;
 
   return (
     <chakra.article>
@@ -26,21 +26,21 @@ export const CardPerfomance: React.FC<CardPerfomanceProps> = ({perfomance}) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
             alt='Green double couch with wooden legs'
-            style={{borderRadius: '12px', objectFit: 'cover'}}
+            style={{ borderRadius: '12px', objectFit: 'cover' }}
             fill
           />
         </chakra.div>
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
           <Badge text={String(age_limit) + '+'}/>
           <Heading fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]} fontWeight="medium">
-            <Link href={`/perfomances/${id}-${slug}`} _hover={{textDecor: 'none'}}>
+            <Link href={`/perfomances/${id}-${slug}`} _hover={{ textDecor: 'none' }}>
               {title}
             </Link>
           </Heading>
           <Text noOfLines={2}>{small_description}</Text>
           <Flex gap={5} alignItems="center">
-            <Link href={`/perfomances/${id}-${slug}`} _hover={{textDecor: 'none'}}>
-              <Button bgColor="brand.200" color="white" _hover={{bgColor: "#4d8a8c"}} size="lg">Подробнее</Button>
+            <Link href={`/perfomances/${id}-${slug}`} _hover={{ textDecor: 'none' }}>
+              <Button bgColor="brand.200" color="white" _hover={{ bgColor: "#4d8a8c" }} size="lg">Подробнее</Button>
             </Link>
           </Flex>
         </Flex>

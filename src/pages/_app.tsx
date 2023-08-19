@@ -32,7 +32,7 @@ const sizes = {
   }
 }
 
-const theme = extendTheme({...sizes})
+const theme = extendTheme({ ...sizes })
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {process.env.NEXT_PUBLIC_METRIKA === 'production' && (
           <noscript>
             <div>
-              <img src="https://mc.yandex.ru/watch/93393151" style={{position: "absolute", left: "-9999px"}} alt="" />
+              <img src="https://mc.yandex.ru/watch/93393151" style={{ position: "absolute", left: "-9999px" }} alt="" />
             </div>
           </noscript>
         )}

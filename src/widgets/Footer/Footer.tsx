@@ -48,10 +48,10 @@ export const Footer = () => {
                 rel="noreferer" 
                 href="https://yandex.ru/maps/-/CCUk5JdIsD" 
                 pos="relative" 
-                _hover={{textDecoration: 'none', color: 'brand.200'}}
+                _hover={{ textDecoration: 'none', color: 'brand.200' }}
                 >
                   <Text fontSize="lg" _after={
-                    {'content': '""',
+                    { 'content': '""',
                     'width': '100%',
                     'height': '1px',
                     'bgColor': 'gray.900',
@@ -67,8 +67,8 @@ export const Footer = () => {
               <Flex flexDir="column" gap={2}>
                 <Text fontSize="lg" fontWeight="medium">Контакты</Text>
                 <Flex gap={[2, 5, 5, 5, 5]} flexDir={["column", "row", "row", "row", "row"]}>
-                  {contacts?.map(({contact, type, title}) => (
-                  <Link key={title} href={type === 'phone' ? `tel:${contact}` : `mailto:${contact}`} _hover={{color: "brand.200"}}>
+                  {contacts?.map(({ contact, type, title }) => (
+                  <Link key={title} href={type === 'phone' ? `tel:${contact}` : `mailto:${contact}`} _hover={{ color: "brand.200" }}>
                     <Text>{contact}</Text>
                   </Link>
                   ))}
@@ -103,7 +103,7 @@ export const Footer = () => {
                     bgColor="brand.300" 
                     color="white"
                     pos="relative"
-                    _hover={{bgColor: "#69494a"}}
+                    _hover={{ bgColor: "#69494a" }}
                     >
                       <Image width={30} height={30} src={`/${social.type}.svg`} alt={`иконка ${social.type}`} />
                   </Box>
@@ -113,7 +113,7 @@ export const Footer = () => {
             <Button 
               size="lg" 
               bg="brand.300" 
-              _hover={{bgColor: "#69494a"}} 
+              _hover={{ bgColor: "#69494a" }} 
               color="white" 
               fontWeight="normal"
               onClick={() => setOpenedFeedbackModal(true)}

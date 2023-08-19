@@ -39,16 +39,13 @@ export const Navbar = () => {
   return (
     <chakra.nav 
       transition="0.1s ease-in" 
-      // mt={scrolled || notWelcomePage ? 0 : [0, 4]}
-      mt={0}
+      mt={scrolled || notWelcomePage ? 0 : [0, 4]}
       w="full" 
       h={20}
       pos="fixed" 
-      // borderBottom={scrolled || notWelcomePage ? "1px solid" : "none"}
-      borderBottom="1px solid"
+      borderBottom={scrolled || notWelcomePage ? "1px solid" : "none"}
       borderColor={opened ? "transparent" : "#583D3E"} 
-      // bgColor={scrolled || notWelcomePage ? 'brand.100' : 'transparent'} 
-      bgColor="brand.100" 
+      bgColor={scrolled || notWelcomePage ? 'brand.100' : 'transparent'} 
       top={0} 
       left={0} 
       zIndex={opened ? "toast" :"docked"}
@@ -65,25 +62,19 @@ export const Navbar = () => {
               >
                 <Image 
                   fill 
-                  // src={scrolled || notWelcomePage ? '/logo-dark.svg' : "/logo-light.svg"}
-                  src='/logo-dark.svg' 
-                  alt='Логотип в меню'
+                  src={scrolled || notWelcomePage ? '/logo-dark.svg' : "/logo-light.svg"} 
+                  alt='Логотип в меню' 
+                  style={{ fill: "red" }}
                   priority={true}
                   />
             </chakra.div>
           </Link>
-          <Flex 
-            gap={6} 
-            display={['none', 'none', 'none', 'flex', 'flex']} 
-            // color={scrolled || notWelcomePage ? 'brand.300' : 'brand.100'}
-            color='brand.300'
-            >
-              <NavbarLink href='/festival' text='КиноTheatrum' scrolled={true} />
-              <NavbarLink href='/afisha' text='Афиша' scrolled={true} />
-              <NavbarLink href='/perfomances' text='Спектакли' scrolled={true} />
-              <NavbarLink href='/about' text='О театре' scrolled={true} />
-              <NavbarLink href='/news' text='Новости' scrolled={true} />
-              <NavbarLink href='/contacts' text='Контакты' scrolled={true} />
+          <Flex gap={8} display={['none', 'none', 'none', 'flex', 'flex']} color={scrolled || notWelcomePage ? 'brand.300' : 'brand.100'}>
+            <NavbarLink href='/afisha' text='Афиша' scrolled={scrolled || notWelcomePage} />
+            <NavbarLink href='/perfomances' text='Спектакли' scrolled={scrolled || notWelcomePage} />
+            <NavbarLink href='/about' text='О театре' scrolled={scrolled || notWelcomePage} />
+            <NavbarLink href='/news' text='Новости' scrolled={scrolled || notWelcomePage} />
+            <NavbarLink href='/contacts' text='Контакты' scrolled={scrolled || notWelcomePage} />
           </Flex>
           <chakra.div
             display={['block', 'block', 'block', 'none', 'none']}
