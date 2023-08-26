@@ -1,0 +1,57 @@
+/* for [slug].tsx */
+.description p {
+  margin-top: 16px;
+  text-align: justify;
+}
+
+.description li {
+  margin-top: 20px;
+}
+
+.description ol {
+  margin-left: 20px;
+}
+
+.description p:first-child {
+  margin-top: 0;
+}
+
+.description blockquote {
+  margin-top: 16px;
+  position: relative;
+}
+
+.description blockquote::before {
+  content: '';
+  width: 3px;
+  height: 100%;
+  background-color: #000;
+  margin-top: 16px;
+  position: absolute;
+  left: -12px;
+  bottom: 0;
+}
+
+.description blockquote:first-child {
+  margin-top: 0;
+}
+
+.properties li {
+  list-style: none;
+  margin-top: 16px;
+}
+
+/* for index.tsx */
+
+.filters {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filters::-webkit-scrollbar-thumb {
+  display: none;
+}

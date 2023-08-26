@@ -1,0 +1,29 @@
+.description p {
+  margin-top: 16px;
+  text-align: justify;
+}
+
+.description li {
+  margin-top: 20px;
+}
+
+.description ol {
+  margin-left: 20px;
+}
+
+.description p:first-child {
+  margin-top: 0;
+}
+
+.description blockquote {
+  margin-top: 16px;
+}
+
+.description blockquote:first-child {
+  margin-top: 0;
+}
+
+.properties li {
+  list-style: none;
+  margin-top: 16px;
+}
