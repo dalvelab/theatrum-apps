@@ -2,7 +2,11 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:corporate": "cd apps/theatrum-schedule-pwa && npm run build",
+    "build:wed": "cd apps/theatrum-web && npm run build",
     "dev": "turbo run dev",
+    "dev:corporate": "cd apps/theatrum-schedule-pwa && npm run dev",
+    "dev:web": "cd apps/theatrum-web && npm run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
