@@ -43,7 +43,7 @@ export function getGenetiveRusMonth(month: number) {
 }
 
 export function getformatDateLocale(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {
-  return new Date(date).toLocaleString('ru-RU', { timeZone });
+  return new Date(date).toLocaleString('ru-RU', { timeZone }).split(',')[0];
 }
 
 export function getformatDateLocaleTime(date: Date, timeZone: string = 'Asia/Yekaterinburg' ) {

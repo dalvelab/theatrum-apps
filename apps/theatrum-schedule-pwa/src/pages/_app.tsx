@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { GolosFont } from '@/shared/fonts';
+import { Navbar } from '@/shared/components';
 
 const sizes = {
   colors: {
@@ -58,7 +59,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <ChakraProvider theme={theme}>
-        <chakra.main>
+        <Navbar />
+        <chakra.main mt={[0, 0, 0, 16, 16]}>
           <Component {...pageProps} />
         </chakra.main>
       </ChakraProvider>
