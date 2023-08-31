@@ -5,12 +5,11 @@ export const Navbar = () => {
   return (
     <chakra.nav 
       display={["none", "none", "block", "block", "block"]}
-      transition="0.1s ease-in"
       w="full" 
       h={16}
       pos="fixed" 
       borderBottom="1px solid"
-      borderColor="blackAlpha.900" 
+      borderColor="blackAlpha.200" 
       bgColor="white"
       top={0} 
       left={0} 

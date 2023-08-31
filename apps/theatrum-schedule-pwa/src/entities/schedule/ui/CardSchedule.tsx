@@ -29,9 +29,10 @@ export const CardSchedule: React.FC<CardScheduleProps> = ({ time, title, type, l
         border="1px solid"
         borderColor="blackAlpha.100"
         borderRadius="xl"
+        cursor="pointer"
       >
         <Badge variant='subtle' colorScheme={typeToSchemeMap[type]} p="4px 10px" borderRadius="md">{type}</Badge>
-        <Heading fontWeight="semibold" as="h4" fontSize="3xl">{title}</Heading>
+        <Heading fontWeight="semibold" as="h4" fontSize="2xl">{title}</Heading>
         <Stack
           direction="row" divider={<Divider color="#171923" />} 
           alignItems="center" gap={4}  

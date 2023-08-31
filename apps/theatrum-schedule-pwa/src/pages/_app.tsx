@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { GolosFont } from '@/shared/fonts';
-import { Navbar } from '@/shared/components';
+import { Navbar, MobileMenu } from '@/shared/components';
 
 const sizes = {
   colors: {
@@ -63,6 +63,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <chakra.main mt={[0, 0, 0, 16, 16]}>
           <Component {...pageProps} />
         </chakra.main>
+        <MobileMenu />
       </ChakraProvider>
     </>
   )
