@@ -14,8 +14,8 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
     <>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
-        <meta property="og:title" content="Theatrum" />
-        <meta property="og:description" content="Theatrum Schedule — корпоративное приложение для сотрудников театра" />
+        <meta property="og:title" content="Theatrum Corporate" />
+        <meta property="og:description" content="Theatrum Schedule — корпоративное приложение для сотрудников Theatrum" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />

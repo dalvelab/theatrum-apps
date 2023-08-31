@@ -17,7 +17,7 @@ export const MobileMenu = () => {
       bgColor="white"
       bottom={0} 
       left={0}
-      pb={5}
+      pb={6}
       pt={3}
       zIndex="toast"
       >

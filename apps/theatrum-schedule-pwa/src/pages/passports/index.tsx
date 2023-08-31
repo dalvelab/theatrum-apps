@@ -1,0 +1,44 @@
+import Head from 'next/head';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
+
+import { getEventPassports, CardPassport } from '@/entities';
+import type { EventPassport } from '@/entities';
+import type { ApiResponse, Meta } from '@/shared/models/api';
+
+export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <>
+      <Head>
+        <meta property="og:url" content="https://corporate.theatrum.center" />
+        <meta property="og:title" content="Theatrum Corporate" />
+        <meta property="og:description" content="Theatrum Schedule — корпоративное приложение для сотрудников Theatrum" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/bage.png" />
+        <link rel="canonical" href="https://corporate.theatrum.center" />
+      </Head>
+      <chakra.section pt={10} pb={20} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
+          <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
+            <Heading as="h2">Паспорта спектаклей</Heading>
+            <Grid mt={7} templateColumns={["1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} gap={5}>
+              {passports.data.attributes.events.map(({ title, link }, index) => (
+                <CardPassport key={index} title={title} link={link} />
+              ))}
+            </Grid>
+          </Container>
+        </chakra.section>
+    </>
+  )
+}
+
+interface ArchiveProps {
+  passports: ApiResponse<EventPassport, Meta>
+}
+
+export const getServerSideProps: GetServerSideProps<ArchiveProps> = async () => {
+  const passports = await getEventPassports({ limit: 100 });
+
+  return {
+    props: { passports }
+  }
+};
