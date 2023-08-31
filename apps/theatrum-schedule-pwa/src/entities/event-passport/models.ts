@@ -1,8 +1,6 @@
 export type EventPassport = {
   id: number;
-  attributes: {
-    events: Passport[];
-  }
+  events: Passport[];
 }
 
 interface Passport {

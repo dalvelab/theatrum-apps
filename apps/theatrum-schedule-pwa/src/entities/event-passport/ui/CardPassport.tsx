@@ -21,7 +21,7 @@ export const CardPassport: React.FC<CardPassportProps> = ({ title, link }) => {
       >
         <Heading fontWeight="semibold" as="h4" fontSize="2xl">{title}</Heading>
         <Link href={link} target='_blank' referrerPolicy="no-referrer">
-          <Button colorScheme="green">Перейти</Button>
+          <Button bgColor="brand.200" color="white" _hover={{ bgColor: "brand.200", color: "white" }}>Перейти</Button>
         </Link>
       </Flex>
     </chakra.article>

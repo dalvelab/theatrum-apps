@@ -20,7 +20,7 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />
       </Head>
-      <chakra.section pt={10} pb={20} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
+      <chakra.section pt={10} pb={40} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">План репетиций и показов</Heading>
             <Flex mt={10} flexDir="column" gap={7}>

@@ -6,7 +6,7 @@ import { getEventPassports, CardPassport } from '@/entities';
 import type { EventPassport } from '@/entities';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 
-export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
   return (
     <>
       <Head>
@@ -17,11 +17,11 @@ export default function Arhive({ passports }: InferGetServerSidePropsType<typeof
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />
       </Head>
-      <chakra.section pt={10} pb={20} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
+      <chakra.section pt={10} pb={40} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">Паспорта спектаклей</Heading>
             <Grid mt={7} templateColumns={["1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} gap={5}>
-              {passports.data.attributes.events.map(({ title, link }, index) => (
+              {passports.data.events.map(({ title, link }, index) => (
                 <CardPassport key={index} title={title} link={link} />
               ))}
             </Grid>
