@@ -1,15 +1,29 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Container, Flex, Grid, Heading, chakra, Stack, Text } from '@chakra-ui/react';
+import { Container, Flex, Grid, Heading, chakra, Text } from '@chakra-ui/react';
 
-import { CardSchedule, getSchedule, getScheduleByDays } from '@/entities';
+import { CardSchedule, getScheduleArchive, ModalSchedule, getScheduleByDays } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import { getformatDateLocale, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 import { isEmptyArray } from '@/shared/utils/mics';
 
 export default function Arhive({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const scheduleGrid: ScheduleEvent[]  = [];
+  const [selectedEvent, setSelectedEvent] = useState<Pick<ScheduleEvent, 'attributes'>['attributes'] | undefined>(undefined);
+  const [isModalOpened, setModalOpened] = useState(false);
+
+  function handleModalClose() {
+    setModalOpened(false);
+    setSelectedEvent(undefined);
+  }
+
+  function handleModalOpen(data: Pick<ScheduleEvent, 'attributes'>['attributes']) {
+    setModalOpened(true);
+    setSelectedEvent(data);
+  }
+
+  const scheduleGrid = getScheduleByDays(schedule.data);
 
   return (
     <>
@@ -21,11 +35,26 @@ export default function Arhive({ schedule }: InferGetServerSidePropsType<typeof 
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />
       </Head>
+      <ModalSchedule isOpened={isModalOpened} onClose={() => handleModalClose()} scheduleEvent={selectedEvent} />
       <chakra.section pt={10} pb={20} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">Архив расписания</Heading>
             <Flex mt={10} flexDir="column" gap={7}>
                 {isEmptyArray(scheduleGrid) && <Text fontSize="2xl">Архив пока пуст</Text>}
+                {scheduleGrid.map((grid, index) => (
+                  <Flex flexDir="column" key={index}>
+                    <Heading as="h3" size="xl" fontWeight="medium">{getformatDateLocale(grid[0].attributes.date)}</Heading>
+                    <Grid 
+                      mt={6} 
+                      gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr"]} 
+                      gap={6}
+                    >
+                      {grid.map(({ id, attributes }) => (
+                        <CardSchedule key={id} data={attributes} time={getformatDateLocaleTime(attributes.date)} onClick={handleModalOpen} />
+                      ))}
+                    </Grid>
+                  </Flex>
+                ))}
             </Flex>
           </Container>
         </chakra.section>
@@ -38,7 +67,7 @@ interface ArchiveProps {
 }
 
 export const getServerSideProps: GetServerSideProps<ArchiveProps> = async () => {
-  const schedule = await getSchedule({ limit: 100 });
+  const schedule = await getScheduleArchive({ limit: 100 });
 
   return {
     props: { schedule }

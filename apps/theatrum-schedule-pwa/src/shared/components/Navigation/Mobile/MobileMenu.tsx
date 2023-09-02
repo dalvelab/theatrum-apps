@@ -19,7 +19,7 @@ export const MobileMenu = () => {
       left={0}
       pb={6}
       pt={3}
-      zIndex="toast"
+      zIndex={5}
       >
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="center" gap={8}>

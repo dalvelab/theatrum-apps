@@ -7,12 +7,21 @@ export type ScheduleEvent = {
     date: Date;
     location: string;
     type: ScheduleEventType;
-    people?: Person[];
+    people?: Actor[];
     additional_info: string;
   }
 }
 
-export type Person = {
-  name: string;
-  role: string;
+export type Actor = {
+  role?: string;
+  worker?: {
+    data: Worker;
+  };
+}
+
+export type Worker = {
+  id: number;
+  attributes: {
+    name: string;
+  }
 }

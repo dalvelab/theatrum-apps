@@ -1,14 +1,28 @@
 import Head from 'next/head';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useState } from 'react';
 import { Container, Flex, Grid, Heading, chakra, Stack, Text } from '@chakra-ui/react';
 
-import { CardSchedule, getSchedule, getScheduleByDays } from '@/entities';
+import { CardSchedule, getSchedule, getScheduleByDays, ModalSchedule } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 import { getformatDateLocale, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 
 export default function Home({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const scheduleGrid = getScheduleByDays(schedule.data);
+
+  const [selectedEvent, setSelectedEvent] = useState<Pick<ScheduleEvent, 'attributes'>['attributes'] | undefined>(undefined);
+  const [isModalOpened, setModalOpened] = useState(false);
+
+  function handleModalClose() {
+    setModalOpened(false);
+    setSelectedEvent(undefined);
+  }
+
+  function handleModalOpen(data: Pick<ScheduleEvent, 'attributes'>['attributes']) {
+    setModalOpened(true);
+    setSelectedEvent(data);
+  }
 
   return (
     <>
@@ -20,6 +34,7 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />
       </Head>
+      <ModalSchedule isOpened={isModalOpened} onClose={() => handleModalClose()} scheduleEvent={selectedEvent} />
       <chakra.section pt={10} pb={40} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">План репетиций и показов</Heading>
@@ -32,8 +47,8 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
                       gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr"]} 
                       gap={6}
                     >
-                      {grid.map(({ id, attributes: { title, type, date, location } }) => (
-                        <CardSchedule key={id} title={title} time={getformatDateLocaleTime(date)} type={type} location={location} />
+                      {grid.map(({ id, attributes }) => (
+                        <CardSchedule key={id} data={attributes} time={getformatDateLocaleTime(attributes.date)} onClick={handleModalOpen} />
                       ))}
                     </Grid>
                   </Flex>

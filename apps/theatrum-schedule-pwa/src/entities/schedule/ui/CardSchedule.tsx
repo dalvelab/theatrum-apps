@@ -1,25 +1,19 @@
 import { chakra, Flex, Badge, Stack, Heading, Text } from "@chakra-ui/react"
 import { Divider } from "@/shared/components";
-import { ScheduleEventType } from "../api";
+import { ScheduleEvent } from "../api";
+import { typeToSchemeMap } from '../model';
 
 interface CardScheduleProps {
-  title: string;
-  type: ScheduleEventType;
+  data: Pick<ScheduleEvent, 'attributes'>['attributes'];
+  onClick: (data: Pick<ScheduleEvent, 'attributes'>['attributes']) => void;
   time: string;
-  location: string;
 }
 
-const typeToSchemeMap: Record<ScheduleEventType, string> = {
-  'спектакль': 'blue',
-  'концерт': 'green',
-  'банкет': 'purple',
-  'репетиция': 'red',
-  'прочее': 'gray',
-}
+export const CardSchedule: React.FC<CardScheduleProps> = ({ data, onClick, time }) => {
+  const { title, type, location } = data;
 
-export const CardSchedule: React.FC<CardScheduleProps> = ({ time, title, type, location }) => {
   return (
-    <chakra.article>
+    <chakra.article onClick={() => onClick(data)}>
       <Flex 
         flexDir="column" 
         alignItems="flex-start"

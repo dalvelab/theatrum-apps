@@ -13,7 +13,7 @@ export const Navbar = () => {
       bgColor="white"
       top={0} 
       left={0} 
-      zIndex="toast"
+      zIndex={5}
       >
       <Container maxWidth="container.xl" h="full">
         <Flex w="full" h="full" justifyContent="flex-end" alignItems="center">
