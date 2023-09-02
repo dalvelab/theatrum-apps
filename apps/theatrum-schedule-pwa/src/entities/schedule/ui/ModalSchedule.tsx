@@ -40,18 +40,21 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
       );
     }
 
-    const { title, type, location, date, people, additional_info } = scheduleEvent;
+    const { title, type, location, date, people, additional_info, timeBadge } = scheduleEvent;
 
     return (
-      <Modal isOpen={isOpened} onClose={onClose} size={["full", "full", "6xl", "3xl", "3xl"]}>
-        <ModalOverlay />
+      <Modal isOpen={isOpened} onClose={onClose} size={["full", "full", "6xl", "3xl", "3xl"]} autoFocus={false}>
+        <ModalOverlay display={["none", "none", "none", "block", "block"]}/>
         <ModalContent>
-          <ModalHeader display="flex" flexDir="column" alignItems="flex-start" gap={2}>
-            <Badge variant='subtle' colorScheme={typeToSchemeMap[type]} p="4px 10px" borderRadius="md">{type}</Badge>
+          <ModalHeader pt={10} flexDir="column" alignItems="flex-start" gap={2}>
+            <Flex gap={2}>
+              <Badge variant='subtle' colorScheme={typeToSchemeMap[type]} p="4px 10px" borderRadius="md">{type}</Badge>
+              {timeBadge && (<Badge variant='subtle' colorScheme="cyan" p="4px 10px" borderRadius="md">время по ЕКБ</Badge>)}
+            </Flex>
             <Heading>{title}</Heading>
           </ModalHeader>
           <ModalCloseButton size="lg" />
-          <ModalBody pb={5}>
+          <ModalBody pb={10}>
             <Flex gap={2} flexDir="column">
               <Flex fontWeight={500} fontSize="xl" gap={2}>
                 <Text>Время:</Text>
@@ -73,8 +76,8 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
                 return (
                   <Flex key={index} mt={4} gap={2} flexDir="column">
                     <Flex fontSize="lg" gap={isNotVoid(workerName) ? 2 : 0}>
-                      <Text>{isNotVoid(workerName) ? `${workerName} - ` : ''}</Text>
-                      <Text>{isNotVoid(person.role) ? person.role : ''}</Text>
+                      <Text>{isNotVoid(person.role) ? `${person.role} - ` : ''}</Text>
+                      <Text>{isNotVoid(workerName) ? workerName : ''}</Text>
                     </Flex>
                     <Divider />
                   </Flex>

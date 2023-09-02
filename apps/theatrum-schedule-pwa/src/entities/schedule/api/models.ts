@@ -9,6 +9,7 @@ export type ScheduleEvent = {
     type: ScheduleEventType;
     people?: Actor[];
     additional_info: string;
+    timeBadge: boolean;
   }
 }
 

@@ -10,7 +10,7 @@ interface CardScheduleProps {
 }
 
 export const CardSchedule: React.FC<CardScheduleProps> = ({ data, onClick, time }) => {
-  const { title, type, location } = data;
+  const { title, type, location, timeBadge } = data;
 
   return (
     <chakra.article onClick={() => onClick(data)}>
@@ -25,7 +25,10 @@ export const CardSchedule: React.FC<CardScheduleProps> = ({ data, onClick, time 
         borderRadius="xl"
         cursor="pointer"
       >
-        <Badge variant='subtle' colorScheme={typeToSchemeMap[type]} p="4px 10px" borderRadius="md">{type}</Badge>
+        <Flex gap={2}>
+          <Badge variant='subtle' colorScheme={typeToSchemeMap[type]} p="4px 10px" borderRadius="md">{type}</Badge>
+          {timeBadge && (<Badge variant='subtle' colorScheme="cyan" p="4px 10px" borderRadius="md">время по ЕКБ</Badge>)}
+        </Flex>
         <Heading fontWeight="semibold" as="h4" fontSize="2xl">{title}</Heading>
         <Stack
           direction="row" divider={<Divider color="#171923" />} 
