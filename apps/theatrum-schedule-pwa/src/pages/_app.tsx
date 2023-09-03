@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { SessionProvider } from "next-auth/react"
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { GolosFont } from '@/shared/fonts';
 import { Navbar, MobileMenu } from '@/shared/components';
@@ -28,7 +29,7 @@ const sizes = {
 
 const theme = extendTheme({ ...sizes })
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
       <Head>
@@ -58,13 +59,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <ChakraProvider theme={theme}>
-        <Navbar />
-        <chakra.main mt={[0, 0, 0, 16, 16]}>
-          <Component {...pageProps} />
-        </chakra.main>
-        <MobileMenu />
-      </ChakraProvider>
+      <SessionProvider session={session}>
+        <ChakraProvider theme={theme}>
+          <Navbar />
+          <chakra.main mt={[0, 0, 0, 16, 16]}>
+            <Component {...pageProps} />
+          </chakra.main>
+          <MobileMenu />
+        </ChakraProvider>
+      </SessionProvider>
     </>
   )
 }

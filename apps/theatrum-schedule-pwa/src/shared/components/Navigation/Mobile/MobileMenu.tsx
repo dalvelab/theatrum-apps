@@ -1,10 +1,17 @@
 import { Link } from '@chakra-ui/next-js';
 import { chakra, Container, Flex, Text } from "@chakra-ui/react"
-import { CalendarIcon, EditIcon, SettingsIcon } from '@chakra-ui/icons';
+import { CalendarIcon, EditIcon, SettingsIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
+import { signOut, useSession } from 'next-auth/react';
 
 export const MobileMenu = () => {
   const router = useRouter();
+
+  const { status } = useSession();
+
+  if (status !== 'authenticated') {
+    return null
+  }
 
   return (
     <chakra.nav 
@@ -41,6 +48,10 @@ export const MobileMenu = () => {
                 <Text fontWeight="medium">Паспорта</Text>
               </Flex>
             </Link>
+            <Flex onClick={() => signOut()} flexDir="column" gap={1} alignItems="center">
+              <ExternalLinkIcon fontSize="xl" />
+              <Text fontSize="sm" fontWeight="medium">Выход</Text>
+            </Flex>
         </Flex>
       </Container>
     </chakra.nav>

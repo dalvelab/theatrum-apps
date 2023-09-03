@@ -10,7 +10,9 @@
         "DB_HOST",
         "NEXT_PUBLIC_FILES_ENDPOINT",
         "NEXT_PUBLIC_METRIKA",
-        "NEXT_PUBLIC_API_HOST"
+        "NEXT_PUBLIC_API_HOST",
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET"
       ]
     },
     "lint": {},

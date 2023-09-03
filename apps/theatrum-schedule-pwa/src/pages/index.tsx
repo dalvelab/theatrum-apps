@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useState } from 'react';
-import { Container, Flex, Grid, Heading, chakra, Stack, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { Container, Flex, Grid, Heading, Spinner, chakra } from '@chakra-ui/react';
 
 import { CardSchedule, getSchedule, getScheduleByDays, ModalSchedule } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
@@ -9,6 +11,15 @@ import type { ApiResponse, Meta } from '@/shared/models/api';
 import { getformatDateLocale, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 
 export default function Home({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status !== 'authenticated' && session.status !== 'loading') {
+      router.replace('/auth');
+    }
+  }, [router, session.status]);
+
   const scheduleGrid = getScheduleByDays(schedule.data);
 
   const [selectedEvent, setSelectedEvent] = useState<Pick<ScheduleEvent, 'attributes'>['attributes'] | undefined>(undefined);
@@ -22,6 +33,10 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
   function handleModalOpen(data: Pick<ScheduleEvent, 'attributes'>['attributes']) {
     setModalOpened(true);
     setSelectedEvent(data);
+  }
+
+  if (session.status !== 'authenticated') {
+    return <Spinner size="xl" />
   }
 
   return (

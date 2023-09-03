@@ -1,12 +1,28 @@
 import Head from 'next/head';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { Container, Grid, Heading, chakra, Spinner } from '@chakra-ui/react';
 
 import { getEventPassports, CardPassport } from '@/entities';
 import type { EventPassport } from '@/entities';
 import type { ApiResponse, Meta } from '@/shared/models/api';
 
 export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status !== 'authenticated'  && session.status !== 'loading') {
+      router.replace('/auth');
+    }
+  }, [router, session.status]);
+
+  if (session.status !== 'authenticated') {
+    return <Spinner size="xl" />
+  }
+
   return (
     <>
       <Head>
