@@ -11,7 +11,6 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   async function handleFormSubmit() {
     const res = await signIn('credentials', {
       identifier: email,

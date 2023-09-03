@@ -42,22 +42,23 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
         <title>Theatrum — корпоративное приложение</title>
+        <link rel="icon" href="/favicon.ico" />
 
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="/icons/favicon-16x16.png"
+          href="/icons/icon-16x16.png"
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="/icons/favicon-32x32.png"
+          href="/icons/icon-32x32.png"
           rel="icon"
           type="image/png"
           sizes="32x32"
         />
-        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
+        <meta name="theme-color" content="#FFFFFF" />
       </Head>
       <SessionProvider session={session}>
         <ChakraProvider theme={theme}>
