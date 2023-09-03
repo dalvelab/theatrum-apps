@@ -1,13 +1,15 @@
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router";
 import { useState } from 'react';
-import { chakra, Container, Flex, Heading, Input, FormControl, FormLabel, Button } from '@chakra-ui/react';
+import { chakra, Container, Flex, Heading, Input, FormControl, FormLabel, Button, useToast } from '@chakra-ui/react';
 
 export default function Auth() {
   const router = useRouter();
+  const toast = useToast()
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
 
   async function handleFormSubmit() {
     const res = await signIn('credentials', {
@@ -18,6 +20,24 @@ export default function Auth() {
 
     if (res?.ok) {
       router.replace('/');
+    } else if (res?.status === 401 || res?.status === 403) {
+      toast({
+        title: 'Произошла ошибка',
+        description: "Неверный логин или пароль",
+        status: 'error',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      })
+    } else {
+      toast({
+        title: 'Произошла ошибка',
+        description: "Попробуйте позже",
+        status: 'error',
+        duration: 2500,
+        position: 'top-right',
+        isClosable: true,
+      })
     }
   }
 
