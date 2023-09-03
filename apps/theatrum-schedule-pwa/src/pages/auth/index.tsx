@@ -1,5 +1,6 @@
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router";
+import Image from 'next/image';
 import { useState } from 'react';
 import { chakra, Container, Flex, Heading, Input, FormControl, FormLabel, Button, useToast } from '@chakra-ui/react';
 
@@ -55,7 +56,10 @@ export default function Auth() {
           borderColor="blackAlpha.100"
           borderRadius="xl"
         >
-          <Heading fontSize="3xl">Вход</Heading>
+          <chakra.div w="96px" h="96px" pos="relative" alignSelf="center">
+            <Image src="/icons/icon-96x96.png" fill alt="Три буквы THR"/>
+          </chakra.div>
+          <Heading mt={4} fontSize="3xl">Вход</Heading>
             <Flex w="full" flexDir="column" mt={5} gap={4}>
               <FormControl>
                 <FormLabel>Логин</FormLabel>
