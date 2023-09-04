@@ -28,7 +28,7 @@ export async function getScheduleArchive(params: getScheduleParams): Promise<Api
       pagination: {
         limit: params?.limit || 100,
       },
-      populate: ['people']
+      populate: ['people', 'people.worker']
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/corporate-schedule-archives?${query}`);
