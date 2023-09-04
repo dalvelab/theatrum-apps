@@ -14,7 +14,7 @@ export default function Arhive({ passports }: InferGetServerSidePropsType<typeof
   const router = useRouter();
 
   useEffect(() => {
-    if (session.status !== 'authenticated'  && session.status !== 'loading') {
+    if (session.status !== 'authenticated' && session.status !== 'loading') {
       router.replace('/auth');
     }
   }, [router, session.status]);
@@ -37,8 +37,8 @@ export default function Arhive({ passports }: InferGetServerSidePropsType<typeof
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">Паспорта спектаклей</Heading>
             <Grid mt={7} templateColumns={["1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]} gap={5}>
-              {passports.data.events.map(({ title, link }, index) => (
-                <CardPassport key={index} title={title} link={link} />
+              {passports.data.events.map(({ title, document }, index) => (
+                <CardPassport key={index} title={title} link={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${document.url}`} />
               ))}
             </Grid>
           </Container>

@@ -14,7 +14,6 @@ export async function getEventPassports(params: getEventPassportsParams): Promis
       pagination: {
         limit: params?.limit || 100,
       },
-      populate: ['events']
     }
   )
   const res = await fetch(`${process.env.DB_HOST}/corporate-event-passport?${query}`);

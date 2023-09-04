@@ -5,5 +5,9 @@ export type EventPassport = {
 
 interface Passport {
   title: string;
-  link: string;
+  document: {
+    id: number;
+    name: string;
+    url: string;
+  };
 }
