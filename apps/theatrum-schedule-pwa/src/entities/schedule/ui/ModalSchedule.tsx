@@ -19,6 +19,8 @@ import { typeToSchemeMap } from '../model';
 import { isNotVoid, isVoid } from '@/shared/utils/mics';
 import { getformatDateLocaleTime } from '@/shared/utils/formatDate';
 
+import styles from './styles.module.css';
+
 interface ModalScheduleProps {
   isOpened: boolean;
   onClose: () => void;
@@ -41,6 +43,8 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
     }
 
     const { title, type, location, date, people, additional_info, timeBadge } = scheduleEvent;
+
+    console.log(scheduleEvent);
 
     return (
       <Modal isOpen={isOpened} onClose={onClose} size={["full", "full", "6xl", "3xl", "3xl"]} autoFocus={false}>
@@ -85,7 +89,9 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
             })}
             {isNotVoid(additional_info) && additional_info !== "" && <Text mt={5} fontSize="2xl" fontWeight={600}>Комментарии</Text>}
             <chakra.div w="100%" fontSize="lg" pt={2}>
-              <ReactMarkdown>{additional_info}</ReactMarkdown>
+              <ReactMarkdown className={styles.description}>
+                {additional_info}
+              </ReactMarkdown>
             </chakra.div>
           </ModalBody>
         </ModalContent>
