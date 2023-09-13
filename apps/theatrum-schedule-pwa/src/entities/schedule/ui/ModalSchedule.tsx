@@ -12,14 +12,11 @@ import {
   Heading,
   Divider,
 } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown';
+import { Markdown } from 'ui';
 
 import { ScheduleEvent } from '../api';
+import { getformatDateLocaleTime, isNotVoid, isVoid } from 'platform';
 import { typeToSchemeMap } from '../model';
-import { isNotVoid, isVoid } from '@/shared/utils/mics';
-import { getformatDateLocaleTime } from '@/shared/utils/formatDate';
-
-import styles from './styles.module.css';
 
 interface ModalScheduleProps {
   isOpened: boolean;
@@ -43,8 +40,6 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
     }
 
     const { title, type, location, date, people, additional_info, timeBadge } = scheduleEvent;
-
-    console.log(scheduleEvent);
 
     return (
       <Modal isOpen={isOpened} onClose={onClose} size={["full", "full", "6xl", "3xl", "3xl"]} autoFocus={false}>
@@ -89,9 +84,7 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
             })}
             {isNotVoid(additional_info) && additional_info !== "" && <Text mt={5} fontSize="2xl" fontWeight={600}>Комментарии</Text>}
             <chakra.div w="100%" fontSize="lg" pt={2}>
-              <ReactMarkdown className={styles.description}>
-                {additional_info}
-              </ReactMarkdown>
+              <Markdown text={additional_info} />
             </chakra.div>
           </ModalBody>
         </ModalContent>

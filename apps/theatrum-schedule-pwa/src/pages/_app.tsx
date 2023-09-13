@@ -3,31 +3,11 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { SessionProvider } from "next-auth/react"
 import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
-import { GolosFont } from '@/shared/fonts';
+import { chakraTheatrumConfig } from 'ui';
+
 import { Navbar, MobileMenu } from '@/shared/components';
 
-const sizes = {
-  colors: {
-    brand: {
-      100: '#E9D5CD',
-      200: '#477A7B',
-      300: '#583D3E',
-      400: '#E6C7B3'
-    }
-  },
-  fonts: {
-    body: GolosFont.style.fontFamily,
-    heading: GolosFont.style.fontFamily,
-    mono: GolosFont.style.fontFamily,
-  },
-  sizes: {
-    container: {
-      xl: '1440px'
-    }
-  }
-}
-
-const theme = extendTheme({ ...sizes })
+const theme = extendTheme({ ...chakraTheatrumConfig })
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

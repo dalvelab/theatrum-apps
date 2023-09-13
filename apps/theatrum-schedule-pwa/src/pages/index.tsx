@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { Container, Flex, Grid, Heading, Spinner, chakra } from '@chakra-ui/react';
+import { getformatDateLocale, getformatDateLocaleTime } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
 
 import { CardSchedule, getSchedule, getScheduleByDays, ModalSchedule } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
-import type { ApiResponse, Meta } from '@/shared/models/api';
-import { getformatDateLocale, getformatDateLocaleTime } from '@/shared/utils/formatDate';
 
 export default function Home({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const session = useSession();

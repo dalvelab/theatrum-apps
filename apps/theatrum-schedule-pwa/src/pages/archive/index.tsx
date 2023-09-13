@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { Container, Flex, Grid, Heading, chakra, Text, Spinner } from '@chakra-ui/react';
+import { getformatDateLocale, getformatDateLocaleTime, isEmptyArray } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
+
 
 import { CardSchedule, getScheduleArchive, ModalSchedule, getScheduleByDays } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
-import type { ApiResponse, Meta } from '@/shared/models/api';
-import { getformatDateLocale, getformatDateLocaleTime } from '@/shared/utils/formatDate';
-import { isEmptyArray } from '@/shared/utils/mics';
 
 export default function Archive({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const session = useSession();

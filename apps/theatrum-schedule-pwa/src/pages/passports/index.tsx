@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { Container, Grid, Heading, chakra, Spinner } from '@chakra-ui/react';
+import type { ApiResponse, Meta } from 'platform';
 
 import { getEventPassports, CardPassport } from '@/entities';
 import type { EventPassport } from '@/entities';
-import type { ApiResponse, Meta } from '@/shared/models/api';
 
 export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
   const session = useSession();

@@ -1,5 +1,5 @@
 import { chakra, Flex, Badge, Stack, Heading, Text } from "@chakra-ui/react"
-import { Divider } from "@/shared/components";
+import { Divider } from "ui";
 import { ScheduleEvent } from "../api";
 import { typeToSchemeMap } from '../model';
 

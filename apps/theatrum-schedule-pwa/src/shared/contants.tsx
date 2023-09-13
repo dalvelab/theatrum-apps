@@ -1,1 +1,0 @@
-export const CANONICAL_DOMAIN = 'https://corporate.theatrum.center'

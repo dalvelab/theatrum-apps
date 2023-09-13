@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { chakra, Flex, Button, Stack, Heading, Text } from "@chakra-ui/react"
+import { chakra, Flex, Button, Heading } from "@chakra-ui/react"
 
 interface CardPassportProps {
   title: string;
