@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
+import { isNotVoid } from "platform";
+import type { ApiResponse, Meta } from "platform"
 
 import { FeedbackModal } from '@/entities/message';
 import { getFooter } from "@/entities/footer/api"
 import type { Footer as FooterType } from "@/entities/footer/models"
-import type { ApiResponse, Meta } from "@/shared/models/api"
-import { isNotVoid } from "@/shared/utils/mics";
 
 export const Footer = () => {
   const [footerData, setFooterData] = useState<null | ApiResponse<FooterType, Meta>>(null);

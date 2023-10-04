@@ -1,4 +1,4 @@
-import type { ApiResponse, Meta } from '@/shared/models/api';
+import type { ApiResponse, Meta } from 'platform';
 
 import { MessageResponse, Message } from './models';
 

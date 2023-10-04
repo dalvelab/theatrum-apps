@@ -2,15 +2,15 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { Button, Container, Grid, Heading, chakra, Text } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
+import type { ApiResponse, Meta } from 'platform';
+import { isNotVoid, isEmptyArray, isVoid } from 'platform';
 
 import { CardAfisha, CardNews } from '@/shared/components'
 import { getAfisha, getSlider  } from '@/entities/event/api';
 import { getNews  } from '@/entities/post/api';
-import type { Afisha, Slider } from '@/entities/event/models';
-import type { ApiResponse, Meta } from '@/shared/models/api';
-import type { News } from '@/entities/post/models';
 import { WelcomeSlider } from '@/widgets/Slider';
-import { isNotVoid, isEmptyArray, isVoid } from '@/shared/utils/mics';
+import type { Afisha, Slider } from '@/entities/event/models';
+import type { News } from '@/entities/post/models';
 
 export default function Home({ afisha, news, slider }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const events = isNotVoid(afisha.data) && !isEmptyArray(afisha.data) ? afisha.data.slice(0, 6) : [];

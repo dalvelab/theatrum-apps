@@ -2,13 +2,13 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Image from "next/image"
 import { useState } from "react";
 import { chakra, Container, Button, Flex, Link, Heading, Text  } from "@chakra-ui/react"
+import { isNotVoid, isVoid } from 'platform';
+import type { ApiResponse, Meta } from "platform";
 
 import { getAboutPage, SceneModal, EmptyAbout } from "@/entities/about";
 import type { AboutPage } from "@/entities/about";
-import type { ApiResponse, Meta } from "@/shared/models/api";
 import { SEO } from '@/shared/components';
 import { BookingModal } from '@/entities/message';
-import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
 export default function AfishaDetails({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedModal, setModalOpened] = useState(false);

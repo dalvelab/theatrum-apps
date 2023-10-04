@@ -1,16 +1,13 @@
 import Image from 'next/image';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Link, chakra, Heading, Container, Flex, Text, Stack } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown';
+import { Link, chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
+import { Markdown } from 'ui';
+import { getGenetiveRusMonth, isNotVoid } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
 
-import type { ApiResponse, Meta } from '@/shared/models/api';
-import type { News } from '@/entities/post/models';
 import { getSinglelNews } from '@/entities/post/api';
-import { getGenetiveRusMonth } from '@/shared/utils/formatDate';
-import { isNotVoid } from '@/shared/utils/mics';
 import { SEO } from '@/shared/components';
-
-import styles from './styles.module.css';
+import type { News } from '@/entities/post/models';
 
 export default function NewsDetails({ post } : InferGetServerSidePropsType<typeof getServerSideProps>) {
 
@@ -63,7 +60,7 @@ export default function NewsDetails({ post } : InferGetServerSidePropsType<typeo
             </Flex>
           </Flex>
           <chakra.div mt={[5, 6, 7, 7, 7]} w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
-            <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
+            <Markdown text={description} />
           </chakra.div>
         </Container>
       </chakra.main>

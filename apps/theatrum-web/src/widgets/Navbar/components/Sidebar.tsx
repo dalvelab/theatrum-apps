@@ -33,6 +33,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onClose, isOpen }) => {
         <Link href="/afisha" onClick={onClose}>
           <Text>Афиша</Text>
         </Link>
+        <Link href="/season" onClick={onClose}>
+          <Text>Сезон Fazioli</Text>
+        </Link>
         <Link href="/perfomances" onClick={onClose}>
           <Text>Спектакли</Text>
         </Link>

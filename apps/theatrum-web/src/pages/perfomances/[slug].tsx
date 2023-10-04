@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown';
+import { Markdown } from 'ui';
+import { isNotVoid } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
+import { Badge } from 'ui';
 
 import { getSinglelPerformance } from '@/entities/event/api';
-import type { ApiResponse, Meta } from '@/shared/models/api';
-import type { Performance } from '@/entities/event/models';
 import { SwipeGallery, Roles } from '@/entities/event';
+import type { Performance } from '@/entities/event/models';
 
-import { Badge, SEO } from '@/shared/components';
-import { isNotVoid } from '@/shared/utils/mics';
+import { SEO } from '@/shared/components';
 
 import styles from './styles.module.css';
 
@@ -63,14 +64,16 @@ export default function PerfomanceDetails({ performance } : InferGetServerSidePr
             <Flex mt={8} justifyContent="space-between" gap={10} flexDir={["column", "column", "column", "row", "row"]}>
               <Flex flexDir="column" minW={["100%", "100%", "380px", "380px", "380px"]}>
                 <chakra.div mt={premiere ? 6 : 0} w="100%" fontSize="lg">
-                  <chakra.li listStyleType="none" display="flex" gap={3} alignItems="center">
+                  <chakra.li display="flex" gap={3} alignItems="center">
                     Возрастное ограничение: <Badge text={age_limit.toString() + "+"} />
                   </chakra.li>
-                  <ReactMarkdown className={styles.properties}>{properties}</ReactMarkdown>
+                  <chakra.div className={styles.properties}>
+                    <Markdown text={properties} />                    
+                  </chakra.div>
                 </chakra.div>
               </Flex>
               <chakra.div w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
-                <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
+                <Markdown text={description} />
               </chakra.div>
             </Flex>
           </Container>

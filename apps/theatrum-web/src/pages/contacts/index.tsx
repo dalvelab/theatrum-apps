@@ -3,14 +3,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { Button, chakra, Container, Heading, Flex, Link, Text } from '@chakra-ui/react';
+import { isNotVoid, isVoid } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
 
 import { getContacts } from '@/entities/contact/api';
 import { EmptyContacts } from '@/entities/contact/ui';
 import type { Contacts } from '@/entities/contact/models';
-import type { ApiResponse, Meta } from '@/shared/models/api';
 import { FeedbackModal } from '@/entities/message';
 import { Property, SEO } from '@/shared/components';
-import { isNotVoid, isVoid } from '@/shared/utils/mics';
 
 export default function Contacts({ contact }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);

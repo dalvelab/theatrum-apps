@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
 import { Heading, Flex, Text, Stack } from "@chakra-ui/react"
+import { Badge, Divider } from 'ui';
 
 import { Event } from "@/entities/event/models";
-import { Badge, Divider } from "@/shared/components"
-import { formatAfishaDays } from "@/shared/utils/formatDate";
-import { isNotVoid } from '@/shared/utils/mics';
+import { formatAfishaDays, isNotVoid } from 'platform';
 
 interface SlideProps {
   event: Event['attributes'];

@@ -1,5 +1,7 @@
 import type { StrapiImage } from '@/shared/models/image';
 
+export type Season = 'none' | 'fazioli';
+
 export type Event = {
   id: number;
   attributes: {
@@ -29,6 +31,7 @@ export type Event = {
     promoted_events: {
       data: Afisha[];
     };
+    season?: Season;
   }
 }
 

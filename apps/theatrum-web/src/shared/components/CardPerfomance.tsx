@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { Link } from '@chakra-ui/next-js';
 import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react"
+import { Badge } from 'ui';
 
 import { Performance } from '@/entities/event/models';
-
-import { Badge } from './Badge';
 
 interface CardPerfomanceProps {
   perfomance: Performance;

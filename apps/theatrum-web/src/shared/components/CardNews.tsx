@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import removeMd from 'remove-markdown';
 import { chakra, Flex, Heading, LinkOverlay, LinkBox, Text } from "@chakra-ui/react"
+import { getGenetiveRusMonth } from 'platform';
 
 import { News } from '@/entities/post/models';
 
-import { getGenetiveRusMonth } from '../utils/formatDate';
 
 interface CardNewsProps {
   post: News;

@@ -1,6 +1,5 @@
 import qs from 'qs';
-
-import type { ApiResponse, Meta } from '@/shared/models/api';
+import type { ApiResponse, Meta } from 'platform';
 
 import { Footer } from './models';
 

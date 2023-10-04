@@ -1,13 +1,12 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react"
 import { useState } from 'react';
+import { isEmptyArray, isVoid } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
 
 import { CardPerfomance, SEO } from '@/shared/components';
-import { ApiResponse } from '@/shared/models/api';
 import { getPerformances } from '@/entities/event/api';
 import type { Performance } from '@/entities/event/models';
-import type { Meta } from '@/shared/models/api';
-import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
 export default function Perfomances({ perfomances }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [filter, setFilter] = useState(false);

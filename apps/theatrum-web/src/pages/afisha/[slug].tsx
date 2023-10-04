@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Button, chakra, Heading, Container, Flex, Text, Stack, Grid } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown';
+import { Markdown } from 'ui';
+import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime, isNotVoid } from "platform"
+import type { ApiResponse, Meta } from 'platform';
+import { Badge, Divider } from 'ui';
 
 import { getSinglelAfisha } from '@/entities/event/api';
-import type { ApiResponse, Meta } from '@/shared/models/api';
 import type { Afisha } from '@/entities/event/models';
 import { YAScript, SwipeGallery, Roles } from '@/entities/event';
 import { SlideContent } from '@/widgets/Slider';
-import { Badge, Divider, SEO } from '@/shared/components';
-import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime } from '@/shared/utils/formatDate';
-import { isNotVoid } from "@/shared/utils/mics"
+import { SEO } from '@/shared/components';
 
 import styles from './styles.module.css';
 
@@ -150,11 +150,13 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
                   <chakra.li listStyleType="none" display="flex" gap={3} alignItems="center">
                     Возрастное ограничение: <Badge text={age_limit.toString() + "+"} />
                   </chakra.li>
-                  <ReactMarkdown className={styles.properties}>{properties}</ReactMarkdown>
+                  <chakra.div className={styles.properties}>
+                    <Markdown text={properties} />                    
+                  </chakra.div>
                 </chakra.div>
               </Flex>
               <chakra.div w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
-                <ReactMarkdown className={styles.description}>{description}</ReactMarkdown>
+                <Markdown text={description} />
               </chakra.div>
             </Flex>
           </Container>

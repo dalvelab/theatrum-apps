@@ -71,6 +71,7 @@ export const Navbar = () => {
           </Link>
           <Flex gap={8} display={['none', 'none', 'none', 'flex', 'flex']} color={scrolled || notWelcomePage ? 'brand.300' : 'brand.100'}>
             <NavbarLink href='/afisha' text='Афиша' scrolled={scrolled || notWelcomePage} />
+            <NavbarLink href='/season' text='Сезон Fazioli' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/perfomances' text='Спектакли' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/about' text='О театре' scrolled={scrolled || notWelcomePage} />
             <NavbarLink href='/news' text='Новости' scrolled={scrolled || notWelcomePage} />

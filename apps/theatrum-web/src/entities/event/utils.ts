@@ -1,6 +1,6 @@
-import { isVoid } from '@/shared/utils/mics';
+import { isVoid, getformatDateLocale } from 'platform';
+
 import type { Afisha } from './models';
-import { getformatDateLocale } from '@/shared/utils/formatDate';
 
 // Функция сортирует мероприятия в Афише в зависимости от выбранного месяца 
 export function getTicketsByMonth(afisha: Afisha[], filter?: string | string[]): Afisha[] {
@@ -10,5 +10,5 @@ export function getTicketsByMonth(afisha: Afisha[], filter?: string | string[]):
 
   return afisha
   .filter((event) => event.attributes.tickets
-  .some((ticket) => getformatDateLocale(ticket.date).split(',').toString().substring(3, 5) === filter))
+  .some((ticket) =>  getformatDateLocale(ticket.date).split(',').toString().substring(3, 5) === filter))
 }

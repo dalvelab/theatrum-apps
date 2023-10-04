@@ -1,22 +1,33 @@
 import qs from 'qs';
+import type { ApiResponse, Meta } from 'platform';
 
-import type { ApiResponse, Meta } from '@/shared/models/api';
-
-import { Afisha, Performance, Slider } from './models';
+import { Afisha, Performance, Slider, Season } from './models';
 
 interface getAfishaParams {
   limit?: number;
+  season?: Season;
 }
 
 export async function getAfisha(params: getAfishaParams): Promise<ApiResponse<Afisha[], Meta>> {
   const query = qs.stringify(
     {
       pagination: {
-        limit: params?.limit || 100,
+        limit: params.limit || 100,
+      },
+      filters: {
+        event: {
+          season: {
+            $eq: params?.season
+          }
+        }
       },
       populate: ['event', 'event.banner', 'event.meta', 'tickets']
+    },
+    {
+      encodeValuesOnly: true, // prettify URL
     }
   )
+
   const res = await fetch(`${process.env.DB_HOST}/afishas?${query}`);
 
   return res.json()
@@ -57,7 +68,11 @@ export async function getSlider(): Promise<ApiResponse<Slider, Meta>> {
   return res.json();
 }
 
-export async function getPerformances(params: getAfishaParams): Promise<ApiResponse<Performance[], Meta>> {
+interface getPerformancesParams {
+  limit?: number;
+}
+
+export async function getPerformances(params: getPerformancesParams): Promise<ApiResponse<Performance[], Meta>> {
   const query = qs.stringify(
     {
       pagination: {

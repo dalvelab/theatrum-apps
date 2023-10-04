@@ -1,12 +1,10 @@
 import Image from 'next/image';
 import { Link } from '@chakra-ui/next-js';
 import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
+import { formatAfishaDays } from "platform"
+import { Badge, Divider } from "ui"
 
-import { Divider } from "./Divider"
 import { Afisha } from '@/entities/event/models';
-import { formatAfishaDays } from "@/shared/utils/formatDate"
-
-import { Badge } from './Badge';
 
 interface CardAfishaProps {
   afisha: Afisha;

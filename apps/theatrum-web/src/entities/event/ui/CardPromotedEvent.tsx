@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { Link } from '@chakra-ui/next-js';
 import { Button, chakra, Flex, Text, Heading, Stack } from "@chakra-ui/react"
-
-import { formatAfishaDays } from "@/shared/utils/formatDate"
-import { Badge, Divider } from '@/shared/components';
+import { formatAfishaDays } from "platform"
+import { Badge, Divider } from "ui";
 
 interface CardPromotedEvent {
   title: string;

@@ -2,13 +2,12 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react"
+import { isEmptyArray, isVoid } from 'platform';
+import type { ApiResponse, Meta } from 'platform';
 
 import { CardNews, SEO } from '@/shared/components';
-import { ApiResponse } from '@/shared/models/api';
 import { getNews } from '@/entities/post/api';
 import type { News } from '@/entities/post/models';
-import type { Meta } from '@/shared/models/api';
-import { isEmptyArray, isVoid } from '@/shared/utils/mics';
 
 export default function News({ news }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { query, push } = useRouter()

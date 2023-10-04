@@ -2,15 +2,15 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react"
+import { isEmptyArray } from 'platform';
+import { getformatDateLocale, rusMonths } from 'platform';
+
+import type { ApiResponse, Meta } from 'platform';
 
 import { CardAfisha, SEO } from '@/shared/components';
-import { ApiResponse } from '@/shared/models/api';
 import { getAfisha } from '@/entities/event/api';
 import { getTicketsByMonth } from '@/entities/event/utils';
 import type { Afisha } from '@/entities/event/models';
-import type { Meta } from '@/shared/models/api';
-import { getformatDateLocale, rusMonths } from '@/shared/utils/formatDate';
-import { isEmptyArray } from '@/shared/utils/mics';
 
 import styles from './styles.module.css';
 
@@ -30,7 +30,7 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
 
   const ticketMonths = afisha.data
     .map((event) => event.attributes.tickets
-    .map((ticket) => getformatDateLocale(ticket.date).split(',')[0].toString().substring(3, 5)))
+    .map((ticket) => getformatDateLocale(ticket.date).toString().substring(3, 5)))
     .flat();
   
   const uniqueTicketMonths = new Set<string>();
@@ -81,7 +81,7 @@ export default function Afisha({ afisha }: InferGetServerSidePropsType<typeof ge
               </chakra.button>
               ))}
             </Flex>
-              {!data || data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Афиша пока что пуста</Text>}
+              {!data || data.length === 0 && <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>Раздел пока что пуст</Text>}
               <Grid gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]} mt={10} gap={[6, 6, 6, 10, 10]} pb={20}>
                 {data.map((event) => (
                   <CardAfisha key={event.id} afisha={event} />

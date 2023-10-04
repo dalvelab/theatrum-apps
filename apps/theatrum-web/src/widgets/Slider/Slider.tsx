@@ -3,15 +3,14 @@ import Link from "next/link"
 import { Button, Container, Flex, chakra } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper";
+import { formatAfishaDays, isVoid, isEmptyArray } from "platform";
 
 import type { Slider } from "@/entities/event/models"
-import { formatAfishaDays } from "@/shared/utils/formatDate"
 import { EmptySlide } from './EmptySlide';
 import { SlideContent } from './SlideContent';
 
 import 'swiper/css';
 import "swiper/css/pagination";
-import { isVoid, isEmptyArray } from "@/shared/utils/mics";
 
 interface WelcomeSliderProps {
   slider: Slider;
