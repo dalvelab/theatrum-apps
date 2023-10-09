@@ -11,9 +11,8 @@ import type { News } from '@/entities/post/models';
 
 export default function NewsDetails({ post } : InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-  const { image, title, description, createdAt, source } = post.data.attributes;
+  const { image, title, description, source } = post.data.attributes;
 
-  const date = createdAt.toString()
   const publish_date = isNotVoid(source) && isNotVoid(source.publish_date) ? source?.publish_date.toString() : '';
 
   return (
@@ -41,9 +40,6 @@ export default function NewsDetails({ post } : InferGetServerSidePropsType<typeo
                 />
             </chakra.div>
             <Flex flexDir="column" gap={3}>
-              <Text color="brand.300" fontSize="lg">
-              {`${Number(date.substring(8, 10))} ${getGenetiveRusMonth(Number(date.substring(5, 7)))}, ${date.substring(0, 4)}`}
-              </Text>
               <Heading as="h1" fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]} fontWeight="medium" color="gray.900">{title}</Heading>
               {isNotVoid(source) && (
                 <Text fontSize="sm">

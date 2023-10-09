@@ -18,7 +18,12 @@
 
 .description blockquote {
   margin-top: 16px;
+  margin-left: 12px;
   position: relative;
+}
+
+.description blockquote p {
+  margin-left: 8px;
 }
 
 .description blockquote::before {

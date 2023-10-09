@@ -13,9 +13,7 @@ interface CardNewsProps {
 
 export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
   const { id } = post;
-  const { title, description, image, createdAt, slug } = post.attributes;
-
-  const date = createdAt.toString()
+  const { title, description, image, slug } = post.attributes;
 
   return (
     <LinkBox as="article">
@@ -35,9 +33,6 @@ export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
             </LinkOverlay>
           </Heading>
           <Text noOfLines={3} mt={3}>{removeMd(description)}</Text>
-          <Text color="brand.300" alignSelf="flex-end" mt={3} fontSize="sm">
-            {`${Number(date.substring(8, 10))} ${getGenetiveRusMonth(Number(date.substring(5, 7)))}, ${date.substring(0, 4)}`}
-          </Text>
         </Flex>
       </Flex>
     </LinkBox>
