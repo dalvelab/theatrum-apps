@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { Container, Grid, Heading, chakra, Spinner } from '@chakra-ui/react';
 import type { ApiResponse, Meta } from 'platform';
 
+import { Loader } from '@/components';
 import { getEventPassports, CardPassport } from '@/entities';
 import type { EventPassport } from '@/entities';
 
@@ -20,7 +21,7 @@ export default function Arhive({ passports }: InferGetServerSidePropsType<typeof
   }, [router, session.status]);
 
   if (session.status !== 'authenticated') {
-    return <Spinner size="xl" />
+    return <Loader />
   }
 
   return (

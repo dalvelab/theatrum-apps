@@ -9,6 +9,7 @@ import type { ApiResponse, Meta } from 'platform';
 
 import { CardSchedule, getSchedule, getScheduleByDays, ModalSchedule } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
+import { Loader } from '@/components';
 
 export default function Home({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const session = useSession();
@@ -36,7 +37,7 @@ export default function Home({ schedule }: InferGetServerSidePropsType<typeof ge
   }
 
   if (session.status !== 'authenticated') {
-    return <Spinner size="xl" />
+    return <Loader />
   }
 
   return (

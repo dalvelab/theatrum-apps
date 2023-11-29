@@ -7,7 +7,7 @@ export function getScheduleByDays(schedule: ScheduleEvent[]) {
   for (let i = 0; i < schedule.length; i++) {
     const date = schedule[i].attributes.date.toString().slice(0, 10);
 
-    if(!dates.includes(date)) {
+    if (!dates.includes(date)) {
       dates.push(date);
       scheduleByDays.push([schedule[i]]);
     } else {

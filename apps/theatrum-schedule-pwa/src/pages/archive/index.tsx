@@ -10,6 +10,7 @@ import type { ApiResponse, Meta } from 'platform';
 
 import { CardSchedule, getScheduleArchive, ModalSchedule, getScheduleByDays } from '@/entities';
 import type { ScheduleEvent } from '@/entities';
+import { Loader } from '@/components';
 
 export default function Archive({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const session = useSession();
@@ -37,8 +38,10 @@ export default function Archive({ schedule }: InferGetServerSidePropsType<typeof
   const scheduleGrid = getScheduleByDays(schedule.data);
 
   if (session.status !== 'authenticated') {
-    return <Spinner size="xl" />
+    return <Loader />
   }
+
+  console.log(scheduleGrid)
 
   return (
     <>

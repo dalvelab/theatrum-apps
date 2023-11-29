@@ -35,7 +35,7 @@ export const SlideContent: React.FC<SlideProps> = ({ children, event, formattedD
           <Text lineHeight={1}>{formattedDate[0].date}</Text>
           <Text lineHeight={1}>{formattedDate[0].month}</Text>
         </Flex>}
-        {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time}</Text>}
+        {formattedDate.length === 1 && isNotVoid(formattedDate[0].time) && <Text lineHeight={1}>{formattedDate[0].time?.replace(' ', ', ')}</Text>}
         {formattedDate.length > 1 && (
           <Stack divider={<Divider type='dot' />} flexDirection="row" gap={[2, 3]} alignItems="center">
             {formattedDate.map(({ date, month }, index) => 
