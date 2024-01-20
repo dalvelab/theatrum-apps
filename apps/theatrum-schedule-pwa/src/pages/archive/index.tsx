@@ -2,17 +2,16 @@ import Head from 'next/head';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { Container, Flex, Grid, Heading, chakra, Text, Spinner } from '@chakra-ui/react';
-import { getformatDateLocale, getformatDateLocaleTime, isEmptyArray } from 'platform';
+import { useEffect } from 'react';
+import { Link } from '@chakra-ui/next-js';
+import { Container, Flex, Heading, chakra, Button } from '@chakra-ui/react';
+import { rusMonths } from 'platform';
 import type { ApiResponse, Meta } from 'platform';
 
-
-import { CardSchedule, getScheduleArchive, ModalSchedule, getScheduleByDays } from '@/entities';
-import type { ScheduleEvent } from '@/entities';
+import { getArchivedScheduleMonths } from '@/entities';
 import { Loader } from '@/components';
 
-export default function Archive({ schedule }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Archive({ dates }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const session = useSession();
   const router = useRouter();
 
@@ -22,26 +21,9 @@ export default function Archive({ schedule }: InferGetServerSidePropsType<typeof
     }
   }, [router, session.status]);
 
-  const [selectedEvent, setSelectedEvent] = useState<Pick<ScheduleEvent, 'attributes'>['attributes'] | undefined>(undefined);
-  const [isModalOpened, setModalOpened] = useState(false);
-
-  function handleModalClose() {
-    setModalOpened(false);
-    setSelectedEvent(undefined);
-  }
-
-  function handleModalOpen(data: Pick<ScheduleEvent, 'attributes'>['attributes']) {
-    setModalOpened(true);
-    setSelectedEvent(data);
-  }
-
-  const scheduleGrid = getScheduleByDays(schedule.data);
-
   if (session.status !== 'authenticated') {
     return <Loader />
   }
-
-  console.log(scheduleGrid)
 
   return (
     <>
@@ -53,26 +35,35 @@ export default function Archive({ schedule }: InferGetServerSidePropsType<typeof
         <meta property="og:image" content="/bage.png" />
         <link rel="canonical" href="https://corporate.theatrum.center" />
       </Head>
-      <ModalSchedule isOpened={isModalOpened} onClose={() => handleModalClose()} scheduleEvent={selectedEvent} />
       <chakra.section pt={10} pb={20} pos="relative" bgColor="white" position="relative" h="auto" minH="100vh">
           <Container maxWidth="container.xl" h="auto" display="flex" flexDir="column">
             <Heading as="h2">Архив расписания</Heading>
-            <Flex mt={10} flexDir="column" gap={7}>
-                {isEmptyArray(scheduleGrid) && <Text fontSize="2xl">Архив пока пуст</Text>}
-                {scheduleGrid.map((grid, index) => (
-                  <Flex flexDir="column" key={index}>
-                    <Heading as="h3" size="xl" fontWeight="medium">{getformatDateLocale(grid[0].attributes.date)}</Heading>
-                    <Grid 
-                      mt={6} 
-                      gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr", "1fr 1fr 1fr"]} 
-                      gap={6}
+            <Flex mt={10} gap={7} flexWrap="wrap">
+              {dates.data.map((date) => {
+                const monthIndex = Number(date.split('-')[0]);
+                const year = date.split('-')[1];
+
+                return (
+                  <chakra.article key={date}>
+                    <Flex 
+                      minW="300px"
+                      flexDir="column" 
+                      alignItems="flex-start"
+                      gap={4} 
+                      boxShadow="0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1)" 
+                      p={5} 
+                      border="1px solid"
+                      borderColor="blackAlpha.100"
+                      borderRadius="xl"
                     >
-                      {grid.map(({ id, attributes }) => (
-                        <CardSchedule key={id} data={attributes} time={getformatDateLocaleTime(attributes.date)} onClick={handleModalOpen} />
-                      ))}
-                    </Grid>
-                  </Flex>
-                ))}
+                      <Heading fontWeight="semibold" as="h4" fontSize="2xl">{rusMonths[monthIndex - 1]} {year}</Heading>
+                      <Link href={`/archive/${date}`}>
+                        <Button>Перейти</Button>
+                      </Link>
+                    </Flex>
+                  </chakra.article>
+                )
+              })}
             </Flex>
           </Container>
         </chakra.section>
@@ -81,13 +72,13 @@ export default function Archive({ schedule }: InferGetServerSidePropsType<typeof
 }
 
 interface ArchiveProps {
-  schedule: ApiResponse<ScheduleEvent[], Meta>
+  dates: ApiResponse<string[], Meta>
 }
 
 export const getServerSideProps: GetServerSideProps<ArchiveProps> = async () => {
-  const schedule = await getScheduleArchive({ limit: 100 });
+  const dates = await getArchivedScheduleMonths();
 
   return {
-    props: { schedule }
+    props: { dates }
   }
 };

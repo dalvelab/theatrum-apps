@@ -33,11 +33,11 @@ export async function getAfisha(params: getAfishaParams): Promise<ApiResponse<Af
   return res.json()
 }
 
-interface GetSinglelAfisha {
+interface GetSingleAfisha {
   id?: string;
 }
 
-export async function getSinglelAfisha(params: GetSinglelAfisha): Promise<ApiResponse<Afisha, Meta>> {
+export async function getSingleAfisha(params: GetSingleAfisha): Promise<ApiResponse<Afisha, Meta>> {
   const query = qs.stringify(
     {
       populate: [

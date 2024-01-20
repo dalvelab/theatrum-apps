@@ -6,7 +6,7 @@ import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime, isNotVo
 import type { ApiResponse, Meta } from 'platform';
 import { Badge, Divider } from 'ui';
 
-import { getSinglelAfisha } from '@/entities/event/api';
+import { getSingleAfisha } from '@/entities/event/api';
 import type { Afisha } from '@/entities/event/models';
 import { YAScript, SwipeGallery, Roles } from '@/entities/event';
 import { SlideContent } from '@/widgets/Slider';
@@ -196,7 +196,7 @@ interface IProps {
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
-  const afisha = await getSinglelAfisha({ id: params?.slug?.toString().split('-')[0] })
+  const afisha = await getSingleAfisha({ id: params?.slug?.toString().split('-')[0] })
 
   return {
     props: { afisha }

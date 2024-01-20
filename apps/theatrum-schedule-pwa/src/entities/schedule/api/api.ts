@@ -22,7 +22,18 @@ export async function getSchedule(params: getScheduleParams): Promise<ApiRespons
   return res.json()
 }
 
-export async function getScheduleArchive(params: getScheduleParams): Promise<ApiResponse<ScheduleEvent[], Meta>> {
+export async function getArchivedScheduleMonths(): Promise<ApiResponse<string[], Meta>> {
+  const res = await fetch(`${process.env.DB_HOST}/corporate-schedule-archives`);
+
+  return res.json();
+}
+
+interface getArchivedScheduleByMonthParams {
+  id: string;
+  limit?: number;
+}
+
+export async function getArchivedScheduleByMonth(params: getArchivedScheduleByMonthParams): Promise<ApiResponse<ScheduleEvent[], Meta>> {
   const query = qs.stringify(
     {
       pagination: {
@@ -31,7 +42,7 @@ export async function getScheduleArchive(params: getScheduleParams): Promise<Api
       populate: ['people', 'people.worker']
     }
   )
-  const res = await fetch(`${process.env.DB_HOST}/corporate-schedule-archives?${query}`);
+  const res = await fetch(`${process.env.DB_HOST}/corporate-schedule-archives/${params.id}?${query}`);
 
   return res.json()
 }
