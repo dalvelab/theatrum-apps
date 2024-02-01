@@ -8,12 +8,10 @@ import type { ApiResponse, Meta } from "platform";
 import { getAboutPage, SceneModal, EmptyAbout } from "@/entities/about";
 import type { AboutPage } from "@/entities/about";
 import { SEO } from '@/shared/components';
-import { BookingModal } from '@/entities/message';
 
 export default function AfishaDetails({ page }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedModal, setModalOpened] = useState(false);
   const [selectedScene, setSelectedScene] = useState<number | null>(null);
-  const [openedBookingModal, setOpenedBookingModal] = useState(false);
 
   if (isVoid(page.data)) {
     return <EmptyAbout />
@@ -44,9 +42,6 @@ export default function AfishaDetails({ page }: InferGetServerSidePropsType<type
             onClose={() => setModalOpened(false)} 
           />
         }
-        {openedBookingModal && (
-          <BookingModal isOpened={openedBookingModal} onClose={() => setOpenedBookingModal(false)} />
-        )}
         <chakra.section pt={10} pb={20} pos="relative" position="relative" h="auto">
           <Container maxWidth="container.xl" h="340px" display="flex" justifyContent="center" alignItems="center" pos="relative">
             <chakra.div 
@@ -92,16 +87,17 @@ export default function AfishaDetails({ page }: InferGetServerSidePropsType<type
                     gap={4}>
                     <Text textAlign="justify">{block.text}</Text>
                     {block.button === 'table_booking' && (
+                      <Link href="https://cateringprime.ru/teatrum" target='_blank'>
                       <Button 
                         size="lg" 
                         bg="brand.300" 
                         _hover={{ bgColor: "#69494a" }} 
                         color="white" 
                         fontWeight="normal"
-                        onClick={() => setOpenedBookingModal(true)}
                         >
                           Забронировать стол
                         </Button>
+                        </Link>
                     )}
                   </Flex>
                   <chakra.div 
