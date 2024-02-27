@@ -41,6 +41,8 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
 
     const { title, type, location, date, people, additional_info, timeBadge } = scheduleEvent;
 
+    console.log(people);
+
     return (
       <Modal isOpen={isOpened} onClose={onClose} size={["full", "full", "6xl", "3xl", "3xl"]} autoFocus={false}>
         <ModalOverlay display={["none", "none", "none", "block", "block"]}/>
@@ -68,9 +70,9 @@ export const ModalSchedule: React.FC<ModalScheduleProps> = ({ isOpened, onClose,
               </Flex>
               <Divider />
             </Flex>
-            {isNotVoid(people) && people?.length > 0 && <Text mt={5} fontSize="2xl" fontWeight={600}>Состав</Text>}
+            {isNotVoid(people) && people.length > 0 && <Text mt={5} fontSize="2xl" fontWeight={600}>Состав</Text>}
             {people?.map((person, index) => {
-                const workerName = person.worker?.data?.attributes.name;
+                const workerName = person.worker?.name;
               
                 return (
                   <Flex key={index} mt={4} gap={2} flexDir="column">

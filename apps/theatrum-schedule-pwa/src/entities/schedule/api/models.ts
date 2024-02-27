@@ -15,14 +15,10 @@ export type ScheduleEvent = {
 
 export type Actor = {
   role?: string;
-  worker?: {
-    data: Worker;
-  };
+  worker?: Worker;
 }
 
 export type Worker = {
   id: number;
-  attributes: {
-    name: string;
-  }
+  name: string;
 }
