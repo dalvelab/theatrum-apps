@@ -1,7 +1,7 @@
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { 
-  chakra, 
+import {
+  chakra,
   Button,
   Modal,
   ModalBody,
@@ -15,11 +15,32 @@ import {
   Text,
   Link,
   Textarea,
-  useToast 
-} from "@chakra-ui/react"
+  useToast,
+  FormErrorMessage,
+  Flex,
+} from "@chakra-ui/react";
+import { z } from "zod";
 
-import { createMessage } from '../api';
-import type { Message } from '../models';
+import { createMessage } from "../api";
+import type { Message } from "../models";
+import { isNotVoid } from "platform";
+
+const FormSchema = z.object({
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  email: z
+    .string()
+    .min(1, "Email должен быть указан")
+    .email("Некорретный email"),
+  phone: z.string().min(1, "Телефон должен быть указан"),
+  message: z.string().min(1, "Сообщение не может быть пустым"),
+});
+
+const initalForm = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+};
 
 interface FeedbackModalProps {
   isOpened: boolean;
@@ -27,140 +48,220 @@ interface FeedbackModalProps {
 }
 
 export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose }) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
-  
-  const toast = useToast()
+  const [form, setForm] = useState(initalForm);
+  const [errors, setErrors] = useState<z.ZodError<
+    z.infer<typeof FormSchema>
+  > | null>(null);
 
-  const handleFormSubmition = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const toast = useToast();
+
+  const handleFormSubmition = async (payload: typeof form) => {
+    const result = FormSchema.safeParse(payload);
+
+    if (!result.success) {
+      setErrors(result.error);
+
+      return;
+    }
+
+    const { name, phone, email, message } = payload;
 
     const data: Message = {
-      title: 'Обратная связь',
-      name, 
+      title: "Обратная связь",
+      name,
       phone,
       email,
-      body,
-      status: 'new'
-    }
+      body: message,
+      status: "new",
+    };
 
     try {
       const res = await createMessage(data);
 
       if (!res.data) {
         toast({
-          title: 'Произошла ошибка.',
+          title: "Произошла ошибка.",
           description: "Попробуйте позже",
-          status: 'error',
+          status: "error",
           duration: 2500,
-          position: 'top-right',
+          position: "top-right",
           isClosable: true,
-        })
+        });
         return;
       }
 
       toast({
-        title: 'Сообщение отправлено.',
+        title: "Сообщение отправлено.",
         description: "Мы свяжемся с вами в ближайшее время",
-        status: 'success',
+        status: "success",
         duration: 2500,
-        position: 'top-right',
+        position: "top-right",
         isClosable: true,
-      })
-      onClose();
+      });
+      onCloseModal();
     } catch (error) {
       toast({
-        title: 'Произошла ошибка.',
+        title: "Произошла ошибка.",
         description: "Попробуйте позже",
-        status: 'error',
+        status: "error",
         duration: 2500,
-        position: 'top-right',
+        position: "top-right",
         isClosable: true,
-      })
+      });
     }
-  }
+  };
+
+  const onCloseModal = () => {
+    onClose();
+    setErrors(null);
+    setForm(initalForm);
+  };
+
+  const nameError = errors?.issues.find((issue) => issue.path.includes("name"));
+  const phoneError = errors?.issues.find((issue) =>
+    issue.path.includes("phone")
+  );
+  const emailError = errors?.issues.find((issue) =>
+    issue.path.includes("email")
+  );
+  const messageError = errors?.issues.find((issue) =>
+    issue.path.includes("message")
+  );
 
   return (
-    <Modal size={["full", "md", "md", "md", "md"]} isOpen={isOpened} onClose={onClose}>
+    <Modal
+      size={["full", "md", "md", "md", "md"]}
+      isOpen={isOpened}
+      onClose={onClose}
+    >
       <ModalOverlay />
-      <ModalContent
-        bgColor="brand.100">
-        <ModalHeader fontSize="3xl">
-          Связаться с нами
-        </ModalHeader>
+      <ModalContent bgColor="brand.100">
+        <ModalHeader fontSize="3xl">Связаться с нами</ModalHeader>
         <ModalCloseButton top="20px" size="lg" color="brand.300" />
         <ModalBody>
-          <chakra.form display="flex" flexDir="column" gap={5} pb={5} onSubmit={(e) => handleFormSubmition(e)}>
-            <FormControl>
+          <Flex flexDir="column" gap={5} pb={5}>
+          <FormControl isRequired isInvalid={isNotVoid(nameError)}>
               <FormLabel color="brand.300">Ваше имя</FormLabel>
-              <Input 
+              <Input
                 required
-                borderColor="brand.300" 
-                _hover={{ borderColor: "brand.200" }} 
-                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
+                borderColor="brand.300"
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{
+                  borderColor: "brand.200",
+                  boxShadow: "0 0 0 1px #477A7B",
+                }}
                 name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                />
+                value={form.name}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    name: event.target.value,
+                  })
+                }
+                onFocus={() => setErrors(null)}
+              />
+              {isNotVoid(nameError) && (
+                <FormErrorMessage>{nameError.message}</FormErrorMessage>
+              )}
             </FormControl>
-            <FormControl>
+            <FormControl isRequired isInvalid={isNotVoid(phoneError)}>
               <FormLabel color="brand.300">Телефон</FormLabel>
-              <Input 
+              <Input
                 required
-                borderColor="brand.300" 
-                _hover={{ borderColor: "brand.200" }} 
-                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
+                borderColor="brand.300"
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{
+                  borderColor: "brand.200",
+                  boxShadow: "0 0 0 1px #477A7B",
+                }}
                 name="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                />
+                value={form.phone}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    phone: event.target.value,
+                  })
+                }
+                onFocus={() => setErrors(null)}
+              />
+              {isNotVoid(phoneError) && (
+                <FormErrorMessage>{phoneError.message}</FormErrorMessage>
+              )}
             </FormControl>
-            <FormControl>
+            <FormControl isRequired isInvalid={isNotVoid(emailError)}>
               <FormLabel color="brand.300">E-mail</FormLabel>
-              <Input 
+              <Input
                 required
                 name="email"
-                type='email'
-                borderColor="brand.300" 
+                type="email"
+                borderColor="brand.300"
                 _hover={{ borderColor: "brand.200" }}
-                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }} 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
+                _focus={{
+                  borderColor: "brand.200",
+                  boxShadow: "0 0 0 1px #477A7B",
+                }}
+                value={form.email}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    email: event.target.value,
+                  })
+                }
+                onFocus={() => setErrors(null)}
+              />
+              {isNotVoid(emailError) && (
+                <FormErrorMessage>{emailError.message}</FormErrorMessage>
+              )}
             </FormControl>
-            <FormControl>
+            <FormControl isRequired isInvalid={isNotVoid(messageError)}>
               <FormLabel color="brand.300">Сообщение</FormLabel>
               <Textarea
                 required
                 name="body"
-                borderColor="brand.300" 
-                _hover={{ borderColor: "brand.200" }} 
-                _focus={{ borderColor: "brand.200", boxShadow: "0 0 0 1px #477A7B" }}  
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-                />
+                borderColor="brand.300"
+                _hover={{ borderColor: "brand.200" }}
+                _focus={{
+                  borderColor: "brand.200",
+                  boxShadow: "0 0 0 1px #477A7B",
+                }}
+                value={form.message}
+                onChange={(event) =>
+                  setForm({
+                    ...form,
+                    message: event.target.value,
+                  })
+                }
+                onFocus={() => setErrors(null)}
+              />
+              {isNotVoid(messageError) && (
+                <FormErrorMessage>{messageError.message}</FormErrorMessage>
+              )}
             </FormControl>
-            <Button 
+            <Button
               size="lg"
               bg="brand.300"
               _hover={{ bgColor: "#69494a" }}
               color="white"
-              type='submit'
+              type="submit"
               fontWeight="normal"
-              >
-                Связаться с нами
+              onClick={() => handleFormSubmition(form)}
+            >
+              Связаться с нами
             </Button>
             <Text fontSize="sm">
-                Нажимая кнопку вы соглашаетесь с {" "}
-                <Link textDecoration="underline" href="https://admin.theatrum.center/uploads/privacy_b70387acf5.pdf" referrerPolicy="no-referrer" target="_blank">
-                  политикой конфиденциальности
-                </Link>
+              Нажимая кнопку вы соглашаетесь с{" "}
+              <Link
+                textDecoration="underline"
+                href="/uploads/privacy_b70387acf5.pdf"
+                referrerPolicy="no-referrer"
+                target="_blank"
+              >
+                политикой конфиденциальности
+              </Link>
             </Text>
-          </chakra.form>
+          </Flex>
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
-} 
+  );
+}; 

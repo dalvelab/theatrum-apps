@@ -47,75 +47,80 @@ export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({ slider }) => {
       
       return (
         <SwiperSlide key={slide.id}>
-          <chakra.div 
-            w="full"
-            h="100vh"
-            >
-            <Container 
-              maxWidth="container.xl" 
-              h="100vh" 
-              display="flex" 
-              alignItems="center" 
-              zIndex={1} 
+          <chakra.div w="full" h="100vh">
+            <Container
+              maxWidth="container.xl"
+              h="100vh"
+              display="flex"
+              alignItems="center"
+              zIndex={1}
               pos="relative"
+            >
+              <SlideContent
+                event={slide.attributes.event.data.attributes}
+                formattedDate={formattedDate}
               >
-              <SlideContent 
-                event={slide.attributes.event.data.attributes} 
-                formattedDate={formattedDate}>
-                <Flex 
-                  flexDir={["column", "row", "row", "row", "row"]} 
-                  gap={5} 
-                  alignItems={["flex-start", "center", "center", "center", "center"]}>
+                <Flex
+                  flexDir={["column", "row", "row", "row", "row"]}
+                  gap={5}
+                  alignItems={[
+                    "flex-start",
+                    "center",
+                    "center",
+                    "center",
+                    "center",
+                  ]}
+                >
                   <Link href={`/afisha/${id}-${slug}`}>
-                    <Button 
-                      size="lg" 
-                      bgColor="brand.200" 
+                    <Button
+                      size="lg"
+                      bgColor="brand.200"
                       color="white"
-                      _hover={{ bgColor: "#4d8a8c" }} 
+                      _hover={{ bgColor: "#4d8a8c" }}
                       alignSelf="flex-start"
-                      >
-                        Подробнее
-                      </Button>
+                    >
+                      Подробнее
+                    </Button>
                   </Link>
                   {pushkin_card && (
                     <Image
-                    src='/pushkin-card.png'
-                    alt='Пушкинская карта'
-                    width={150}
-                    height={50}
-                  />
+                      src="/pushkin-card.png"
+                      alt="Пушкинская карта"
+                      width={150}
+                      height={50}
+                    />
                   )}
                 </Flex>
               </SlideContent>
             </Container>
-            <chakra.div 
-              w="full" 
-              h="100vh" 
-              pos="absolute" 
-              left={0} 
-              top={0} 
+            <chakra.div
+              w="full"
+              h="100vh"
+              pos="absolute"
+              left={0}
+              top={0}
               bg="black"
-              opacity={0.6} 
+              opacity={0.6}
             />
-            <chakra.div 
-              w="full" 
-              h="100vh" 
-              pos="absolute" 
-              left={0} 
-              top={0} 
-              zIndex='-1'
-              >
-                <Image 
-                  src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${banner.data.attributes.url}`}
-                  alt={title}
-                  fill
-                  style={{ objectFit: "cover", border: "none" }}
-                  priority={true}
-                />
+            <chakra.div
+              w="full"
+              h="100vh"
+              pos="absolute"
+              left={0}
+              top={0}
+              zIndex="-1"
+            >
+              <Image
+                src={banner.data.attributes.url}
+                alt={title}
+                fill
+                style={{ objectFit: "cover", border: "none" }}
+                priority={true}
+              />
             </chakra.div>
           </chakra.div>
         </SwiperSlide>
-      )
+      );
     })}
   </Swiper>
   )

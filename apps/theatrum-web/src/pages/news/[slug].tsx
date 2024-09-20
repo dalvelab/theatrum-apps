@@ -19,49 +19,87 @@ export default function NewsDetails({ post } : InferGetServerSidePropsType<typeo
     <>
       <SEO>
         <title>{`${title} - Новости Theatrum`}</title>
-        <meta name="description" content={description.slice(0, 160) + '...'} />
+        <meta name="description" content={description.slice(0, 160) + "..."} />
         <meta property="og:title" content={`${title} - Новости Theatrum`} />
-        <meta property="og:description" content={description.slice(0, 160) + '...'} />
+        <meta
+          property="og:description"
+          content={description.slice(0, 160) + "..."}
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`} />
+        <meta property="og:image" content={image.data.attributes.url} />
       </SEO>
       <chakra.main mt={20} bgColor="brand.100">
-        <Container pt={10} pb={20} maxWidth="container.xl" minH="100vh" h="auto" display="flex" flexDir="column" zIndex={1} pos="relative">
-          <Flex gap={7} alignItems={["flex-start", "flex-start", "flex-start", "center", "center"]} flexDir={["column", "column", "column", "row", "row"]}>
-            <chakra.div 
-              pos="relative" 
-              minW={["100%", "100%", "100%", "520px", "640px"]} 
-              height={["320px", "400px", "520px", "400px", "460px"]}>
-                <Image
-                src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.data.attributes.url}`}
+        <Container
+          pt={10}
+          pb={20}
+          maxWidth="container.xl"
+          minH="100vh"
+          h="auto"
+          display="flex"
+          flexDir="column"
+          zIndex={1}
+          pos="relative"
+        >
+          <Flex
+            gap={7}
+            alignItems={[
+              "flex-start",
+              "flex-start",
+              "flex-start",
+              "center",
+              "center",
+            ]}
+            flexDir={["column", "column", "column", "row", "row"]}
+          >
+            <chakra.div
+              pos="relative"
+              minW={["100%", "100%", "100%", "520px", "640px"]}
+              height={["320px", "400px", "520px", "400px", "460px"]}
+            >
+              <Image
+                src={image.data.attributes.url}
                 alt={title}
                 fill
-                style={{ objectFit: 'cover', borderRadius: '12px' }}
-                />
+                style={{ objectFit: "cover", borderRadius: "12px" }}
+              />
             </chakra.div>
             <Flex flexDir="column" gap={3}>
-              <Heading as="h1" fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]} fontWeight="medium" color="gray.900">{title}</Heading>
+              <Heading
+                as="h1"
+                fontSize={["2xl", "3xl", "3xl", "3xl", "3xl"]}
+                fontWeight="medium"
+                color="gray.900"
+              >
+                {title}
+              </Heading>
               {isNotVoid(source) && (
                 <Text fontSize="sm">
-                  Опубликовано {" "}
-                  {publish_date && `${Number(publish_date.substring(8, 10))} ${getGenetiveRusMonth(Number(publish_date.substring(5, 7)))}, ${publish_date.substring(0, 4)}`}
-                  {" "}
-                  в
-                  {" "}
-                  <Link color="brand.200" href={source.link} target='_blank'>
+                  Опубликовано{" "}
+                  {publish_date &&
+                    `${Number(
+                      publish_date.substring(8, 10)
+                    )} ${getGenetiveRusMonth(
+                      Number(publish_date.substring(5, 7))
+                    )}, ${publish_date.substring(0, 4)}`}{" "}
+                  в{" "}
+                  <Link color="brand.200" href={source.link} target="_blank">
                     {source.title}
                   </Link>
                 </Text>
               )}
             </Flex>
           </Flex>
-          <chakra.div mt={[5, 6, 7, 7, 7]} w={["100%", "100%", "100%", "container.lg", "container.lg"]} fontSize="lg">
+          <chakra.div
+            mt={[5, 6, 7, 7, 7]}
+            w={["100%", "100%", "100%", "container.lg", "container.lg"]}
+            fontSize="lg"
+          >
             <Markdown text={description} />
           </chakra.div>
         </Container>
       </chakra.main>
     </>
-  )
+  );
 }
 
 interface IProps {

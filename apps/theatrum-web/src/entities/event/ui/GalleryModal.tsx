@@ -22,71 +22,58 @@ interface GalleryModalProps {
 
 export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpened, onClose, data, activeImage }) => {
   return (
-    <Modal 
-      autoFocus={false} 
-      size="full" 
-      isOpen={isOpened} 
-      onClose={onClose}>
+    <Modal autoFocus={false} size="full" isOpen={isOpened} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         bgColor="gray.900"
         display="flex"
         boxShadow="none"
         justifyContent="center"
-        >
-          <Container maxW="container.xl" p={[2, 4, 4, 4, 4]}>
-            <chakra.button
-              w={["36px", "44px", "44px", "44px", "44px"]}
-              h={["36px", "44px", "44px", "44px", "44px"]}
-              pos="absolute"
-              right={4}
-              top={4}
-              zIndex={2}
-              onClick={onClose}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              borderRadius="12px"
-              >
-              <chakra.div 
-                width={8} 
-                height={8} 
-                pos="relative">
-                <Image
-                  src="/close-green-gallery.png"
-                  fill
-                  alt='Иконка закрытия мобильного меню'
-                  priority={true}
-                />
-              </chakra.div>
-            </chakra.button>
-              <Swiper
-                slidesPerView={1} 
-                loop={true}
-                initialSlide={activeImage}
+      >
+        <Container maxW="container.xl" p={[2, 4, 4, 4, 4]}>
+          <chakra.button
+            w={["36px", "44px", "44px", "44px", "44px"]}
+            h={["36px", "44px", "44px", "44px", "44px"]}
+            pos="absolute"
+            right={4}
+            top={4}
+            zIndex={2}
+            onClick={onClose}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius="12px"
+          >
+            <chakra.div width={8} height={8} pos="relative">
+              <Image
+                src="/close-green-gallery.png"
+                fill
+                alt="Иконка закрытия мобильного меню"
+                priority={true}
+              />
+            </chakra.div>
+          </chakra.button>
+          <Swiper slidesPerView={1} loop={true} initialSlide={activeImage}>
+            <SwiperButtons />
+            {data.map((image) => (
+              <SwiperSlide key={image.id}>
+                <chakra.div
+                  minW="100%"
+                  h={["284px", "440px", "50vh", "70vh", "80vh"]}
+                  pos="relative"
                 >
-                  <SwiperButtons />
-                  {data.map((image) => (
-                    <SwiperSlide
-                      key={image.id}
-                      >
-                      <chakra.div
-                        minW="100%"
-                        h={["284px", "440px", "50vh", "70vh", "80vh",]} 
-                        pos="relative"
-                        >
-                          <Image
-                            src={`${process.env.NEXT_PUBLIC_FILES_ENDPOINT}${image.attributes.url}`}
-                            alt="Изображение площадки"
-                            fill
-                            style={{ objectFit: 'cover', borderRadius: "12px" }}
-                          />
-                      </chakra.div>
-                    </SwiperSlide>
-                  ))}
-              </Swiper>
-          </Container>
+                  <Image
+                    src={image.attributes.url}
+                    alt="Изображение площадки"
+                    fill
+                    style={{ objectFit: "cover", borderRadius: "12px" }}
+                  />
+                </chakra.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Container>
       </ModalContent>
     </Modal>
-  )
+  );
 }

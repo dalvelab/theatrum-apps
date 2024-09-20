@@ -1,10 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['ui', 'platform'],
+  transpilePackages: ["ui", "platform"],
   images: {
-    domains: ['127.0.0.1', '185.211.170.236', '77.232.135.125', 'admin.theatrum.center']
-  }
-}
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: process.env.NEXT_PUBLIC_HOSTNAME,
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/uploads/:path",
+        destination: `${process.env.NEXT_PUBLIC_HOSTNAME}/uploads/:path`,
+      },
+      {
+        source: "/api/:path",
+        destination: `${process.env.NEXT_PUBLIC_HOSTNAME}/api/:path`,
+      },
+    ];
+  },
+};
 
 module.exports = nextConfig

@@ -9,7 +9,7 @@ export async function getFooter(): Promise<ApiResponse<Footer, Meta>> {
       populate: ['partners', 'contacts', 'socials']
     }
   )
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/footer?${query}`);
+  const res = await fetch(`/api/footer?${query}`);
 
   return res.json()
 }
