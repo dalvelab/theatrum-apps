@@ -1,36 +1,55 @@
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import { Container, Flex, chakra, Link, Text, Box, Button } from "@chakra-ui/react"
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import {
+  Container,
+  Flex,
+  chakra,
+  Link,
+  Text,
+  Box,
+  Button,
+} from "@chakra-ui/react";
 import { isNotVoid } from "platform";
-import type { ApiResponse, Meta } from "platform"
+import type { ApiResponse, Meta } from "platform";
 
-import { FeedbackModal } from '@/entities/message';
-import { getFooter } from "@/entities/footer/api"
-import type { Footer as FooterType } from "@/entities/footer/models"
+import { FeedbackModal } from "@/entities/message";
+import { getFooter } from "@/entities/footer/api";
+import type { Footer as FooterType } from "@/entities/footer/models";
 
 export const Footer = () => {
-  const [footerData, setFooterData] = useState<null | ApiResponse<FooterType, Meta>>(null);
+  const [footerData, setFooterData] = useState<null | ApiResponse<
+    FooterType,
+    Meta
+  >>(null);
   const [isLoading, setLoading] = useState(false);
   const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
- 
+
   useEffect(() => {
     setLoading(true);
     getFooter().then((data) => {
       setFooterData(data);
       setLoading(false);
-    })
+    });
   }, []);
 
-  const contacts = isNotVoid(footerData?.data) ? 
-    footerData?.data.attributes.contacts.filter((contact) => 
-      contact.type === 'email' ||
-      contact.type === 'phone') 
+  const contacts = isNotVoid(footerData?.data)
+    ? footerData?.data.attributes.contacts.filter(
+        (contact) => contact.type === "email" || contact.type === "phone"
+      )
     : [];
-  const partners = isNotVoid(footerData?.data) ? footerData?.data.attributes.partners.data : [];
-  const workingTime = isNotVoid(footerData?.data) ? footerData?.data.attributes.working_time: '';
-  const address = isNotVoid(footerData?.data) ? footerData?.data.attributes.address : '';
-  const socials = isNotVoid(footerData?.data) ? footerData?.data.attributes.socials : [];
-  
+  const partners = isNotVoid(footerData?.data)
+    ? footerData?.data.attributes.partners
+    : [];
+  const workingTime = isNotVoid(footerData?.data)
+    ? footerData?.data.attributes.working_time
+    : "";
+  const address = isNotVoid(footerData?.data)
+    ? footerData?.data.attributes.address
+    : "";
+  const socials = isNotVoid(footerData?.data)
+    ? footerData?.data.attributes.socials
+    : [];
+
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
@@ -185,20 +204,27 @@ export const Footer = () => {
           </Flex>
         </Flex>
         {(!partners || partners.length !== 0) && (
-          <Flex mt={8} gap={10} flexWrap="wrap" alignItems="center">
-            {partners?.map((partner) => (
-              <Image
+          <Flex mt={4} gap={6} flexWrap="wrap" alignItems="center">
+            {partners.map((partner) => (
+              <chakra.a
+                href={partner.link}
+                target="_blank"
+                w={160}
+                h={100}
+                pos="relative"
                 key={partner.id}
-                src={partner.attributes.url}
-                alt="Логотип партнера"
-                width={partner.attributes.width}
-                height={partner.attributes.height}
-              />
+              >
+                <Image
+                  src={partner.image.data.attributes.url}
+                  alt="Логотип партнера"
+                  fill
+                  style={{ objectFit: "contain", overflowClipMargin: "unset" }}
+                />
+              </chakra.a>
             ))}
           </Flex>
         )}
         <Flex
-          mt={8}
           justifyContent="space-between"
           flexDirection={[
             "column-reverse",
@@ -208,6 +234,7 @@ export const Footer = () => {
             "row",
           ]}
           gap={[4, 4, 4, null, null]}
+          mt={4}
         >
           <Text fontSize="sm" color="brand.300">
             Частное учреждение культуры «Универсальный гастрольный театр»,{" "}
@@ -226,4 +253,4 @@ export const Footer = () => {
       </Container>
     </chakra.footer>
   );
-}
+};
