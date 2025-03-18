@@ -205,7 +205,7 @@ export const Footer = () => {
         </Flex>
         {(!partners || partners.length !== 0) && (
           <Flex mt={4} gap={6} flexWrap="wrap" alignItems="center">
-            {partners.map((partner) => (
+            {partners?.map((partner) => (
               <chakra.a
                 href={partner.link}
                 target="_blank"
