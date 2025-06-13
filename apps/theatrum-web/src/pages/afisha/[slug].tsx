@@ -54,7 +54,7 @@ export default function AfishaDetails({
     // @ts-ignore
     window["YandexTicketsDealer"].push([
       "getDealer",
-      function (dealer) {
+      function (dealer: any) {
         dealer.open({ id, type: "session" });
       },
     ]);
