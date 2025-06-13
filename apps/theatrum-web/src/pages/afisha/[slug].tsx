@@ -1,34 +1,49 @@
-import Image from 'next/image';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Button, chakra, Heading, Container, Flex, Text, Stack, Grid } from '@chakra-ui/react'
-import { Markdown } from 'ui';
-import { formatAfishaDays, getGenetiveRusMonth, getformatDateLocaleTime, isNotVoid } from "platform"
-import type { ApiResponse, Meta } from 'platform';
-import { Badge, Divider } from 'ui';
+import Image from "next/image";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import {
+  Button,
+  chakra,
+  Heading,
+  Container,
+  Flex,
+  Text,
+  Stack,
+  Grid,
+} from "@chakra-ui/react";
+import { Markdown } from "ui";
+import {
+  formatAfishaDays,
+  getGenetiveRusMonth,
+  getformatDateLocaleTime,
+  isNotVoid,
+} from "platform";
+import type { ApiResponse, Meta } from "platform";
+import { Badge, Divider } from "ui";
 
-import { getSingleAfisha } from '@/entities/event/api';
-import type { Afisha } from '@/entities/event/models';
-import { YAScript, SwipeGallery, Roles } from '@/entities/event';
-import { SlideContent } from '@/widgets/Slider';
-import { SEO } from '@/shared/components';
+import { getSingleAfisha } from "@/entities/event/api";
+import type { Afisha } from "@/entities/event/models";
+import { YAScript, SwipeGallery, Roles } from "@/entities/event";
+import { SlideContent } from "@/widgets/Slider";
+import { SEO } from "@/shared/components";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
-export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const event = afisha.data.attributes.event.data.attributes
-  
+export default function AfishaDetails({
+  afisha,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const event = afisha.data.attributes.event.data.attributes;
+
   const {
     banner,
     title,
     premiere,
     production_team,
     roles,
-    age_limit, 
-    pushkin_card, 
-    description, 
+    age_limit,
+    description,
     properties,
     small_description,
-    gallery
+    gallery,
   } = event;
   const { tickets } = afisha.data.attributes;
 
@@ -37,15 +52,20 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
 
   const handleYAWidget = (id: string) => {
     // @ts-ignore
-    window['YandexTicketsDealer'].push(['getDealer', function(dealer) { dealer.open({ id, type: 'session' }) }])
-  }
+    window["YandexTicketsDealer"].push([
+      "getDealer",
+      function (dealer) {
+        dealer.open({ id, type: "session" });
+      },
+    ]);
+  };
 
   const scrollToTickets = () => {
     window.scrollTo({
       top: window.innerHeight,
-      behavior: 'smooth'
-    })
-  }
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -101,14 +121,6 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
                     Купить билеты
                   </Button>
                 )}
-                {pushkin_card && (
-                  <Image
-                    src="/pushkin-card.png"
-                    alt="Пушкинская карта"
-                    width={150}
-                    height={50}
-                  />
-                )}
               </Flex>
             </SlideContent>
           </Container>
@@ -133,7 +145,7 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
               src={banner.data.attributes.url}
               alt={title}
               fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", overflowClipMargin: "unset" }}
             />
           </chakra.div>
         </chakra.div>
@@ -153,14 +165,6 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
               <Heading size="xl" as="h2" fontWeight="medium">
                 Билеты
               </Heading>
-              {pushkin_card && (
-                <Image
-                  src="/pushkin-card.png"
-                  alt="Пушкинская карта"
-                  width={150}
-                  height={50}
-                />
-              )}
             </Stack>
             <Grid
               mt={6}
@@ -178,7 +182,8 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
                   key={ticket.id}
                   p={[3, 5, 5, 5, 5]}
                   gap={[2, 6, 6, 6, 6]}
-                  border="1px solid #171923"
+                  border="1px solid"
+                  borderColor="brand.border"
                   borderRadius="md"
                   alignItems={[
                     "flex-start",
@@ -308,13 +313,17 @@ export default function AfishaDetails({ afisha } : InferGetServerSidePropsType<t
 }
 
 interface IProps {
-  afisha: ApiResponse<Afisha, Meta>
+  afisha: ApiResponse<Afisha, Meta>;
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
-  const afisha = await getSingleAfisha({ id: params?.slug?.toString().split('-')[0] })
+export const getServerSideProps: GetServerSideProps<IProps> = async ({
+  params,
+}) => {
+  const afisha = await getSingleAfisha({
+    id: params?.slug?.toString().split("-")[0],
+  });
 
   return {
-    props: { afisha }
-  }
+    props: { afisha },
+  };
 };

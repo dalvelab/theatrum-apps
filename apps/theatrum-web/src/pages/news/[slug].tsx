@@ -1,19 +1,23 @@
-import Image from 'next/image';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Link, chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
-import { Markdown } from 'ui';
-import { getGenetiveRusMonth, isNotVoid } from 'platform';
-import type { ApiResponse, Meta } from 'platform';
+import Image from "next/image";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Link, chakra, Heading, Container, Flex, Text } from "@chakra-ui/react";
+import { Markdown } from "ui";
+import { getGenetiveRusMonth, isNotVoid } from "platform";
+import type { ApiResponse, Meta } from "platform";
 
-import { getSinglelNews } from '@/entities/post/api';
-import { SEO } from '@/shared/components';
-import type { News } from '@/entities/post/models';
+import { getSinglelNews } from "@/entities/post/api";
+import { SEO } from "@/shared/components";
+import type { News } from "@/entities/post/models";
 
-export default function NewsDetails({ post } : InferGetServerSidePropsType<typeof getServerSideProps>) {
-
+export default function NewsDetails({
+  post,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { image, title, description, source } = post.data.attributes;
 
-  const publish_date = isNotVoid(source) && isNotVoid(source.publish_date) ? source?.publish_date.toString() : '';
+  const publish_date =
+    isNotVoid(source) && isNotVoid(source.publish_date)
+      ? source?.publish_date.toString()
+      : "";
 
   return (
     <>
@@ -60,7 +64,11 @@ export default function NewsDetails({ post } : InferGetServerSidePropsType<typeo
                 src={image.data.attributes.url}
                 alt={title}
                 fill
-                style={{ objectFit: "cover", borderRadius: "12px" }}
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  overflowClipMargin: "unset",
+                }}
               />
             </chakra.div>
             <Flex flexDir="column" gap={3}>
@@ -103,13 +111,17 @@ export default function NewsDetails({ post } : InferGetServerSidePropsType<typeo
 }
 
 interface IProps {
-  post: ApiResponse<News, Meta>
+  post: ApiResponse<News, Meta>;
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
-  const post = await getSinglelNews({ id: params?.slug?.toString().split('-')[0] })
+export const getServerSideProps: GetServerSideProps<IProps> = async ({
+  params,
+}) => {
+  const post = await getSinglelNews({
+    id: params?.slug?.toString().split("-")[0],
+  });
 
   return {
-    props: { post }
-  }
+    props: { post },
+  };
 };

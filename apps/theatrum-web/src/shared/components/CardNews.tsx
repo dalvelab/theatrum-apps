@@ -1,11 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import removeMd from 'remove-markdown';
-import { chakra, Flex, Heading, LinkOverlay, LinkBox, Text } from "@chakra-ui/react"
-import { getGenetiveRusMonth } from 'platform';
+import Image from "next/image";
+import Link from "next/link";
+import removeMd from "remove-markdown";
+import {
+  chakra,
+  Flex,
+  Heading,
+  LinkOverlay,
+  LinkBox,
+  Text,
+} from "@chakra-ui/react";
+import { getGenetiveRusMonth } from "platform";
 
-import { News } from '@/entities/post/models';
-
+import { News } from "@/entities/post/models";
 
 interface CardNewsProps {
   post: News;
@@ -23,7 +29,8 @@ export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
         flexDir="column"
         p={4}
         bg="transparent"
-        border="1px solid #583D3E"
+        border="1px solid"
+        borderColor="brand.border"
         borderRadius="2xl"
       >
         <chakra.div
@@ -36,7 +43,11 @@ export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
             src={image.data.attributes.url}
             alt={title}
             fill
-            style={{ borderRadius: "12px", objectFit: "cover" }}
+            style={{
+              borderRadius: "12px",
+              objectFit: "cover",
+              overflowClipMargin: "unset",
+            }}
           />
         </chakra.div>
         <Flex flexDir="column" mt={3}>
@@ -56,4 +67,4 @@ export const CardNews: React.FC<CardNewsProps> = ({ post }) => {
       </Flex>
     </LinkBox>
   );
-}
+};

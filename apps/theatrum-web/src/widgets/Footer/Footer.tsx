@@ -58,7 +58,8 @@ export const Footer = () => {
       h="auto"
       minH={40}
       bgColor="brand.100"
-      borderTop="1px solid #583D3E"
+      borderTop="1px solid"
+      borderColor="brand.border"
       pos="relative"
     >
       {openedFeedbackModal && (
@@ -161,7 +162,7 @@ export const Footer = () => {
             </Flex>
           </Flex>
           <Flex flexDir="column" gap={8}>
-            <Flex gap={10}>
+            <Flex justifyContent="flex-end" gap={4}>
               {socials?.map((social) => (
                 <Link
                   key={social.id}

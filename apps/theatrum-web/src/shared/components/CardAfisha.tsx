@@ -1,18 +1,27 @@
-import Image from 'next/image';
-import { Link } from '@chakra-ui/next-js';
-import { chakra, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
-import { formatAfishaDays } from "platform"
-import { Badge, Divider } from "ui"
+import Image from "next/image";
+import { Link } from "@chakra-ui/next-js";
+import {
+  chakra,
+  Button,
+  Flex,
+  Heading,
+  Stack,
+  Text,
+  Badge as ChakraBadge,
+} from "@chakra-ui/react";
+import { formatAfishaDays } from "platform";
+import { Badge, Divider } from "ui";
 
-import { Afisha } from '@/entities/event/models';
+import { Afisha } from "@/entities/event/models";
 
 interface CardAfishaProps {
   afisha: Afisha;
 }
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
-  const { id } = afisha
-  const { age_limit, slug, premiere, title, banner, pushkin_card } = afisha.attributes.event.data.attributes;
+  const { id } = afisha;
+  const { age_limit, slug, premiere, title, banner } =
+    afisha.attributes.event.data.attributes;
 
   const dates = afisha.attributes.tickets.map((ticket) => ticket.date);
   const formattedDate = formatAfishaDays(dates);
@@ -37,12 +46,47 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
           h={["240px", "320px", "272px", "100%", "100%"]}
           pos="relative"
         >
-          <Image
-            src={banner.data.attributes.url}
-            alt="Green double couch with wooden legs"
-            style={{ borderRadius: "12px", objectFit: "cover" }}
-            fill
-          />
+          <Flex pos="absolute" left="12px" top="12px" gap={3}>
+            {premiere && (
+              <ChakraBadge
+                px={3}
+                borderRadius={12}
+                bgColor="rgba(255, 255, 255, 0.8)"
+                py={2}
+                fontSize="md"
+                textTransform="none"
+                zIndex={2}
+              >
+                Премьера
+              </ChakraBadge>
+            )}
+          </Flex>
+          <chakra.div
+            pos="relative"
+            h="100%"
+            borderRadius={12}
+            overflow="hidden"
+          >
+            <chakra.div
+              w="100%"
+              pos="absolute"
+              left={0}
+              top={0}
+              h="100%"
+              bgColor="black"
+            />
+            <Image
+              src={banner.data.attributes.url}
+              alt="Баннер мероприятия"
+              style={{
+                objectFit: "cover",
+                backgroundColor: "black",
+                opacity: "0.7",
+                overflowClipMargin: "unset",
+              }}
+              fill
+            />
+          </chakra.div>
         </chakra.div>
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
           {/* DESKTOP */}
@@ -55,7 +99,6 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
             fontSize={["xl", "xl", "xl", "xl", "2xl"]}
             color="gray.900"
           >
-            {premiere && <Text color="brand.300">премьера</Text>}
             {formattedDate.length === 1 && (
               <Flex gap={2}>
                 <Text lineHeight={1}>{formattedDate[0].date}</Text>
@@ -100,11 +143,6 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
             gap={4}
             alignItems="center"
           >
-            {premiere && (
-              <Text fontSize="lg" color="brand.300">
-                премьера
-              </Text>
-            )}
             <Badge text={String(age_limit) + "+"} />
           </Flex>
           <Heading
@@ -147,17 +185,9 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
                 Подробнее
               </Button>
             </Link>
-            {pushkin_card && (
-              <Image
-                src="/pushkin-card.png"
-                alt="Пушкинская карта"
-                width={130}
-                height={32}
-              />
-            )}
           </Flex>
         </Flex>
       </Flex>
     </chakra.article>
   );
-}
+};

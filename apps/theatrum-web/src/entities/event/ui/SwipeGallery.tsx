@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { chakra } from "@chakra-ui/react";
 
-import { Gallery } from "@/shared/components"
+import { Gallery } from "@/shared/components";
 import { GalleryModal } from "./GalleryModal";
 import { useState } from "react";
 
@@ -9,22 +9,22 @@ interface SwipeGalleryProps {
   data: {
     id: number;
     attributes: {
-        name: string;
-        url: string;
-        width?: number | undefined;
-        height: number;
+      name: string;
+      url: string;
+      width?: number | undefined;
+      height: number;
     };
-}[]
+  }[];
 }
 
 export const SwipeGallery: React.FC<SwipeGalleryProps> = ({ data }) => {
-  const [isOpened, setIsOpened] = useState(false)
+  const [isOpened, setIsOpened] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
 
   const handleGalleryModalOpen = (id: number) => {
     setIsOpened(true);
     setActiveImage(id);
-  }
+  };
 
   return (
     <>
@@ -48,11 +48,15 @@ export const SwipeGallery: React.FC<SwipeGalleryProps> = ({ data }) => {
               src={image.attributes.url}
               alt="Изображение галереи"
               fill
-              style={{ objectFit: "cover", borderRadius: "12px" }}
+              style={{
+                objectFit: "cover",
+                borderRadius: "12px",
+                overflowClipMargin: "unset",
+              }}
             />
           </chakra.div>
         ))}
       </Gallery>
     </>
   );
-}
+};

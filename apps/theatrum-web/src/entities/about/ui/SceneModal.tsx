@@ -1,17 +1,31 @@
-import { chakra, Modal, ModalBody, ModalOverlay, ModalContent, Flex, Text, ModalCloseButton, Heading, Container } from "@chakra-ui/react"
+import {
+  chakra,
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalContent,
+  Flex,
+  Text,
+  ModalCloseButton,
+  Heading,
+  Container,
+} from "@chakra-ui/react";
 
-import { Scene } from "../models"
+import { Scene } from "../models";
 import Image from "next/image";
 import { Link } from "@chakra-ui/next-js";
 
 interface SceneModalProps {
-  scene: Scene
+  scene: Scene;
   isOpened: boolean;
   onClose: () => void;
 }
 
-export const SceneModal: React.FC<SceneModalProps> = ({ scene, isOpened, onClose }) => {
-
+export const SceneModal: React.FC<SceneModalProps> = ({
+  scene,
+  isOpened,
+  onClose,
+}) => {
   return (
     <Modal
       size={["full", "full", "full", "xl", "xl"]}
@@ -80,7 +94,11 @@ export const SceneModal: React.FC<SceneModalProps> = ({ scene, isOpened, onClose
                     src={scene.gallery.data[0].attributes.url}
                     alt="Изображение площадки"
                     fill
-                    style={{ objectFit: "cover", borderRadius: "12px" }}
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "12px",
+                      overflowClipMargin: "unset",
+                    }}
                   />
                 </chakra.div>
               </Flex>
@@ -105,7 +123,11 @@ export const SceneModal: React.FC<SceneModalProps> = ({ scene, isOpened, onClose
                     src={scene.gallery.data[1].attributes.url}
                     alt="Изображение площадки"
                     fill
-                    style={{ objectFit: "cover", borderRadius: "12px" }}
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "12px",
+                      overflowClipMargin: "unset",
+                    }}
                   />
                 </chakra.div>
                 <Flex flexDir="column">
@@ -166,4 +188,4 @@ export const SceneModal: React.FC<SceneModalProps> = ({ scene, isOpened, onClose
       </ModalContent>
     </Modal>
   );
-} 
+};

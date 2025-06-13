@@ -1,30 +1,32 @@
-import Image from 'next/image';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { chakra, Heading, Container, Flex, Text } from '@chakra-ui/react'
-import { Markdown } from 'ui';
-import { isNotVoid } from 'platform';
-import type { ApiResponse, Meta } from 'platform';
-import { Badge } from 'ui';
+import Image from "next/image";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { chakra, Heading, Container, Flex, Text } from "@chakra-ui/react";
+import { Markdown } from "ui";
+import { isNotVoid } from "platform";
+import type { ApiResponse, Meta } from "platform";
+import { Badge } from "ui";
 
-import { getSinglelPerformance } from '@/entities/event/api';
-import { SwipeGallery, Roles } from '@/entities/event';
-import type { Performance } from '@/entities/event/models';
+import { getSinglelPerformance } from "@/entities/event/api";
+import { SwipeGallery, Roles } from "@/entities/event";
+import type { Performance } from "@/entities/event/models";
 
-import { SEO } from '@/shared/components';
+import { SEO } from "@/shared/components";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
-export default function PerfomanceDetails({ performance } : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function PerfomanceDetails({
+  performance,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {
     banner,
     title,
-    small_description, 
+    small_description,
     premiere,
     production_team,
     roles,
     age_limit,
     gallery,
-    description, 
+    description,
     properties,
   } = performance.data.attributes.event.data.attributes;
 
@@ -84,7 +86,7 @@ export default function PerfomanceDetails({ performance } : InferGetServerSidePr
               src={banner.data.attributes.url}
               alt={title}
               fill
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", overflowClipMargin: "unset" }}
             />
           </chakra.div>
         </chakra.div>
@@ -175,13 +177,17 @@ export default function PerfomanceDetails({ performance } : InferGetServerSidePr
 }
 
 interface IProps {
-  performance: ApiResponse<Performance, Meta>
+  performance: ApiResponse<Performance, Meta>;
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async ({ params }) => {
-  const performance = await getSinglelPerformance({ id: params?.slug?.toString().split('-')[0] })
+export const getServerSideProps: GetServerSideProps<IProps> = async ({
+  params,
+}) => {
+  const performance = await getSinglelPerformance({
+    id: params?.slug?.toString().split("-")[0],
+  });
 
   return {
-    props: { performance }
-  }
+    props: { performance },
+  };
 };

@@ -1,5 +1,5 @@
-import type { FormEvent } from 'react';
-import { useState } from 'react';
+import type { FormEvent } from "react";
+import { useState } from "react";
 import {
   chakra,
   Button,
@@ -47,7 +47,10 @@ interface FeedbackModalProps {
   onClose: () => void;
 }
 
-export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose }) => {
+export const FeedbackModal: React.FC<FeedbackModalProps> = ({
+  isOpened,
+  onClose,
+}) => {
   const [form, setForm] = useState(initalForm);
   const [errors, setErrors] = useState<z.ZodError<
     z.infer<typeof FormSchema>
@@ -140,11 +143,11 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose 
         <ModalCloseButton top="20px" size="lg" color="brand.300" />
         <ModalBody>
           <Flex flexDir="column" gap={5} pb={5}>
-          <FormControl isRequired isInvalid={isNotVoid(nameError)}>
+            <FormControl isRequired isInvalid={isNotVoid(nameError)}>
               <FormLabel color="brand.300">Ваше имя</FormLabel>
               <Input
                 required
-                borderColor="brand.300"
+                borderColor="brand.border"
                 _hover={{ borderColor: "brand.200" }}
                 _focus={{
                   borderColor: "brand.200",
@@ -168,7 +171,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose 
               <FormLabel color="brand.300">Телефон</FormLabel>
               <Input
                 required
-                borderColor="brand.300"
+                borderColor="brand.border"
                 _hover={{ borderColor: "brand.200" }}
                 _focus={{
                   borderColor: "brand.200",
@@ -194,7 +197,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose 
                 required
                 name="email"
                 type="email"
-                borderColor="brand.300"
+                borderColor="brand.border"
                 _hover={{ borderColor: "brand.200" }}
                 _focus={{
                   borderColor: "brand.200",
@@ -218,7 +221,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose 
               <Textarea
                 required
                 name="body"
-                borderColor="brand.300"
+                borderColor="brand.border"
                 _hover={{ borderColor: "brand.200" }}
                 _focus={{
                   borderColor: "brand.200",
@@ -264,4 +267,4 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpened, onClose 
       </ModalContent>
     </Modal>
   );
-}; 
+};

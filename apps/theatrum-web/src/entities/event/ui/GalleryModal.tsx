@@ -1,8 +1,14 @@
 import Image from "next/image";
-import { Container, chakra, Modal, ModalOverlay, ModalContent } from "@chakra-ui/react"
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {
+  Container,
+  chakra,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+} from "@chakra-ui/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
+import "swiper/css";
 import { SwiperButtons } from "./SwiperButtons";
 
 interface GalleryModalProps {
@@ -11,16 +17,21 @@ interface GalleryModalProps {
   data: {
     id: number;
     attributes: {
-        name: string;
-        url: string;
-        width?: number | undefined;
-        height: number;
+      name: string;
+      url: string;
+      width?: number | undefined;
+      height: number;
     };
   }[];
   activeImage: number;
 }
 
-export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpened, onClose, data, activeImage }) => {
+export const GalleryModal: React.FC<GalleryModalProps> = ({
+  isOpened,
+  onClose,
+  data,
+  activeImage,
+}) => {
   return (
     <Modal autoFocus={false} size="full" isOpen={isOpened} onClose={onClose}>
       <ModalOverlay />
@@ -66,7 +77,11 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpened, onClose, d
                     src={image.attributes.url}
                     alt="Изображение площадки"
                     fill
-                    style={{ objectFit: "cover", borderRadius: "12px" }}
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "12px",
+                      overflowClipMargin: "unset",
+                    }}
                   />
                 </chakra.div>
               </SwiperSlide>
@@ -76,4 +91,4 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ isOpened, onClose, d
       </ModalContent>
     </Modal>
   );
-}
+};

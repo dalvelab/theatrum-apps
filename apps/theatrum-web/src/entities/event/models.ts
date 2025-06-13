@@ -1,6 +1,6 @@
-import type { StrapiImage } from '@/shared/models/image';
+import type { StrapiImage } from "@/shared/models/image";
 
-export type Season = 'none' | 'fazioli';
+export type Season = "none" | "fazioli";
 
 export type Event = {
   id: number;
@@ -9,7 +9,6 @@ export type Event = {
     createdAt: Date;
     description: string;
     premiere: boolean;
-    pushkin_card: boolean;
     slug: string;
     small_description: string;
     title: string;
@@ -23,8 +22,8 @@ export type Event = {
           url: string;
           width?: number;
           height: number;
-        }
-      }[]
+        };
+      }[];
     };
     roles: Role[];
     production_team: Role[];
@@ -32,21 +31,21 @@ export type Event = {
       data: Afisha[];
     };
     season?: Season;
-  }
-}
+  };
+};
 
 export type Role = {
   id: number;
   role: string;
   name: string;
-}
+};
 
 export type Ticket = {
   id: number;
   date: Date;
   link: string;
   paid: boolean;
-}
+};
 
 export type Afisha = {
   id: number;
@@ -56,9 +55,9 @@ export type Afisha = {
     event: {
       data: Event;
     };
-    tickets: Ticket[]
-  }
-}
+    tickets: Ticket[];
+  };
+};
 
 export type Slider = {
   id: number;
@@ -72,11 +71,11 @@ export type Slider = {
           };
           tickets: Ticket[];
           title: string;
-        }
-      }[]
-    }
-  }
-}
+        };
+      }[];
+    };
+  };
+};
 
 export type Performance = {
   id: number;
@@ -84,6 +83,6 @@ export type Performance = {
     archived: boolean;
     event: {
       data: Event;
-    }
-  }
-}
+    };
+  };
+};
