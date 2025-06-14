@@ -1,4 +1,5 @@
 import type { StrapiImage } from "@/shared/models/image";
+import { ProjectType } from "@/shared/models/project";
 
 export type Season = "none" | "fazioli";
 
@@ -11,6 +12,7 @@ export type Event = {
     premiere: boolean;
     slug: string;
     small_description: string;
+    project_type?: ProjectType;
     title: string;
     banner: StrapiImage;
     properties: string;

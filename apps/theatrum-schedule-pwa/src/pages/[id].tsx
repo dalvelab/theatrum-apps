@@ -1,14 +1,22 @@
-import Head from 'next/head';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { Container, Flex, Grid, Heading, chakra, Text, Spinner, Button } from '@chakra-ui/react';
+import Head from "next/head";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import {
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  chakra,
+  Text,
+  Spinner,
+  Button,
+} from "@chakra-ui/react";
 import {
   getformatDateLocale,
   getformatDateLocaleTime,
-  isEmptyArray,
-  isNotVoid,
+  isEmpty,
   rusMonths,
   shortRusDayNames,
 } from "platform";
@@ -99,7 +107,7 @@ export default function SingleScheduleEvent({
             Расписание за {month} {year}
           </Heading>
           <Flex mt={10} gap={7} flexWrap="wrap">
-            {isEmptyArray(scheduleGrid) && (
+            {isEmpty(scheduleGrid) && (
               <Text fontSize="2xl">Архив пока пуст</Text>
             )}
             {scheduleGrid.map((grid, index) => (
@@ -138,15 +146,17 @@ export default function SingleScheduleEvent({
 }
 
 interface ArchiveProps {
-  events: ApiResponse<ScheduleEvent[], Meta>
+  events: ApiResponse<ScheduleEvent[], Meta>;
 }
 
-export const getServerSideProps: GetServerSideProps<ArchiveProps> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<ArchiveProps> = async ({
+  params,
+}) => {
   const id = params?.id as string;
 
   const events = await getScheduleByMonth({ id, limit: 100 });
 
   return {
-    props: { events }
-  }
+    props: { events },
+  };
 };

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
 import type { ApiResponse, Meta } from "platform";
-import { isNotVoid, isEmptyArray, isVoid } from "platform";
+import { isEmpty, isNotEmpty } from "platform";
 
 import { CardAfisha, CardNews } from "@/shared/components";
 import { getAfisha, getSlider } from "@/entities/event/api";
@@ -24,10 +24,7 @@ export default function Home({
   news,
   slider,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const events =
-    isNotVoid(afisha.data) && !isEmptyArray(afisha.data)
-      ? afisha.data.slice(0, 6)
-      : [];
+  const events = isNotEmpty(afisha.data) ? afisha.data.slice(0, 6) : [];
 
   return (
     <>
@@ -59,12 +56,11 @@ export default function Home({
             flexDir="column"
           >
             <Heading as="h2">Ближайшие мероприятия</Heading>
-            {isVoid(afisha.data) ||
-              (isEmptyArray(afisha.data) && (
-                <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>
-                  Афиша пока что пуста
-                </Text>
-              ))}
+            {isEmpty(afisha.data) && (
+              <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>
+                Афиша пока что пуста
+              </Text>
+            )}
             <Grid
               gridTemplateColumns={["1fr", "1fr", "1fr 1fr", "1fr", "1fr"]}
               mt={10}
@@ -99,12 +95,11 @@ export default function Home({
             flexDir="column"
           >
             <Heading as="h2">Новости</Heading>
-            {isVoid(news.data) ||
-              (isEmptyArray(news.data) && (
-                <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>
-                  Новостей нет
-                </Text>
-              ))}
+            {isEmpty(news.data) && (
+              <Text mt={5} fontSize={["xl", "2xl", "3xl", "3xl", "3xl"]}>
+                Новостей нет
+              </Text>
+            )}
             <Grid
               templateColumns={[
                 "1fr",

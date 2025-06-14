@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button, Container, Flex, chakra } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
-import { formatAfishaDays, isVoid, isEmptyArray } from "platform";
+import { formatAfishaDays, isEmpty } from "platform";
 
 import type { Slider } from "@/entities/event/models";
 import { EmptySlide } from "./EmptySlide";
@@ -19,7 +19,7 @@ interface WelcomeSliderProps {
 export const WelcomeSlider: React.FC<WelcomeSliderProps> = ({ slider }) => {
   const { data } = slider.attributes.slides;
 
-  if (isVoid(data) || isEmptyArray(data)) {
+  if (isEmpty(data)) {
     return <EmptySlide />;
   }
 

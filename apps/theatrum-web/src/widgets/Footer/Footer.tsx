@@ -162,7 +162,16 @@ export const Footer = () => {
             </Flex>
           </Flex>
           <Flex flexDir="column" gap={8}>
-            <Flex justifyContent="flex-end" gap={4}>
+            <Flex
+              justifyContent={[
+                "flex-start",
+                "flex-start",
+                "flex-start",
+                "flex-end",
+                "flex-end",
+              ]}
+              gap={4}
+            >
               {socials?.map((social) => (
                 <Link
                   key={social.id}

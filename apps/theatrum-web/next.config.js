@@ -10,6 +10,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    scrollRestoration: true,
+  },
   async rewrites() {
     return [
       {

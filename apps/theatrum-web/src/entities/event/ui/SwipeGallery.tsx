@@ -46,7 +46,7 @@ export const SwipeGallery: React.FC<SwipeGalleryProps> = ({ data }) => {
           >
             <Image
               src={image.attributes.url}
-              alt="Изображение галереи"
+              alt={image.attributes.name}
               fill
               style={{
                 objectFit: "cover",

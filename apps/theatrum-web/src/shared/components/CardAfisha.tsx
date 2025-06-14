@@ -9,7 +9,7 @@ import {
   Text,
   Badge as ChakraBadge,
 } from "@chakra-ui/react";
-import { formatAfishaDays } from "platform";
+import { formatAfishaDays, isNotVoid } from "platform";
 import { Badge, Divider } from "ui";
 
 import { Afisha } from "@/entities/event/models";
@@ -20,7 +20,7 @@ interface CardAfishaProps {
 
 export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
   const { id } = afisha;
-  const { age_limit, slug, premiere, title, banner } =
+  const { age_limit, slug, premiere, project_type, title, banner } =
     afisha.attributes.event.data.attributes;
 
   const dates = afisha.attributes.tickets.map((ticket) => ticket.date);
@@ -58,6 +58,19 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
                 zIndex={2}
               >
                 Премьера
+              </ChakraBadge>
+            )}
+            {isNotVoid(project_type) && project_type === "replica" && (
+              <ChakraBadge
+                px={3}
+                borderRadius={12}
+                bgColor="rgba(255, 255, 255, 0.8)"
+                py={2}
+                fontSize="md"
+                textTransform="none"
+                zIndex={2}
+              >
+                Реплика
               </ChakraBadge>
             )}
           </Flex>

@@ -33,7 +33,7 @@ export default function PerfomanceDetails({
   return (
     <>
       <SEO>
-        <title>{`${title} - Спектакли Theatrum`}</title>
+        <title>{`${title} - Репертуар Theatrum`}</title>
         <meta name="description" content={small_description} />
         <meta property="og:title" content={`${title} - Афиша Theatrum`} />
         <meta property="og:description" content={small_description} />

@@ -1,17 +1,20 @@
-import Image from 'next/image';
-import { Link } from '@chakra-ui/next-js';
-import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react"
-import { Badge } from 'ui';
+import Image from "next/image";
+import { Link } from "@chakra-ui/next-js";
+import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Badge } from "ui";
 
-import { Performance } from '@/entities/event/models';
+import { Performance } from "@/entities/event/models";
 
 interface CardPerfomanceProps {
   perfomance: Performance;
 }
 
-export const CardPerfomance: React.FC<CardPerfomanceProps> = ({ perfomance }) => {
+export const CardPerfomance: React.FC<CardPerfomanceProps> = ({
+  perfomance,
+}) => {
   const { id } = perfomance;
-  const { age_limit, title, banner, small_description, slug } = perfomance.attributes.event.data.attributes;
+  const { age_limit, title, banner, small_description, slug } =
+    perfomance.attributes.event.data.attributes;
 
   return (
     <chakra.article>
@@ -47,7 +50,7 @@ export const CardPerfomance: React.FC<CardPerfomanceProps> = ({ perfomance }) =>
             fontWeight="medium"
           >
             <Link
-              href={`/perfomances/${id}-${slug}`}
+              href={`/repertoire/${id}-${slug}`}
               _hover={{ textDecor: "none" }}
             >
               {title}
@@ -56,7 +59,7 @@ export const CardPerfomance: React.FC<CardPerfomanceProps> = ({ perfomance }) =>
           <Text noOfLines={2}>{small_description}</Text>
           <Flex gap={5} alignItems="center">
             <Link
-              href={`/perfomances/${id}-${slug}`}
+              href={`/repertoire/${id}-${slug}`}
               _hover={{ textDecor: "none" }}
             >
               <Button
@@ -73,4 +76,4 @@ export const CardPerfomance: React.FC<CardPerfomanceProps> = ({ perfomance }) =>
       </Flex>
     </chakra.article>
   );
-}
+};

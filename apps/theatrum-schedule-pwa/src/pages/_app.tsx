@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
-import { SessionProvider } from "next-auth/react"
-import { chakra, ChakraProvider, extendTheme } from '@chakra-ui/react'
-import { chakraTheatrumConfig } from 'ui';
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
+import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { chakraTheatrumConfig } from "ui";
 
-import { Navbar, MobileMenu } from '@/shared/components';
+import { Navbar, MobileMenu } from "@/shared/components";
 
-const theme = extendTheme({ ...chakraTheatrumConfig })
+const theme = extendTheme({ ...chakraTheatrumConfig });
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <>
       <Head>
@@ -50,5 +53,5 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
         </ChakraProvider>
       </SessionProvider>
     </>
-  )
+  );
 }

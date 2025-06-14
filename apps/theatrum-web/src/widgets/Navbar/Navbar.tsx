@@ -94,8 +94,8 @@ export const Navbar = () => {
               scrolled={scrolled || notWelcomePage}
             />
             <NavbarLink
-              href="/perfomances"
-              text="Спектакли"
+              href="/repertoire"
+              text="Репертуар"
               scrolled={scrolled || notWelcomePage}
             />
             <NavbarLink
