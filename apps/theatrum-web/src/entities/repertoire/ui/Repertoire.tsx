@@ -1,14 +1,4 @@
-"use client";
-
-import {
-  chakra,
-  Heading,
-  Container,
-  Flex,
-  Text,
-  GridItem,
-  Grid,
-} from "@chakra-ui/react";
+import { chakra, Heading, Container, Flex, Grid } from "@chakra-ui/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Markdown } from "ui";

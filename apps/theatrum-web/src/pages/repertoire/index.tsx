@@ -13,8 +13,9 @@ import { getProjects } from "@/entities/repertoire/api";
 
 type Filter = "perfomances" | "projects" | "archive";
 
-const filters: Record<string, string> = {
+const filters: Record<Filter, string> = {
   perfomances: "Спектакли",
+  projects: "Проекты",
   archive: "Архив",
 };
 
@@ -86,7 +87,7 @@ export default function PerfomancesPage({
             </Heading>
             <Flex
               mt={6}
-              gap={6}
+              gap={5}
               position="relative"
               fontSize={["xl", "2xl", "2xl", "2xl", "2xl"]}
               fontWeight="medium"

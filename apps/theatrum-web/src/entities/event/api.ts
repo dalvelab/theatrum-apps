@@ -30,7 +30,13 @@ export async function getAfisha(
           },
         },
       },
-      populate: ["event", "event.banner", "event.meta", "tickets"],
+      populate: [
+        "event",
+        "event.banner",
+        "event.meta",
+        "tickets",
+        "event.project_type",
+      ],
     },
     {
       encodeValuesOnly: true, // prettify URL

@@ -112,7 +112,7 @@ export const getServerSideProps: GetServerSideProps<IProps> = async ({
   let afisha: ApiResponse<Afisha[], Meta> | null = null;
   let events: ApiResponse<Event[], Meta> | null = null;
 
-  if (isNotVoid(project.data.attributes.project_type)) {
+  if (isNotVoid(project.data.attributes.project_type.data)) {
     if (
       project.data.attributes.project_type.data.attributes.title === "replica"
     ) {

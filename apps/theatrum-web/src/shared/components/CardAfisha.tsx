@@ -60,7 +60,7 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
                 Премьера
               </ChakraBadge>
             )}
-            {isNotVoid(project_type) &&
+            {isNotVoid(project_type?.data) &&
               project_type.data.attributes.title === "replica" && (
                 <ChakraBadge
                   px={3}

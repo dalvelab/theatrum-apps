@@ -82,7 +82,7 @@ export default function Afisha({
             <Flex
               className={styles.filters}
               mt={6}
-              gap={6}
+              gap={5}
               position="relative"
               overflowX="scroll"
             >
