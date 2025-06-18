@@ -8,17 +8,19 @@ import { getPerformances } from "@/entities/event/api";
 import { Projects, Perfomances } from "@/entities/repertoire";
 import type { Performance } from "@/entities/event/models";
 import { useRouter } from "next/router";
+import { Project } from "@/entities/repertoire/models";
+import { getProjects } from "@/entities/repertoire/api";
 
-type Filter = "perfomances" | "archive";
+type Filter = "perfomances" | "projects" | "archive";
 
-const filters: Record<Filter, string> = {
+const filters: Record<string, string> = {
   perfomances: "Спектакли",
-  // projects: "Проекты",
   archive: "Архив",
 };
 
 export default function PerfomancesPage({
   perfomances,
+  projects,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { query, push } = useRouter();
 
@@ -45,8 +47,7 @@ export default function PerfomancesPage({
     push(`/repertoire?filter=${key}`);
   }
 
-  // const isProjectSelected = filter === "projects";
-  const isProjectSelected = false;
+  const isProjectSelected = filter === "projects";
 
   return (
     <>
@@ -112,7 +113,7 @@ export default function PerfomancesPage({
               ))}
             </Flex>
             {isProjectSelected ? (
-              <Projects data={[]} />
+              <Projects data={projects.data} />
             ) : (
               <Perfomances data={perfomances.data} isArchived={isArchived} />
             )}
@@ -125,12 +126,14 @@ export default function PerfomancesPage({
 
 interface IProps {
   perfomances: ApiResponse<Performance[], Meta>;
+  projects: ApiResponse<Project[], Meta>;
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
   const perfomances = await getPerformances({ limit: 100 });
+  const projects = await getProjects();
 
   return {
-    props: { perfomances },
+    props: { perfomances, projects },
   };
 };

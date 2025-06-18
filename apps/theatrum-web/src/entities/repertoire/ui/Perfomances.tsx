@@ -1,7 +1,7 @@
 import { isEmpty } from "platform";
 import { Grid, Text } from "@chakra-ui/react";
 import { Performance } from "../models";
-import { CardPerfomance } from "@/shared/components";
+import { CardEvent } from "@/shared/components";
 
 interface PerfomancesProps {
   data: Performance[];
@@ -32,9 +32,9 @@ export const Perfomances: React.FC<PerfomancesProps> = ({
       pb={20}
     >
       {perfomancesData.map((perfomance) => (
-        <CardPerfomance
-          key={perfomance.attributes.event.data.id}
-          perfomance={perfomance}
+        <CardEvent
+          key={perfomance.id}
+          event={perfomance.attributes.event.data}
         />
       ))}
     </Grid>

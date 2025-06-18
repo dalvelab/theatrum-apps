@@ -6,16 +6,16 @@ import { isNotVoid } from "platform";
 import type { ApiResponse, Meta } from "platform";
 import { Badge } from "ui";
 
-import { getSinglelPerformance } from "@/entities/event/api";
+import { getSingleEvent } from "@/entities/event/api";
 import { SwipeGallery, Roles } from "@/entities/event";
-import type { Performance } from "@/entities/event/models";
+import type { Event } from "@/entities/event/models";
 
 import { SEO } from "@/shared/components";
 
 import styles from "./styles.module.css";
 
 export default function PerfomanceDetails({
-  performance,
+  event,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const {
     banner,
@@ -28,7 +28,7 @@ export default function PerfomanceDetails({
     gallery,
     description,
     properties,
-  } = performance.data.attributes.event.data.attributes;
+  } = event.data.attributes;
 
   return (
     <>
@@ -177,17 +177,17 @@ export default function PerfomanceDetails({
 }
 
 interface IProps {
-  performance: ApiResponse<Performance, Meta>;
+  event: ApiResponse<Event, Meta>;
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async ({
   params,
 }) => {
-  const performance = await getSinglelPerformance({
-    id: params?.slug?.toString().split("-")[0],
+  const event = await getSingleEvent({
+    id: params?.slug?.toString().split("-")[0] as string,
   });
 
   return {
-    props: { performance },
+    props: { event },
   };
 };

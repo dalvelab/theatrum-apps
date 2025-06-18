@@ -12,7 +12,14 @@ export type Event = {
     premiere: boolean;
     slug: string;
     small_description: string;
-    project_type?: ProjectType;
+    project_type?: {
+      data: {
+        id: number;
+        attributes: {
+          title: ProjectType;
+        };
+      };
+    };
     title: string;
     banner: StrapiImage;
     properties: string;

@@ -3,18 +3,16 @@ import { Link } from "@chakra-ui/next-js";
 import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { Badge } from "ui";
 
-import { Performance } from "@/entities/event/models";
+import { Event } from "@/entities/event/models";
 
 interface CardPerfomanceProps {
-  perfomance: Performance;
+  event: Event;
 }
 
-export const CardPerfomance: React.FC<CardPerfomanceProps> = ({
-  perfomance,
-}) => {
-  const { id } = perfomance;
+export const CardEvent: React.FC<CardPerfomanceProps> = ({ event }) => {
+  const id = event.id;
   const { age_limit, title, banner, small_description, slug } =
-    perfomance.attributes.event.data.attributes;
+    event.attributes;
 
   return (
     <chakra.article>

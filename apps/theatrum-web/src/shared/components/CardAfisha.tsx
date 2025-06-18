@@ -60,19 +60,20 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
                 Премьера
               </ChakraBadge>
             )}
-            {isNotVoid(project_type) && project_type === "replica" && (
-              <ChakraBadge
-                px={3}
-                borderRadius={12}
-                bgColor="rgba(255, 255, 255, 0.8)"
-                py={2}
-                fontSize="md"
-                textTransform="none"
-                zIndex={2}
-              >
-                Реплика
-              </ChakraBadge>
-            )}
+            {isNotVoid(project_type) &&
+              project_type.data.attributes.title === "replica" && (
+                <ChakraBadge
+                  px={3}
+                  borderRadius={12}
+                  bgColor="rgba(255, 255, 255, 0.8)"
+                  py={2}
+                  fontSize="md"
+                  textTransform="none"
+                  zIndex={2}
+                >
+                  Реплика
+                </ChakraBadge>
+              )}
           </Flex>
           <chakra.div
             pos="relative"

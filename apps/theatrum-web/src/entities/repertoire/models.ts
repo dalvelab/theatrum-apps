@@ -17,7 +17,14 @@ export type Project = {
   attributes: {
     title: string;
     image: StrapiImage;
-    project_type: ProjectType;
+    project_type: {
+      data: {
+        id: number;
+        attributes: {
+          title: ProjectType;
+        };
+      };
+    };
     description: string;
     gallery: {
       data: {
