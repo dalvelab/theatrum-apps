@@ -1,5 +1,6 @@
 import { Link } from "@chakra-ui/next-js";
 import {
+  Button,
   chakra,
   Container,
   Flex,
@@ -17,6 +18,7 @@ import {
   ExternalLinkIcon,
   HamburgerIcon,
   AddIcon,
+  InfoOutlineIcon,
 } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
@@ -71,28 +73,15 @@ export const MobileMenu = () => {
               <Text fontWeight="medium">Информация</Text>
             </Flex>
           </Link>
-          <Link
-            href="/passports"
-            fontSize="sm"
-            color={
-              router.asPath === "/passports" ? "brand.200" : "blackAlpha.900"
-            }
-            _hover={{ textDecor: "none", color: "brand.200" }}
-          >
-            <Flex flexDir="column" gap={1} alignItems="center">
-              <SettingsIcon fontSize="xl" />
-              <Text fontWeight="medium">Паспорта</Text>
-            </Flex>
-          </Link>
           <Menu autoSelect={false}>
-            <MenuButton
-              as={IconButton}
-              fontSize="2xl"
-              aria-label="Options"
-              icon={<HamburgerIcon />}
-              variant="outline"
-              border="none"
-            />
+            <MenuButton fontSize="2xl" aria-label="Options">
+              <Flex flexDir="column" gap={1} alignItems="center">
+                <HamburgerIcon fontSize="xl" />
+                <Text fontSize="sm" fontWeight="medium">
+                  Прочее
+                </Text>
+              </Flex>
+            </MenuButton>
             <MenuList px={2} display="flex" flexDir="column" gap={2}>
               <Flex flexDir="column">
                 <MenuItem
@@ -115,6 +104,14 @@ export const MobileMenu = () => {
                   onClick={() => router.push("/archive")}
                 >
                   Архив
+                </MenuItem>
+                <MenuItem
+                  py={2}
+                  borderRadius="md"
+                  icon={<SettingsIcon fontSize="lg" />}
+                  onClick={() => router.push("/passports")}
+                >
+                  Паспорта
                 </MenuItem>
               </Flex>
             </MenuList>
