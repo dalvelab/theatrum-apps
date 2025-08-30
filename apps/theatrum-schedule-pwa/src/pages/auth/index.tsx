@@ -1,7 +1,7 @@
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   chakra,
   Container,
@@ -18,7 +18,6 @@ import { isEmpty } from "platform";
 export default function Auth() {
   const router = useRouter();
   const toast = useToast();
-  const session = useSession();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +34,7 @@ export default function Auth() {
     });
 
     if (res?.ok) {
-      router.push("/");
+      router.replace("/");
     } else if (res?.status === 401 || res?.status === 403) {
       toast({
         title: "Произошла ошибка",
@@ -90,13 +89,11 @@ export default function Auth() {
           <Heading mt={4} fontSize="3xl">
             Вход
           </Heading>
-          <chakra.form
-            display="flex"
+          <Flex
             w="full"
             flexDir="column"
             mt={5}
             gap={4}
-            action="submit"
             onSubmit={handleFormSubmit}
           >
             <FormControl>
@@ -115,8 +112,8 @@ export default function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
-            <Button type="submit">Войти</Button>
-          </chakra.form>
+            <Button onClick={handleFormSubmit}>Войти</Button>
+          </Flex>
         </Flex>
       </Container>
     </chakra.section>
