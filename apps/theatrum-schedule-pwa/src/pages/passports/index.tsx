@@ -1,29 +1,14 @@
-import Head from 'next/head';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { Container, Grid, Heading, chakra, Spinner } from '@chakra-ui/react';
-import type { ApiResponse, Meta } from 'platform';
+import Head from "next/head";
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { Container, Grid, Heading, chakra, Spinner } from "@chakra-ui/react";
+import type { ApiResponse, Meta } from "platform";
 
-import { Loader } from '@/components';
-import { getEventPassports, CardPassport } from '@/entities';
-import type { EventPassport } from '@/entities';
+import { getEventPassports, CardPassport } from "@/entities";
+import type { EventPassport } from "@/entities";
 
-export default function Arhive({ passports }: InferGetServerSidePropsType<typeof getServerSideProps>) { 
-  const session = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session.status !== 'authenticated' && session.status !== 'loading') {
-      router.replace('/auth');
-    }
-  }, [router, session.status]);
-
-  if (session.status !== 'authenticated') {
-    return <Loader />
-  }
-
+export default function Arhive({
+  passports,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -75,13 +60,15 @@ export default function Arhive({ passports }: InferGetServerSidePropsType<typeof
 }
 
 interface ArchiveProps {
-  passports: ApiResponse<EventPassport, Meta>
+  passports: ApiResponse<EventPassport, Meta>;
 }
 
-export const getServerSideProps: GetServerSideProps<ArchiveProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  ArchiveProps
+> = async () => {
   const passports = await getEventPassports({ limit: 100 });
 
   return {
-    props: { passports }
-  }
+    props: { passports },
+  };
 };

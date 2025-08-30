@@ -6,6 +6,7 @@ import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { chakraTheatrumConfig } from "ui";
 
 import { Navbar, MobileMenu } from "@/shared/components";
+import { SessionRouter } from "@/shared/SessionRouter";
 
 const theme = extendTheme({ ...chakraTheatrumConfig });
 
@@ -45,11 +46,13 @@ export default function App({
       </Head>
       <SessionProvider session={session}>
         <ChakraProvider theme={theme}>
-          <Navbar />
           <chakra.main mt={[0, 0, 0, 16, 16]}>
-            <Component {...pageProps} />
+            <SessionRouter>
+              <Navbar />
+              <Component {...pageProps} />
+              <MobileMenu />
+            </SessionRouter>
           </chakra.main>
-          <MobileMenu />
         </ChakraProvider>
       </SessionProvider>
     </>

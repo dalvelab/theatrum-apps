@@ -29,19 +29,11 @@ import {
   getScheduleByDays,
 } from "@/entities";
 import type { ScheduleEvent } from "@/entities";
-import { Loader } from "@/components";
 
 export default function SingleScheduleEvent({
   events,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const session = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (session.status !== "authenticated" && session.status !== "loading") {
-      router.replace("/auth");
-    }
-  }, [router, session.status]);
 
   const [selectedEvent, setSelectedEvent] = useState<
     Pick<ScheduleEvent, "attributes">["attributes"] | undefined
@@ -65,10 +57,6 @@ export default function SingleScheduleEvent({
 
   const month = rusMonths[Number(date.split("-")[0]) - 1];
   const year = date.split("-")[1];
-
-  if (session.status !== "authenticated") {
-    return <Loader />;
-  }
 
   return (
     <>

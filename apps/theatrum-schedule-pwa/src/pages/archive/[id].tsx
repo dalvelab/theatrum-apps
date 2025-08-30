@@ -1,8 +1,7 @@
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Flex, Grid, Heading, chakra, Text } from "@chakra-ui/react";
 import {
   getformatDateLocale,
@@ -19,19 +18,11 @@ import {
   getScheduleByDays,
 } from "@/entities";
 import type { ScheduleEvent } from "@/entities";
-import { Loader } from "@/components";
 
 export default function ArchivedEventsForSingleMonth({
   events,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const session = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    if (session.status !== "authenticated" && session.status !== "loading") {
-      router.replace("/auth");
-    }
-  }, [router, session.status]);
 
   const [selectedEvent, setSelectedEvent] = useState<
     Pick<ScheduleEvent, "attributes">["attributes"] | undefined
@@ -55,10 +46,6 @@ export default function ArchivedEventsForSingleMonth({
 
   const month = rusMonths[Number(date.split("-")[0]) - 1];
   const year = date.split("-")[1];
-
-  if (session.status !== "authenticated") {
-    return <Loader />;
-  }
 
   return (
     <>
