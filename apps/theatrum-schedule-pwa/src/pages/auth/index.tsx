@@ -1,7 +1,7 @@
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   chakra,
   Container,
@@ -17,6 +17,13 @@ import {
 export default function Auth() {
   const router = useRouter();
   const toast = useToast();
+  const session = useSession();
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.replace("/");
+    }
+  }, [router, session.status]);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -91,6 +98,7 @@ export default function Auth() {
             mt={5}
             gap={4}
             action="submit"
+            onSubmit={handleFormSubmit}
           >
             <FormControl>
               <FormLabel>Логин</FormLabel>
@@ -108,9 +116,7 @@ export default function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
-            <Button type="submit" onClick={handleFormSubmit}>
-              Войти
-            </Button>
+            <Button type="submit">Войти</Button>
           </chakra.form>
         </Flex>
       </Container>
