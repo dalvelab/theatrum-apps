@@ -10,12 +10,13 @@ import {
 
 import { getInformation, InformationPost } from "@/entities";
 import { Markdown } from "ui";
+import { AuthGuard } from "@/shared/AuthGuard";
 
 export default function Information({
   posts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <>
+    <AuthGuard>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
         <meta property="og:title" content="Theatrum Corporate" />
@@ -80,7 +81,7 @@ export default function Information({
           </Grid>
         </Container>
       </chakra.section>
-    </>
+    </AuthGuard>
   );
 }
 

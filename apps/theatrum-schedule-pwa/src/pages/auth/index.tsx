@@ -13,22 +13,21 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
+import { isEmpty } from "platform";
 
 export default function Auth() {
   const router = useRouter();
   const toast = useToast();
   const session = useSession();
 
-  useEffect(() => {
-    if (session.status === "authenticated") {
-      router.replace("/");
-    }
-  }, [router, session.status]);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleFormSubmit() {
+    if (isEmpty(email) || isEmpty(password)) {
+      return;
+    }
+
     const res = await signIn("credentials", {
       identifier: email,
       password,
@@ -36,7 +35,7 @@ export default function Auth() {
     });
 
     if (res?.ok) {
-      router.replace("/");
+      router.push("/");
     } else if (res?.status === 401 || res?.status === 403) {
       toast({
         title: "Произошла ошибка",

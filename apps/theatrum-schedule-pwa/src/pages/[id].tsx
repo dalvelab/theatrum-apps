@@ -29,6 +29,7 @@ import {
   getScheduleByDays,
 } from "@/entities";
 import type { ScheduleEvent } from "@/entities";
+import { AuthGuard } from "@/shared/AuthGuard";
 
 export default function SingleScheduleEvent({
   events,
@@ -59,7 +60,7 @@ export default function SingleScheduleEvent({
   const year = date.split("-")[1];
 
   return (
-    <>
+    <AuthGuard>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
         <meta property="og:title" content="Theatrum Corporate" />
@@ -129,7 +130,7 @@ export default function SingleScheduleEvent({
           </Flex>
         </Container>
       </chakra.section>
-    </>
+    </AuthGuard>
   );
 }
 

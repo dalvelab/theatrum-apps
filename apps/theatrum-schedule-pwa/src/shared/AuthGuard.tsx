@@ -7,17 +7,18 @@ interface SessionRoter {
   children: ReactNode;
 }
 
-export const SessionRouter: React.FC<SessionRoter> = ({ children }) => {
+export const AuthGuard: React.FC<SessionRoter> = ({ children }) => {
   const session = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (session.status !== "authenticated" && session.status !== "loading") {
-      router.replace("/auth");
+    if (session.status === "loading") return; // Still loading, do nothing
+    if (!session.data) {
+      router.push("/auth");
     }
-  }, [router, session.status]);
+  }, [session, router]);
 
-  if (router.pathname !== "/auth" && session.status !== "authenticated") {
+  if (session.status === "loading") {
     return <Loader />;
   }
 

@@ -6,12 +6,13 @@ import { rusMonths } from "platform";
 import type { ApiResponse, Meta } from "platform";
 
 import { getArchivedScheduleMonths } from "@/entities";
+import { AuthGuard } from "@/shared/AuthGuard";
 
 export default function Archive({
   dates,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <>
+    <AuthGuard>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
         <meta property="og:title" content="Theatrum Corporate" />
@@ -70,7 +71,7 @@ export default function Archive({
           </Flex>
         </Container>
       </chakra.section>
-    </>
+    </AuthGuard>
   );
 }
 

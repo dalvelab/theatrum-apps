@@ -5,12 +5,13 @@ import type { ApiResponse, Meta } from "platform";
 
 import { getEventPassports, CardPassport } from "@/entities";
 import type { EventPassport } from "@/entities";
+import { AuthGuard } from "@/shared/AuthGuard";
 
 export default function Arhive({
   passports,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <>
+    <AuthGuard>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
         <meta property="og:title" content="Theatrum Corporate" />
@@ -55,7 +56,7 @@ export default function Arhive({
           </Grid>
         </Container>
       </chakra.section>
-    </>
+    </AuthGuard>
   );
 }
 

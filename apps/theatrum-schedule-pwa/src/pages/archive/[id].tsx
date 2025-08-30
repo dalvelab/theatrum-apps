@@ -18,6 +18,7 @@ import {
   getScheduleByDays,
 } from "@/entities";
 import type { ScheduleEvent } from "@/entities";
+import { AuthGuard } from "@/shared/AuthGuard";
 
 export default function ArchivedEventsForSingleMonth({
   events,
@@ -48,7 +49,7 @@ export default function ArchivedEventsForSingleMonth({
   const year = date.split("-")[1];
 
   return (
-    <>
+    <AuthGuard>
       <Head>
         <meta property="og:url" content="https://corporate.theatrum.center" />
         <meta property="og:title" content="Theatrum Corporate" />
@@ -117,7 +118,7 @@ export default function ArchivedEventsForSingleMonth({
           </Flex>
         </Container>
       </chakra.section>
-    </>
+    </AuthGuard>
   );
 }
 
