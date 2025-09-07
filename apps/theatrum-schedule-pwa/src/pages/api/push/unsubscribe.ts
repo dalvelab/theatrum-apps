@@ -28,7 +28,6 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid subscription data" });
     }
 
-    // Delete the subscription from Strapi
     const response = await fetch(`${process.env.DB_HOST}/push-subscriptions`, {
       method: "GET",
       headers: {
@@ -44,14 +43,11 @@ export default async function handler(
 
     const { data: subscriptions } = await response.json();
 
-    // Find the subscription to delete
     const subscriptionToDelete = subscriptions.find(
-      (sub: any) =>
-        sub.attributes.subscription.endpoint === subscription.endpoint
+      (sub: any) => sub.subscription.endpoint === subscription.endpoint
     );
 
     if (subscriptionToDelete) {
-      // Delete the subscription from Strapi
       const deleteResponse = await fetch(
         `${process.env.DB_HOST}/push-subscriptions/${subscriptionToDelete.id}`,
         {
