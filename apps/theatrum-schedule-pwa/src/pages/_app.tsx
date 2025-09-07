@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { chakraTheatrumConfig } from "ui";
 
-import { Navbar, MobileMenu } from "@/shared/components";
+import { Menu } from "@/shared/components";
 
 const theme = extendTheme({ ...chakraTheatrumConfig });
 
@@ -46,9 +46,8 @@ export default function App({
       <SessionProvider session={session}>
         <ChakraProvider theme={theme}>
           <chakra.main mt={[0, 0, 0, 16, 16]}>
-            <Navbar />
+            <Menu />
             <Component {...pageProps} />
-            <MobileMenu />
           </chakra.main>
         </ChakraProvider>
       </SessionProvider>
