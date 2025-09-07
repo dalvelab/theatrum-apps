@@ -64,6 +64,7 @@ export async function getInformation(): Promise<
     pagination: {
       limit: 100,
     },
+    sort: ["createdAt:desc"],
   });
 
   const res = await fetch(
