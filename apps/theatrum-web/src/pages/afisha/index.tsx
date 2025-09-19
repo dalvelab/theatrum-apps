@@ -36,7 +36,8 @@ export default function Afisha({
         getformatDateLocale(ticket.date).toString().substring(3, 5)
       )
     )
-    .flat();
+    .flat()
+    .sort((a, b) => Number(a) - Number(b));
 
   const uniqueTicketMonths = new Set<string>();
 
