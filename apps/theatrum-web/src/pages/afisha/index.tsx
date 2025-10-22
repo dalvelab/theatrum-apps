@@ -30,18 +30,31 @@ export default function Afisha({
     setFilter(query.filter);
   }, [push, query.filter]);
 
+  const comparator = (a: string, b: string) => {
+    const monthA = a.substring(0, 2);
+    const yearA = a.substring(3, 8);
+    const monthB = b.substring(0, 2);
+    const yearB = b.substring(3, 8);
+
+    return Number(monthA) - Number(monthB) && Number(yearA) - Number(yearB);
+  };
+
   const ticketMonths = afisha.data
     .map((event) =>
       event.attributes.tickets.map((ticket) =>
-        getformatDateLocale(ticket.date).toString().substring(3, 5)
+        getformatDateLocale(ticket.date).toString().substring(3, 10)
       )
     )
     .flat()
-    .sort((a, b) => Number(a) - Number(b));
+    .sort(comparator);
 
   const uniqueTicketMonths = new Set<string>();
 
-  ticketMonths.map((ticket) => uniqueTicketMonths.add(ticket));
+  ticketMonths.map((ticket) => {
+    const month = ticket.substring(0, 2);
+
+    uniqueTicketMonths.add(month);
+  });
 
   const data = getTicketsByMonth(afisha.data, filter);
 
