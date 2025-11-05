@@ -26,7 +26,7 @@ export const YAMetrika = () => {
         });
       `}
       </Script>
-      <Script id="tianji-metrika" async defer src="http://5967043-cy54186.twc1.net/tracker.js" data-website-id="cmhlpq3xd007586e7lv961fnv"></Script>
+      <Script id="tianji-metrika" async defer src="https://5967043-cy54186.twc1.net/tracker.js" data-website-id="cmhlpq3xd007586e7lv961fnv"></Script>
     </>
   )
 }
