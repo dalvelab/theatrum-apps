@@ -14,6 +14,15 @@ import type { Afisha } from "@/entities/event/models";
 
 import styles from "./styles.module.css";
 
+const comparator = (a: string, b: string) => {
+  const monthA = a.substring(0, 2);
+  const yearA = a.substring(3, 8);
+  const monthB = b.substring(0, 2);
+  const yearB = b.substring(3, 8);
+
+  return Number(monthA) - Number(monthB) && Number(yearA) - Number(yearB);
+};
+
 export default function Afisha({
   afisha,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -29,15 +38,6 @@ export default function Afisha({
 
     setFilter(query.filter);
   }, [push, query.filter]);
-
-  const comparator = (a: string, b: string) => {
-    const monthA = a.substring(0, 2);
-    const yearA = a.substring(3, 8);
-    const monthB = b.substring(0, 2);
-    const yearB = b.substring(3, 8);
-
-    return Number(monthA) - Number(monthB) && Number(yearA) - Number(yearB);
-  };
 
   const ticketMonths = afisha.data
     .map((event) =>
