@@ -10,4 +10,10 @@ export type Meta = {
 export type ApiResponse<Data, Meta> = {
   data: Data;
   meta: Meta;
+  error?: {
+    status: number;
+    name: string;
+    message: string;
+    details: string;
+  }
 }

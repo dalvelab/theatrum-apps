@@ -323,6 +323,19 @@ export const getServerSideProps: GetServerSideProps<IProps> = async ({
     id: params?.slug?.toString().split("-")[0],
   });
 
+  if (afisha.error?.status === 404) {
+    return {
+      notFound: true,
+    }
+  } else if (afisha.error) {
+    return {
+      redirect: {
+        destination: "/500",
+        permanent: false
+      }
+    }
+  }
+
   return {
     props: { afisha },
   };
