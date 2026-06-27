@@ -1,6 +1,6 @@
 import qs from "qs";
 import type { ApiResponse, Meta } from "platform";
-import { Project } from "./models";
+import type { Project } from "./models";
 
 export async function getProjects(): Promise<ApiResponse<Project[], Meta>> {
   const query = qs.stringify(
@@ -9,7 +9,7 @@ export async function getProjects(): Promise<ApiResponse<Project[], Meta>> {
     },
     {
       encodeValuesOnly: true,
-    }
+    },
   );
 
   const res = await fetch(`${process.env.DB_HOST}/projects?${query}`);
@@ -22,7 +22,7 @@ interface getSingleProjectParams {
 }
 
 export async function getSingleProject(
-  params: getSingleProjectParams
+  params: getSingleProjectParams,
 ): Promise<ApiResponse<Project, Meta>> {
   const query = qs.stringify(
     {
@@ -30,11 +30,11 @@ export async function getSingleProject(
     },
     {
       encodeValuesOnly: true,
-    }
+    },
   );
 
   const res = await fetch(
-    `${process.env.DB_HOST}/projects/${params.id}?${query}`
+    `${process.env.DB_HOST}/projects/${params.id}?${query}`,
   );
 
   return res.json();

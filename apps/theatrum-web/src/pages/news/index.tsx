@@ -2,7 +2,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { chakra, Grid, Container, Heading, Text, Flex } from "@chakra-ui/react";
-import { isEmpty, isVoid } from "platform";
+import { isEmpty } from "platform";
 import type { ApiResponse, Meta } from "platform";
 
 import { CardNews, SEO } from "@/shared/components";

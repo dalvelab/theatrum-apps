@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export const usePushNotification = () => {
   const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
+    null,
   );
   const [loading, setLoading] = useState(false);
   const [isSupported, setIsSupported] = useState(false);

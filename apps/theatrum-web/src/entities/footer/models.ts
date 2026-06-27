@@ -1,4 +1,4 @@
-import { ContactType } from "@/shared/models/contact";
+import type { ContactType } from "@/shared/models/contact";
 
 export type Contact = {
   type: ContactType;

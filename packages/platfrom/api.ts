@@ -4,8 +4,8 @@ export type Meta = {
     pageSize: number;
     pageCount: number;
     total: number;
-  }
-}
+  };
+};
 
 export type ApiResponse<Data, Meta> = {
   data: Data;
@@ -15,5 +15,5 @@ export type ApiResponse<Data, Meta> = {
     name: string;
     message: string;
     details: string;
-  }
-}
+  };
+};

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Container, Grid, Heading, chakra, Spinner } from "@chakra-ui/react";
+import { Container, Grid, Heading, chakra } from "@chakra-ui/react";
 import type { ApiResponse, Meta } from "platform";
 
 import { getEventPassports, CardPassport } from "@/entities";

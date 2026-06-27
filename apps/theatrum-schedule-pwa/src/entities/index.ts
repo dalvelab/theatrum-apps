@@ -1,2 +1,2 @@
-export * from './schedule';
-export * from './event-passport';
+export * from "./schedule";
+export * from "./event-passport";

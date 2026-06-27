@@ -8,7 +8,7 @@ import { getPerformances } from "@/entities/event/api";
 import { Projects, Perfomances } from "@/entities/repertoire";
 import type { Performance } from "@/entities/event/models";
 import { useRouter } from "next/router";
-import { Project } from "@/entities/repertoire/models";
+import type { Project } from "@/entities/repertoire/models";
 import { getProjects } from "@/entities/repertoire/api";
 
 type Filter = "perfomances" | "projects" | "archive";

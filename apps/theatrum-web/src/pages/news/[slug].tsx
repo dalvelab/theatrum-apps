@@ -23,11 +23,11 @@ export default function NewsDetails({
     <>
       <SEO>
         <title>{`${title} - Новости Theatrum`}</title>
-        <meta name="description" content={description.slice(0, 160) + "..."} />
+        <meta name="description" content={`${description.slice(0, 160)}...`} />
         <meta property="og:title" content={`${title} - Новости Theatrum`} />
         <meta
           property="og:description"
-          content={description.slice(0, 160) + "..."}
+          content={`${description.slice(0, 160)}...`}
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={image.data.attributes.url} />
@@ -85,9 +85,9 @@ export default function NewsDetails({
                   Опубликовано{" "}
                   {publish_date &&
                     `${Number(
-                      publish_date.substring(8, 10)
+                      publish_date.substring(8, 10),
                     )} ${getGenetiveRusMonth(
-                      Number(publish_date.substring(5, 7))
+                      Number(publish_date.substring(5, 7)),
                     )}, ${publish_date.substring(0, 4)}`}{" "}
                   в{" "}
                   <Link color="brand.200" href={source.link} target="_blank">

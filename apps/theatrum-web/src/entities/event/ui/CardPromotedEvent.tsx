@@ -61,7 +61,7 @@ export const CardPromotedEvent: React.FC<CardPromotedEvent> = ({
       >
         <Text lineHeight={1}>{formattedDate[0].date}</Text>
         <Text lineHeight={1}>{formattedDate[0].month}</Text>
-        <Badge text={String(age_limit) + "+"} />
+        <Badge text={`${String(age_limit)}+`} />
       </Stack>
       <Flex flexDir="column" mt={3}>
         <Heading color="gray.900" fontSize="2xl" fontWeight="medium">

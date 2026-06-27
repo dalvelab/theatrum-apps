@@ -1,14 +1,9 @@
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Container, Flex, Grid, Heading, chakra } from "@chakra-ui/react";
-import {
-  getformatDateLocale,
-  shortRusDayNames,
-  type ApiResponse,
-  type Meta,
-} from "platform";
+import { getformatDateLocale, type ApiResponse, type Meta } from "platform";
 
-import { getInformation, InformationPost } from "@/entities";
+import { getInformation, type InformationPost } from "@/entities";
 import { Markdown } from "ui";
 import { AuthGuard } from "@/shared/AuthGuard";
 

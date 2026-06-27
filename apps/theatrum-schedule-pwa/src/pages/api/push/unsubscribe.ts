@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 interface PushSubscription {
   endpoint: string;
@@ -14,7 +14,7 @@ interface UnsubscribeRequest {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
@@ -24,7 +24,7 @@ export default async function handler(
   try {
     const { subscription }: UnsubscribeRequest = req.body;
 
-    if (!subscription || !subscription.endpoint) {
+    if (!subscription?.endpoint) {
       return res.status(400).json({ error: "Invalid subscription data" });
     }
 
@@ -44,7 +44,7 @@ export default async function handler(
     const { data: subscriptions } = await response.json();
 
     const subscriptionToDelete = subscriptions.find(
-      (sub: any) => sub.subscription.endpoint === subscription.endpoint
+      (sub: any) => sub.subscription.endpoint === subscription.endpoint,
     );
 
     if (subscriptionToDelete) {
@@ -55,7 +55,7 @@ export default async function handler(
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (!deleteResponse.ok) {

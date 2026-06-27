@@ -51,10 +51,10 @@ export default function AfishaDetails({
   const formattedDate = formatAfishaDays(dates);
 
   const handleYAWidget = (id: string) => {
-    // @ts-ignore
-    window["YandexTicketsDealer"].push([
+    // @ts-expect-error
+    window.YandexTicketsDealer.push([
       "getDealer",
-      function (dealer: any) {
+      (dealer: any) => {
         dealer.open({ id, type: "session" });
       },
     ]);
@@ -207,7 +207,7 @@ export default function AfishaDetails({
                     </Text>
                     <Text fontSize="lg">
                       {getGenetiveRusMonth(
-                        Number(ticket.date.toString().substring(5, 7))
+                        Number(ticket.date.toString().substring(5, 7)),
                       )}
                     </Text>
                     <Text fontSize="lg">
@@ -245,7 +245,7 @@ export default function AfishaDetails({
                     alignItems="center"
                   >
                     Возрастное ограничение:{" "}
-                    <Badge text={age_limit.toString() + "+"} />
+                    <Badge text={`${age_limit.toString()}+`} />
                   </chakra.li>
                   <chakra.div className={styles.properties}>
                     <Markdown text={properties} />
@@ -326,14 +326,14 @@ export const getServerSideProps: GetServerSideProps<IProps> = async ({
   if (afisha.error?.status === 404) {
     return {
       notFound: true,
-    }
+    };
   } else if (afisha.error) {
     return {
       redirect: {
         destination: "/500",
-        permanent: false
-      }
-    }
+        permanent: false,
+      },
+    };
   }
 
   return {

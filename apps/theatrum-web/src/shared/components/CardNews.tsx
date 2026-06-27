@@ -9,9 +9,8 @@ import {
   LinkBox,
   Text,
 } from "@chakra-ui/react";
-import { getGenetiveRusMonth } from "platform";
 
-import { News } from "@/entities/post/models";
+import type { News } from "@/entities/post/models";
 
 interface CardNewsProps {
   post: News;

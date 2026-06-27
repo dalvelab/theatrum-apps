@@ -31,8 +31,9 @@ npm run build:web
 npm run build:corporate
 npm run build:cms        # only theatrum-strapi
 
-npm run lint             # turbo: lint all (next lint per app, eslint per package)
-npm run format           # prettier --write across **/*.{ts,tsx,md}
+npm run lint             # biome lint . (whole repo)
+npm run format           # biome format --write . (whole repo)
+npm run check            # biome check --write . (lint + format + safe fixes)
 ```
 
 Run a command for a single app/package directly, e.g. `cd apps/theatrum-web && npm run lint`.
@@ -76,7 +77,6 @@ Import alias: `@/*` → `./src/*` (defined in each app's `tsconfig.json`).
 
 - `platform` — shared TS utilities and types, imported as `import { ... } from 'platform'`. **Note the directory is misspelled `packages/platfrom/` while the package name is `platform`** — edit the `platfrom` dir, import `platform`. Exports: API types (`ApiResponse`, `Meta`), date helpers (`dates.ts`), and `isVoid`/`isEmpty`-style guards (`misc.ts`). Entry is `index.ts` (no build step; consumed as source).
 - `ui` — shared React component library (Chakra-based), entry `index.tsx`, consumed as source. Scaffold a component with `cd packages/ui && npm run generate:component` (turbo gen).
-- `eslint-config-custom` — shared ESLint config (`eslint-config-next` + prettier).
 - `tsconfig` — base tsconfigs extended by apps/packages (e.g. `tsconfig/nextjs.json`).
 
 `platform` and `ui` are shipped as TypeScript source, so apps list them in `transpilePackages` in `next.config.js`. When changing those packages, the consuming app must transpile them — no separate build.
@@ -84,6 +84,16 @@ Import alias: `@/*` → `./src/*` (defined in each app's `tsconfig.json`).
 ## UI stack
 
 Chakra UI (`@chakra-ui/react`, `@chakra-ui/next-js`) with Emotion and Framer Motion. Swiper for carousels/galleries. `react-markdown` / `remove-markdown` for Strapi rich-text content.
+
+## Linting & formatting (Biome)
+
+The repo uses **[Biome](https://biomejs.dev)** (`@biomejs/biome`, pinned 2.5.1) as the single linter + formatter — it replaced ESLint and Prettier. One root `biome.json` governs everything; per-app/package `lint` scripts just call `biome lint .` (Biome walks up to the root config).
+
+- **Run**: `npm run lint` (check), `npm run format` (write formatting), `npm run check` (lint + format + safe autofixes). Biome respects `.gitignore` (`vcs.useIgnoreFile`).
+- **Formatting**: 2-space indent, double quotes, semicolons, 80-col — matches the old Prettier defaults the repo was on. Markdown is **not** formatted (Biome doesn't support it yet; only 3 `.md` files).
+- **Excluded from Biome**: `apps/theatrum-strapi` (CMS keeps its own legacy `.eslintrc`, mostly generated code), `*.svg` assets, and the generated PWA service worker (`public/sw.js`, `public/workbox-*.js`).
+- **Linter**: `recommended` ruleset; Next.js/React domain rules auto-enable from each app's `package.json` deps. A handful of rules that surfaced pre-existing patterns the old ESLint never enforced (`noExplicitAny`, `noArrayIndexKey`, `useExhaustiveDependencies`, `noImportantStyles` (Chakra `!important`), `noSvgWithoutTitle`, `noImgElement`, …) are set to `warn` in `biome.json` so `npm run lint` stays green — tighten them later as code is cleaned up.
+- **Next.js**: `next lint` is gone; both apps set `eslint.ignoreDuringBuilds: true` in `next.config.js` so `next build` doesn't look for ESLint.
 
 ## Deployment (pm2)
 

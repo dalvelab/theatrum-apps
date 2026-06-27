@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+/** biome-ignore-all lint/performance/noImgElement: intentional raw <img> usage in this file */
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";

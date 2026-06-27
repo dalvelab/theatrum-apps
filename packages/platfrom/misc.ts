@@ -3,18 +3,18 @@ interface NullObject {
 }
 
 export const isVoid = (
-  variable: unknown
+  variable: unknown,
 ): variable is null | undefined | void | never | NullObject =>
   typeof variable === "undefined" ||
   (typeof variable === "object" &&
     (variable === null || variable.valueOf() === null));
 
 export const isNotVoid = <T>(
-  variable: T | null | undefined | void | never | NullObject
+  variable: T | null | undefined | void | never | NullObject,
 ): variable is T => !isVoid(variable);
 
 export const isEmptyObject = (
-  variable: unknown
+  variable: unknown,
 ): variable is { [key: string]: never } | NullObject =>
   typeof variable === "object" &&
   variable !== null &&
@@ -30,7 +30,7 @@ export const isEmptyString = (variable: unknown): boolean =>
   typeof variable === "string" && variable === "";
 
 export const isEmpty = (
-  variable: unknown
+  variable: unknown,
 ): variable is
   | null
   | undefined

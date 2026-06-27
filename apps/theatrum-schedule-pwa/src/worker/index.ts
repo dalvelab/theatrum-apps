@@ -9,7 +9,7 @@ self.addEventListener("push", (event: any) => {
         data: data.data,
       };
 
-      // @ts-ignore
+      // @ts-expect-error
       event.waitUntil(self.registration.showNotification(data.title, options));
     } catch (error) {
       console.error("Error processing push message:", error);
@@ -20,9 +20,9 @@ self.addEventListener("push", (event: any) => {
 self.addEventListener("notificationclick", (event: any) => {
   event.notification.close();
 
-  if (event.notification.data && event.notification.data.url) {
+  if (event.notification.data?.url) {
     event.waitUntil(
-      (self as any).clients.openWindow(event.notification.data.url)
+      (self as any).clients.openWindow(event.notification.data.url),
     );
   } else {
     event.waitUntil((self as any).clients.openWindow("/"));

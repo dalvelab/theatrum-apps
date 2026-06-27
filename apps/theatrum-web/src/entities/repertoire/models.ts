@@ -1,6 +1,6 @@
-import { StrapiImage } from "@/shared/models/image";
-import { Event } from "../event/models";
-import { ProjectType } from "@/shared/models/project";
+import type { StrapiImage } from "@/shared/models/image";
+import type { Event } from "../event/models";
+import type { ProjectType } from "@/shared/models/project";
 
 export type Performance = {
   id: number;

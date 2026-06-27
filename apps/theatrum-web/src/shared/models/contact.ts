@@ -1,1 +1,1 @@
-export type ContactType = 'text' | 'email' | 'phone';
+export type ContactType = "text" | "email" | "phone";

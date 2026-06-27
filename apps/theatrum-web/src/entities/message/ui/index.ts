@@ -1,1 +1,1 @@
-export * from './FeedbackModal';
+export * from "./FeedbackModal";

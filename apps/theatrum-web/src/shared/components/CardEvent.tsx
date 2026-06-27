@@ -3,7 +3,7 @@ import { Link } from "@chakra-ui/next-js";
 import { chakra, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { Badge } from "ui";
 
-import { Event } from "@/entities/event/models";
+import type { Event } from "@/entities/event/models";
 
 interface CardPerfomanceProps {
   event: Event;
@@ -42,7 +42,7 @@ export const CardEvent: React.FC<CardPerfomanceProps> = ({ event }) => {
           />
         </chakra.div>
         <Flex flexDir="column" gap={[3, 4, 4, 6, 10]} alignItems="flex-start">
-          <Badge text={String(age_limit) + "+"} />
+          <Badge text={`${String(age_limit)}+`} />
           <Heading
             fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]}
             fontWeight="medium"

@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method === "POST") {
     try {
@@ -19,7 +19,7 @@ export default async function handler(
           body: JSON.stringify({
             data: { subscription },
           }),
-        }
+        },
       );
 
       if (response.ok) {

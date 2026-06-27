@@ -1,2 +1,2 @@
-export * from './SceneModal';
-export * from './EmptyAbout';
+export * from "./SceneModal";
+export * from "./EmptyAbout";

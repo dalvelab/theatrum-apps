@@ -1,26 +1,26 @@
-import { StrapiImage, StrapiFile } from "@/shared/models/image";
+import type { StrapiImage, StrapiFile } from "@/shared/models/image";
 
 type AboutDescription = {
   id: number;
-  button: 'none' | 'table_booking';
+  button: "none" | "table_booking";
   text: string;
   image: StrapiImage;
-}
+};
 
 type Management = {
   id: number;
   job: string;
   name: string;
   image: StrapiImage;
-}
+};
 
 type Document = {
   id: number;
   name: string;
   file: {
     data: StrapiFile;
-  }
-}
+  };
+};
 
 export type Scene = {
   id: number;
@@ -34,11 +34,11 @@ export type Scene = {
         url: string;
         width?: number;
         height: number;
-      }
-    }[]
-  }
+      };
+    }[];
+  };
   documents: Document[];
-}
+};
 
 export type AboutPage = {
   id: number;
@@ -47,5 +47,5 @@ export type AboutPage = {
     management: Management[];
     registerDocuments: Document[];
     scenes: Scene[];
-  }
-}
+  };
+};

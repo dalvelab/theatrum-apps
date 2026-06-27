@@ -5,11 +5,9 @@
   "types": "./index.ts",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint \"**/*.ts*\""
+    "lint": "biome lint ."
   },
   "devDependencies": {
-    "eslint": "8.39.0",
-    "eslint-config-custom": "*",
     "tsconfig": "*",
     "typescript": "5.0.4"
   }

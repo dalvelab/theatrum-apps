@@ -1,14 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import {
-  chakra,
-  Flex,
-  Modal,
-  ModalBody,
-  ModalContent,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Modal, ModalBody, ModalContent, Text } from "@chakra-ui/react";
 
 interface SidebarProps {
   onClose: () => void;

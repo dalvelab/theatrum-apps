@@ -1,8 +1,8 @@
 import qs from "qs";
 import type { ApiResponse, Meta } from "platform";
 
-import { Afisha, Performance, Slider, Season, Event } from "./models";
-import { ProjectType } from "@/shared/models/project";
+import type { Afisha, Performance, Slider, Season, Event } from "./models";
+import type { ProjectType } from "@/shared/models/project";
 
 interface getAfishaParams {
   limit?: number;
@@ -11,7 +11,7 @@ interface getAfishaParams {
 }
 
 export async function getAfisha(
-  params: getAfishaParams
+  params: getAfishaParams,
 ): Promise<ApiResponse<Afisha[], Meta>> {
   const query = qs.stringify(
     {
@@ -40,7 +40,7 @@ export async function getAfisha(
     },
     {
       encodeValuesOnly: true, // prettify URL
-    }
+    },
   );
 
   const res = await fetch(`${process.env.DB_HOST}/afishas?${query}`);
@@ -53,7 +53,7 @@ interface GetSingleAfisha {
 }
 
 export async function getSingleAfisha(
-  params: GetSingleAfisha
+  params: GetSingleAfisha,
 ): Promise<ApiResponse<Afisha, Meta>> {
   const query = qs.stringify({
     populate: [
@@ -67,7 +67,7 @@ export async function getSingleAfisha(
     ],
   });
   const res = await fetch(
-    `${process.env.DB_HOST}/afishas/${params.id}?${query}`
+    `${process.env.DB_HOST}/afishas/${params.id}?${query}`,
   );
 
   return res.json();
@@ -93,7 +93,7 @@ interface getPerformancesParams {
 }
 
 export async function getPerformances(
-  params: getPerformancesParams
+  params: getPerformancesParams,
 ): Promise<ApiResponse<Performance[], Meta>> {
   const query = qs.stringify({
     pagination: {
@@ -112,7 +112,7 @@ interface getEventsParams {
 }
 
 export async function getEvents(
-  params: getEventsParams
+  params: getEventsParams,
 ): Promise<ApiResponse<Event[], Meta>> {
   const query = qs.stringify({
     populate: ["banner"],
@@ -136,7 +136,7 @@ export async function getSingleEvent(params: {
     populate: ["banner", "gallery", "meta", "production_team", "roles"],
   });
   const res = await fetch(
-    `${process.env.DB_HOST}/events/${params.id}?${query}`
+    `${process.env.DB_HOST}/events/${params.id}?${query}`,
   );
 
   return res.json();

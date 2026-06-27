@@ -1,7 +1,7 @@
 import qs from "qs";
 import type { ApiResponse, Meta } from "platform";
 
-import { Footer } from "./models";
+import type { Footer } from "./models";
 
 export async function getFooter(): Promise<ApiResponse<Footer, Meta>> {
   const query = qs.stringify({

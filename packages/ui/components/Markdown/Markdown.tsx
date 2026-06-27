@@ -1,15 +1,11 @@
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 interface MarkdownProps {
-  text: string
+  text: string;
 }
 
-export const Markdown: React.FC<MarkdownProps> = ({text}) => {
-  return (
-    <ReactMarkdown className={styles.description}>
-      {text}
-    </ReactMarkdown>
-  )
-}
+export const Markdown: React.FC<MarkdownProps> = ({ text }) => {
+  return <ReactMarkdown className={styles.description}>{text}</ReactMarkdown>;
+};

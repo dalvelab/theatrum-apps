@@ -110,7 +110,7 @@ export default function PerfomanceDetails({
                 <chakra.div mt={premiere ? 6 : 0} w="100%" fontSize="lg">
                   <chakra.li display="flex" gap={3} alignItems="center">
                     Возрастное ограничение:{" "}
-                    <Badge text={age_limit.toString() + "+"} />
+                    <Badge text={`${age_limit.toString()}+`} />
                   </chakra.li>
                   <chakra.div className={styles.properties}>
                     <Markdown text={properties} />

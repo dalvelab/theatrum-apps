@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import Image from "next/image";
 import { chakra } from "@chakra-ui/react";
-import { useSwiper } from "swiper/react"
+import { useSwiper } from "swiper/react";
 
 export const SwiperButtons = () => {
   const swiper = useSwiper();
-  
+
   return (
     <>
       <chakra.button
@@ -23,11 +23,11 @@ export const SwiperButtons = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <chakra.div 
-          width={["16px", "20px", "20px", "20px", "20px"]} 
-          height={["30px", "36px", "36px", "36px", "36px"]} 
+        <chakra.div
+          width={["16px", "20px", "20px", "20px", "20px"]}
+          height={["30px", "36px", "36px", "36px", "36px"]}
           pos="relative"
-          >
+        >
           <Image
             src="/chevron-green-gallery.png"
             fill
@@ -53,19 +53,19 @@ export const SwiperButtons = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <chakra.div 
-          width={["16px", "20px", "20px", "20px", "20px"]} 
-          height={["30px", "36px", "36px", "36px", "36px"]} 
+        <chakra.div
+          width={["16px", "20px", "20px", "20px", "20px"]}
+          height={["30px", "36px", "36px", "36px", "36px"]}
           pos="relative"
-          >
-            <Image
-              src="/chevron-green-gallery.png"
-              fill
-              alt="иконка галерии вперед"
-              priority={true}
-            />
-          </chakra.div>
+        >
+          <Image
+            src="/chevron-green-gallery.png"
+            fill
+            alt="иконка галерии вперед"
+            priority={true}
+          />
+        </chakra.div>
       </chakra.button>
     </>
-  )
-}
+  );
+};

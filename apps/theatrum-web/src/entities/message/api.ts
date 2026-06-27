@@ -1,9 +1,10 @@
-import type { ApiResponse, Meta } from 'platform';
+import type { ApiResponse, Meta } from "platform";
 
-import { MessageResponse, Message } from './models';
+import type { MessageResponse, Message } from "./models";
 
-export async function createMessage(message: Message): Promise<ApiResponse<MessageResponse, Meta>> {
-
+export async function createMessage(
+  message: Message,
+): Promise<ApiResponse<MessageResponse, Meta>> {
   const res = await fetch(`/api/messages`, {
     method: "POST",
     cache: "no-cache",
@@ -16,5 +17,5 @@ export async function createMessage(message: Message): Promise<ApiResponse<Messa
     }),
   });
 
-  return res.json()
+  return res.json();
 }

@@ -7,9 +7,9 @@ import { SwipeGallery } from "@/entities/event";
 
 import { CardAfisha, CardEvent, SEO } from "@/shared/components";
 import { getSingleProject } from "@/entities/repertoire/api";
-import { Project } from "@/entities/repertoire/models";
+import type { Project } from "@/entities/repertoire/models";
 import { ProjectHeroSection } from "@/entities/repertoire";
-import { Afisha, Event } from "@/entities/event/models";
+import type { Afisha, Event } from "@/entities/event/models";
 import { getAfisha, getEvents } from "@/entities/event/api";
 
 export default function ProjectDetails({

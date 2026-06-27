@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { Loader } from "./components";
 
 interface SessionRoter {

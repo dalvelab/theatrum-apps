@@ -12,7 +12,7 @@ import {
 import { formatAfishaDays, isNotVoid } from "platform";
 import { Badge, Divider } from "ui";
 
-import { Afisha } from "@/entities/event/models";
+import type { Afisha } from "@/entities/event/models";
 
 interface CardAfishaProps {
   afisha: Afisha;
@@ -154,14 +154,14 @@ export const CardAfisha: React.FC<CardAfishaProps> = ({ afisha }) => {
                 ))}
               </Stack>
             )}
-            <Badge text={String(age_limit) + "+"} />
+            <Badge text={`${String(age_limit)}+`} />
           </Stack>
           <Flex
             display={["flex", "none", "flex", "none", "none"]}
             gap={4}
             alignItems="center"
           >
-            <Badge text={String(age_limit) + "+"} />
+            <Badge text={`${String(age_limit)}+`} />
           </Flex>
           <Heading
             fontSize={["xl", "2xl", "2xl", "3xl", "3xl"]}

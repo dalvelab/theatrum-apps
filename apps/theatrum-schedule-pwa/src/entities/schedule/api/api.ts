@@ -2,7 +2,7 @@ import qs from "qs";
 
 import type { ApiResponse, Meta } from "platform";
 
-import { InformationPost, ScheduleEvent } from "./models";
+import type { InformationPost, ScheduleEvent } from "./models";
 
 interface getScheduleByMonthParams {
   id: string;
@@ -18,7 +18,7 @@ export async function getScheduleByMonths(): Promise<
 }
 
 export async function getScheduleByMonth(
-  params: getScheduleByMonthParams
+  params: getScheduleByMonthParams,
 ): Promise<ApiResponse<ScheduleEvent[], Meta>> {
   const query = qs.stringify({
     pagination: {
@@ -27,7 +27,7 @@ export async function getScheduleByMonth(
     populate: ["people", "people.worker"],
   });
   const res = await fetch(
-    `${process.env.DB_HOST}/corporate-schedules/${params.id}?${query}`
+    `${process.env.DB_HOST}/corporate-schedules/${params.id}?${query}`,
   );
 
   return res.json();
@@ -42,7 +42,7 @@ export async function getArchivedScheduleMonths(): Promise<
 }
 
 export async function getArchivedScheduleByMonth(
-  params: getScheduleByMonthParams
+  params: getScheduleByMonthParams,
 ): Promise<ApiResponse<ScheduleEvent[], Meta>> {
   const query = qs.stringify({
     pagination: {
@@ -51,7 +51,7 @@ export async function getArchivedScheduleByMonth(
     populate: ["people", "people.worker"],
   });
   const res = await fetch(
-    `${process.env.DB_HOST}/corporate-schedule-archives/${params.id}?${query}`
+    `${process.env.DB_HOST}/corporate-schedule-archives/${params.id}?${query}`,
   );
 
   return res.json();
@@ -68,7 +68,7 @@ export async function getInformation(): Promise<
   });
 
   const res = await fetch(
-    `${process.env.DB_HOST}/corporate-informations?${query}`
+    `${process.env.DB_HOST}/corporate-informations?${query}`,
   );
 
   return res.json();

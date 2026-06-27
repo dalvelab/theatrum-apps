@@ -1,6 +1,6 @@
 import { isEmpty } from "platform";
 import { Grid, Text } from "@chakra-ui/react";
-import { Performance } from "../models";
+import type { Performance } from "../models";
 import { CardEvent } from "@/shared/components";
 
 interface PerfomancesProps {
@@ -13,7 +13,7 @@ export const Perfomances: React.FC<PerfomancesProps> = ({
   isArchived,
 }) => {
   const perfomancesData = data.filter(
-    (perfomance) => perfomance.attributes.archived === isArchived
+    (perfomance) => perfomance.attributes.archived === isArchived,
   );
 
   if (isEmpty(perfomancesData)) {

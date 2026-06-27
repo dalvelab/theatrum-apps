@@ -34,7 +34,7 @@ export const Footer = () => {
 
   const contacts = isNotVoid(footerData?.data)
     ? footerData?.data.attributes.contacts.filter(
-        (contact) => contact.type === "email" || contact.type === "phone"
+        (contact) => contact.type === "email" || contact.type === "phone",
       )
     : [];
   const partners = isNotVoid(footerData?.data)
@@ -213,7 +213,7 @@ export const Footer = () => {
             </Button>
           </Flex>
         </Flex>
-        {(!partners || partners.length !== 0) && (
+        {partners?.length !== 0 && (
           <Flex mt={4} gap={6} flexWrap="wrap" alignItems="center">
             {partners?.map((partner) => (
               <chakra.a
@@ -223,6 +223,7 @@ export const Footer = () => {
                 h={100}
                 pos="relative"
                 key={partner.id}
+                rel="noopener"
               >
                 <Image
                   src={partner.image.data.attributes.url}

@@ -1,22 +1,37 @@
-import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
-import Image from 'next/image';
-import { useState } from 'react';
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
+import Image from "next/image";
+import { useState } from "react";
 
-import { Button, chakra, Container, Heading, Flex, Link, Text } from '@chakra-ui/react';
-import { isNotVoid, isVoid } from 'platform';
-import type { ApiResponse, Meta } from 'platform';
+import {
+  Button,
+  chakra,
+  Container,
+  Heading,
+  Flex,
+  Link,
+  Text,
+} from "@chakra-ui/react";
+import { isNotVoid, isVoid } from "platform";
+import type { ApiResponse, Meta } from "platform";
 
-import { getContacts } from '@/entities/contact/api';
-import { EmptyContacts } from '@/entities/contact/ui';
-import type { Contacts } from '@/entities/contact/models';
-import { FeedbackModal } from '@/entities/message';
-import { Property, SEO } from '@/shared/components';
+import { getContacts } from "@/entities/contact/api";
+import { EmptyContacts } from "@/entities/contact/ui";
+import type { Contacts } from "@/entities/contact/models";
+import { FeedbackModal } from "@/entities/message";
+import { Property, SEO } from "@/shared/components";
 
-export default function Contacts({ contact }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Contacts({
+  contact,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [openedFeedbackModal, setOpenedFeedbackModal] = useState(false);
 
   if (isVoid(contact.data)) {
-    return <EmptyContacts openedFeedbackModal={openedFeedbackModal} setOpenedFeedbackModal={setOpenedFeedbackModal} />
+    return (
+      <EmptyContacts
+        openedFeedbackModal={openedFeedbackModal}
+        setOpenedFeedbackModal={setOpenedFeedbackModal}
+      />
+    );
   }
 
   const { contacts, image, address } = contact.data.attributes;
@@ -114,13 +129,13 @@ export default function Contacts({ contact }: InferGetServerSidePropsType<typeof
 }
 
 interface IProps {
-  contact: ApiResponse<Contacts, Meta>
+  contact: ApiResponse<Contacts, Meta>;
 }
 
 export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const contact = await getContacts()
+  const contact = await getContacts();
 
   return {
-    props: { contact }
-  }
+    props: { contact },
+  };
 };

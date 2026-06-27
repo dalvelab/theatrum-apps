@@ -1,7 +1,5 @@
-import type { FormEvent } from "react";
 import { useState } from "react";
 import {
-  chakra,
   Button,
   Modal,
   ModalBody,
@@ -102,7 +100,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
         isClosable: true,
       });
       onCloseModal();
-    } catch (error) {
+    } catch (_error) {
       toast({
         title: "Произошла ошибка.",
         description: "Попробуйте позже",
@@ -122,13 +120,13 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({
 
   const nameError = errors?.issues.find((issue) => issue.path.includes("name"));
   const phoneError = errors?.issues.find((issue) =>
-    issue.path.includes("phone")
+    issue.path.includes("phone"),
   );
   const emailError = errors?.issues.find((issue) =>
-    issue.path.includes("email")
+    issue.path.includes("email"),
   );
   const messageError = errors?.issues.find((issue) =>
-    issue.path.includes("message")
+    issue.path.includes("message"),
   );
 
   return (

@@ -1,6 +1,6 @@
 import { isEmpty } from "platform";
 import { Button, chakra, Flex, Grid, Heading, Text } from "@chakra-ui/react";
-import { Project } from "../models";
+import type { Project } from "../models";
 import Image from "next/image";
 import { Link } from "@chakra-ui/next-js";
 

@@ -36,7 +36,7 @@ export default function ArchivedEventsForSingleMonth({
   }
 
   function handleModalOpen(
-    data: Pick<ScheduleEvent, "attributes">["attributes"]
+    data: Pick<ScheduleEvent, "attributes">["attributes"],
   ) {
     setModalOpened(true);
     setSelectedEvent(data);

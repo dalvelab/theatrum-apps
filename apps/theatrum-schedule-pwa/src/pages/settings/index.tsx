@@ -3,7 +3,6 @@ import {
   Button,
   Container,
   Flex,
-  Grid,
   Heading,
   Spinner,
   chakra,
@@ -48,22 +47,18 @@ export default function Settings() {
           <Flex pt={5}>
             {loading ? (
               <Spinner size="xl" />
+            ) : isSupported ? (
+              subscription ? (
+                <Button colorScheme="red" onClick={unsubscribe}>
+                  Выключить уведомления
+                </Button>
+              ) : (
+                <Button colorScheme="green" onClick={subscribe}>
+                  Включить уведомления
+                </Button>
+              )
             ) : (
-              <>
-                {isSupported ? (
-                  subscription ? (
-                    <Button colorScheme="red" onClick={unsubscribe}>
-                      Выключить уведомления
-                    </Button>
-                  ) : (
-                    <Button colorScheme="green" onClick={subscribe}>
-                      Включить уведомления
-                    </Button>
-                  )
-                ) : (
-                  <p>Пуш-уведомления не поддерживаются</p>
-                )}
-              </>
+              <p>Пуш-уведомления не поддерживаются</p>
             )}
           </Flex>
         </Container>

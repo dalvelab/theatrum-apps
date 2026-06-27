@@ -1,6 +1,6 @@
-import type { StrapiImage } from "@/shared/models/image"; 
+import type { StrapiImage } from "@/shared/models/image";
 
-export type NewsType = 'info' | 'press';
+export type NewsType = "info" | "press";
 
 export type News = {
   id: number;
@@ -16,5 +16,5 @@ export type News = {
       link?: string;
       publish_date?: Date;
     };
-  }
-}
+  };
+};

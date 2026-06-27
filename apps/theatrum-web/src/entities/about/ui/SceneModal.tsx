@@ -6,12 +6,11 @@ import {
   ModalContent,
   Flex,
   Text,
-  ModalCloseButton,
   Heading,
   Container,
 } from "@chakra-ui/react";
 
-import { Scene } from "../models";
+import type { Scene } from "../models";
 import Image from "next/image";
 import { Link } from "@chakra-ui/next-js";
 

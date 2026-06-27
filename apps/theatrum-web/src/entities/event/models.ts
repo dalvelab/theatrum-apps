@@ -1,5 +1,5 @@
 import type { StrapiImage } from "@/shared/models/image";
-import { ProjectType } from "@/shared/models/project";
+import type { ProjectType } from "@/shared/models/project";
 
 export type Season = "none" | "fazioli";
 

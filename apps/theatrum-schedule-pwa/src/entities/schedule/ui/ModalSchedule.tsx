@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Markdown } from "ui";
 
-import { ScheduleEvent } from "../api";
+import type { ScheduleEvent } from "../api";
 import { getformatDateLocaleTime, isNotVoid, isVoid } from "platform";
 import { typeToSchemeMap } from "../model";
 

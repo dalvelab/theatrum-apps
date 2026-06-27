@@ -1,9 +1,9 @@
-import Script from "next/script"
+import Script from "next/script";
 
 export const YAScript = () => {
   return (
-    <Script id='yandex-afisha-script'>
-    {`
+    <Script id="yandex-afisha-script">
+      {`
       /* Настройка */ 
       var dealerName = 'YandexTicketsDealer'; 
       var dealer = window[dealerName] = window[dealerName] || []; 
@@ -21,6 +21,6 @@ export const YAScript = () => {
           target.parentNode.insertBefore(script, target); 
       })(); 
     `}
-  </Script>
-  )
-}
+    </Script>
+  );
+};

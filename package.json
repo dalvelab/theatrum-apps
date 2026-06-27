@@ -9,14 +9,13 @@
     "dev:cms": "cd apps/theatrum-strapi && npm run develop",
     "dev:corporate": "cd apps/theatrum-schedule-pwa && npm run dev",
     "dev:web": "cd apps/theatrum-web && npm run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.1",
     "@turbo/gen": "^1.9.7",
-    "eslint": "8.39.0",
-    "eslint-config-custom": "*",
-    "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "name": "theatrum-corp",

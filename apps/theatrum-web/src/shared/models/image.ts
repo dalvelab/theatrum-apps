@@ -6,9 +6,9 @@ export type StrapiImage = {
       url: string;
       width?: number;
       height: number;
-    }
-  }
-}
+    };
+  };
+};
 
 export type StrapiFile = {
   id: number;
@@ -17,5 +17,5 @@ export type StrapiFile = {
     url: string;
     size: number;
     mime: string;
-  }
-}
+  };
+};

@@ -1,18 +1,8 @@
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import {
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  chakra,
-  Text,
-  Spinner,
-  Button,
-} from "@chakra-ui/react";
+import { useState } from "react";
+import { Container, Flex, Grid, Heading, chakra, Text } from "@chakra-ui/react";
 import {
   getformatDateLocale,
   getformatDateLocaleTime,
@@ -47,7 +37,7 @@ export default function SingleScheduleEvent({
   }
 
   function handleModalOpen(
-    data: Pick<ScheduleEvent, "attributes">["attributes"]
+    data: Pick<ScheduleEvent, "attributes">["attributes"],
   ) {
     setModalOpened(true);
     setSelectedEvent(data);

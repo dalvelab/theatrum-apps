@@ -40,12 +40,11 @@ export default function Afisha({
   }, [push, query.filter]);
 
   const ticketMonths = afisha.data
-    .map((event) =>
+    .flatMap((event) =>
       event.attributes.tickets.map((ticket) =>
-        getformatDateLocale(ticket.date).toString().substring(3, 10)
-      )
+        getformatDateLocale(ticket.date).toString().substring(3, 10),
+      ),
     )
-    .flat()
     .sort(comparator);
 
   const uniqueTicketMonths = new Set<string>();
