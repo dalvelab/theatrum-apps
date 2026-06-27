@@ -6,7 +6,7 @@ import { chakraTheatrumConfig } from "ui";
 
 import { Navbar } from "@/widgets/Navbar";
 import { Footer } from "@/widgets/Footer";
-import { YAMetrika } from "@/shared/components";
+import { YAMetrika, CookieConsent } from "@/shared/components";
 
 import "./styles.css";
 
@@ -43,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </chakra.main>
         <Footer />
+        <CookieConsent />
       </ChakraProvider>
     </>
   );
