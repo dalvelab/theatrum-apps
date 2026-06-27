@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_about_scenes",
+  "info": {
+    "displayName": "scene",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "documents": {
+      "type": "component",
+      "repeatable": true,
+      "component": "documents.advanced-document"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

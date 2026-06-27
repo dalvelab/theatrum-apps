@@ -2,9 +2,11 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:cms": "cd apps/theatrum-strapi && npm run build",
     "build:corporate": "cd apps/theatrum-schedule-pwa && npm run build",
     "build:web": "cd apps/theatrum-web && npm run build",
     "dev": "turbo run dev",
+    "dev:cms": "cd apps/theatrum-strapi && npm run develop",
     "dev:corporate": "cd apps/theatrum-schedule-pwa && npm run dev",
     "dev:web": "cd apps/theatrum-web && npm run dev",
     "lint": "turbo run lint",
@@ -19,6 +21,9 @@
   },
   "name": "theatrum-corp",
   "packageManager": "npm@9.6.7",
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"

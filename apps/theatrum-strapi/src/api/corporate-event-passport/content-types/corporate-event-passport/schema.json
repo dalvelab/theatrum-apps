@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "corporate_event_passports",
+  "info": {
+    "singularName": "corporate-event-passport",
+    "pluralName": "corporate-event-passports",
+    "displayName": "CorporateEventPassport",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "events": {
+      "displayName": "EventPassport",
+      "type": "component",
+      "repeatable": true,
+      "component": "corporate.event-passport"
+    }
+  }
+}

@@ -5,7 +5,7 @@
     "build": {
       "dotEnv": [".env.production.local", ".env.local", ".env.production", ".env"],
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"],
+      "outputs": [".next/**", "!.next/cache/**", "build/**", ".cache/**"],
       "env": [
         "DB_HOST",
         "NEXT_PUBLIC_FILES_ENDPOINT",
@@ -14,7 +14,15 @@
         "NEXT_PUBLIC_HOSTNAME",
         "NEXTAUTH_URL",
         "NEXTAUTH_SECRET",
-        "VAPID_PUBLIC_KEY"
+        "VAPID_PUBLIC_KEY",
+        "HOST",
+        "PORT",
+        "APP_KEYS",
+        "API_TOKEN_SALT",
+        "ADMIN_JWT_SECRET",
+        "JWT_SECRET",
+        "CRON_ENABLED",
+        "VAPID_PRIVATE_KEY"
       ]
     },
     "lint": {},

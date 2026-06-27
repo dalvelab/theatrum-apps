@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_documents_advanced_documents",
+  "info": {
+    "displayName": "AdvancedDocument",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  }
+}

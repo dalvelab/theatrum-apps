@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_news_sources",
+  "info": {
+    "displayName": "source",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": false
+    },
+    "publish_date": {
+      "type": "date"
+    }
+  }
+}

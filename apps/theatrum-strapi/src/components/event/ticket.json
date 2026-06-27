@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_event_tickets",
+  "info": {
+    "displayName": "ticket",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "paid": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "private": true,
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

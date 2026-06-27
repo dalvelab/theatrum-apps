@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "AboutPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "registerDocuments": {
+      "type": "component",
+      "repeatable": true,
+      "component": "documents.advanced-document"
+    },
+    "management": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.person"
+    },
+    "scenes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.scene"
+    },
+    "description": {
+      "displayName": "TextBlock",
+      "type": "component",
+      "repeatable": true,
+      "component": "about.text-block"
+    }
+  }
+}

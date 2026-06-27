@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "ContactPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "contact.contact"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "working_time": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "corporate_schedules",
+  "info": {
+    "singularName": "corporate-schedule",
+    "pluralName": "corporate-schedules",
+    "displayName": "CorporateSchedule",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "репетиция",
+        "спектакль",
+        "концерт",
+        "банкет",
+        "прочее"
+      ],
+      "required": true
+    },
+    "people": {
+      "type": "component",
+      "repeatable": true,
+      "component": "corporate.worker",
+      "required": false,
+      "min": 1
+    },
+    "additional_info": {
+      "type": "richtext"
+    },
+    "timeBadge": {
+      "type": "boolean",
+      "default": false
+    },
+    "send_push": {
+      "type": "boolean",
+      "default": false
+    },
+    "custom_push_body": {
+      "type": "string"
+    }
+  }
+}
