@@ -7,9 +7,8 @@ export const YAMetrika = () => {
   }
 
   return (
-    <>
-      <Script id="yandex-metrika-script" strategy="afterInteractive">
-        {`
+    <Script id="yandex-metrika-script" strategy="afterInteractive">
+      {`
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -24,14 +23,6 @@ export const YAMetrika = () => {
               ecommerce:"dataLayer"
         });
       `}
-      </Script>
-      <Script
-        id="tianji-metrika"
-        async
-        defer
-        src="https://5967043-cy54186.twc1.net/tracker.js"
-        data-website-id="cmhlpq3xd007586e7lv961fnv"
-      ></Script>
-    </>
+    </Script>
   );
 };
