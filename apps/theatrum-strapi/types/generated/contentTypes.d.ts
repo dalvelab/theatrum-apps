@@ -385,6 +385,7 @@ export interface ApiAboutPageAboutPage extends Schema.SingleType {
     management: Attribute.Component<'about.person', true>;
     registerDocuments: Attribute.Component<'documents.advanced-document', true>;
     scenes: Attribute.Component<'about.scene', true>;
+    troupe: Attribute.Component<'about.person', true>;
     updatedAt: Attribute.DateTime;
     updatedBy: Attribute.Relation<
       'api::about-page.about-page',

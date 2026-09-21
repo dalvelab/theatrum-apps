@@ -10,6 +10,8 @@ export async function getAboutPage(): Promise<ApiResponse<AboutPage, Meta>> {
       "registerDocuments.file",
       "management",
       "management.image",
+      "troupe",
+      "troupe.image",
       "scenes",
       "scenes.documents",
       "scenes.documents.file",

@@ -13,7 +13,12 @@ import {
 import { isNotVoid, isVoid } from "platform";
 import type { ApiResponse, Meta } from "platform";
 
-import { getAboutPage, SceneModal, EmptyAbout } from "@/entities/about";
+import {
+  getAboutPage,
+  SceneModal,
+  EmptyAbout,
+  PersonCard,
+} from "@/entities/about";
 import type { AboutPage } from "@/entities/about";
 import { SEO } from "@/shared/components";
 
@@ -27,7 +32,7 @@ export default function AfishaDetails({
     return <EmptyAbout />;
   }
 
-  const { description, registerDocuments, management, scenes } =
+  const { description, registerDocuments, management, scenes, troupe } =
     page.data.attributes;
 
   const handleSceneModal = (id: number) => {
@@ -310,45 +315,29 @@ export default function AfishaDetails({
             <Heading as="h3">Руководство</Heading>
             <Flex mt={10} gap={10} flexWrap="wrap">
               {management.map((worker) => (
-                <Flex
-                  maxW="268px"
-                  key={worker.id}
-                  flexDirection="column"
-                  alignItems="flex-start"
-                >
-                  <chakra.div
-                    w="240px"
-                    h="280px"
-                    pos="relative"
-                    overflow="hidden"
-                    borderRadius="12px"
-                  >
-                    <Image
-                      src={worker.image.data.attributes.url}
-                      alt={worker.name}
-                      style={{
-                        objectFit: "cover",
-                        overflowClipMargin: "unset",
-                      }}
-                      width={240}
-                      height={280}
-                    />
-                  </chakra.div>
-                  <Text mt={3} color="brand.300">
-                    {worker.job}
-                  </Text>
-                  <Text
-                    color="gray.900"
-                    fontSize="lg"
-                    textTransform="capitalize"
-                  >
-                    {worker.name}
-                  </Text>
-                </Flex>
+                <PersonCard key={worker.id} person={worker} />
               ))}
             </Flex>
           </Container>
         </chakra.section>
+        {isNotVoid(troupe) && troupe.length > 0 && (
+          <chakra.section pt={10} pb={10} id="troupe">
+            <Container
+              maxWidth="container.xl"
+              h="auto"
+              display="flex"
+              flexDir="column"
+              pos="relative"
+            >
+              <Heading as="h3">Труппа театра</Heading>
+              <Flex mt={10} gap={10} flexWrap="wrap">
+                {troupe.map((actor) => (
+                  <PersonCard key={actor.id} person={actor} />
+                ))}
+              </Flex>
+            </Container>
+          </chakra.section>
+        )}
       </chakra.main>
     </>
   );

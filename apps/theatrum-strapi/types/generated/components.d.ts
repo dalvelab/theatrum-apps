@@ -8,7 +8,7 @@ export interface AboutPerson extends Schema.Component {
   };
   attributes: {
     image: Attribute.Media<'images'> & Attribute.Required;
-    job: Attribute.String & Attribute.Required;
+    job: Attribute.String;
     name: Attribute.String & Attribute.Required;
   };
 }

@@ -7,9 +7,9 @@ type AboutDescription = {
   image: StrapiImage;
 };
 
-type Management = {
+export type Person = {
   id: number;
-  job: string;
+  job: string | null;
   name: string;
   image: StrapiImage;
 };
@@ -44,7 +44,8 @@ export type AboutPage = {
   id: number;
   attributes: {
     description: AboutDescription[];
-    management: Management[];
+    management: Person[];
+    troupe: Person[] | null;
     registerDocuments: Document[];
     scenes: Scene[];
   };
