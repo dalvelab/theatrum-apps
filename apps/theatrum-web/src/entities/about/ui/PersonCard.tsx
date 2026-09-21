@@ -24,12 +24,15 @@ export const PersonCard = ({ person }: IProps) => {
         <Image
           src={person.image.data.attributes.url}
           alt={person.name}
+          fill
+          // Берём с запасом (x2 от ширины карточки): из-за objectFit: cover
+          // горизонтальные фото масштабируются по высоте и мылятся
+          sizes="480px"
+          quality={90}
           style={{
             objectFit: "cover",
             overflowClipMargin: "unset",
           }}
-          width={240}
-          height={280}
         />
       </chakra.div>
       {hasJob && (
