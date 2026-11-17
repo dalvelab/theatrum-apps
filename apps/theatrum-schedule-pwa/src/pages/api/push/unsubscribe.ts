@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { strapiFetch } from "@/shared/strapi";
 
 interface PushSubscription {
   endpoint: string;
@@ -28,7 +29,7 @@ export default async function handler(
       return res.status(400).json({ error: "Invalid subscription data" });
     }
 
-    const response = await fetch(`${process.env.DB_HOST}/push-subscriptions`, {
+    const response = await strapiFetch(`/push-subscriptions`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -48,8 +49,8 @@ export default async function handler(
     );
 
     if (subscriptionToDelete) {
-      const deleteResponse = await fetch(
-        `${process.env.DB_HOST}/push-subscriptions/${subscriptionToDelete.id}`,
+      const deleteResponse = await strapiFetch(
+        `/push-subscriptions/${subscriptionToDelete.id}`,
         {
           method: "DELETE",
           headers: {

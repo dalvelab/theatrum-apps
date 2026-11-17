@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { strapiFetch } from "@/shared/strapi";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,18 +10,15 @@ export default async function handler(
       const { subscription } = req.body;
 
       // Save subscription to Strapi
-      const response = await fetch(
-        `${process.env.DB_HOST}/push-subscriptions`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            data: { subscription },
-          }),
+      const response = await strapiFetch(`/push-subscriptions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          data: { subscription },
+        }),
+      });
 
       if (response.ok) {
         res.status(200).json({ success: true });

@@ -3,6 +3,7 @@ import qs from "qs";
 import type { ApiResponse, Meta } from "platform";
 
 import type { InformationPost, ScheduleEvent } from "./models";
+import { strapiFetch } from "@/shared/strapi";
 
 interface getScheduleByMonthParams {
   id: string;
@@ -12,7 +13,7 @@ interface getScheduleByMonthParams {
 export async function getScheduleByMonths(): Promise<
   ApiResponse<string[], Meta>
 > {
-  const res = await fetch(`${process.env.DB_HOST}/corporate-schedules`);
+  const res = await strapiFetch(`/corporate-schedules`);
 
   return res.json();
 }
@@ -26,9 +27,7 @@ export async function getScheduleByMonth(
     },
     populate: ["people", "people.worker"],
   });
-  const res = await fetch(
-    `${process.env.DB_HOST}/corporate-schedules/${params.id}?${query}`,
-  );
+  const res = await strapiFetch(`/corporate-schedules/${params.id}?${query}`);
 
   return res.json();
 }
@@ -36,7 +35,7 @@ export async function getScheduleByMonth(
 export async function getArchivedScheduleMonths(): Promise<
   ApiResponse<string[], Meta>
 > {
-  const res = await fetch(`${process.env.DB_HOST}/corporate-schedule-archives`);
+  const res = await strapiFetch(`/corporate-schedule-archives`);
 
   return res.json();
 }
@@ -50,8 +49,8 @@ export async function getArchivedScheduleByMonth(
     },
     populate: ["people", "people.worker"],
   });
-  const res = await fetch(
-    `${process.env.DB_HOST}/corporate-schedule-archives/${params.id}?${query}`,
+  const res = await strapiFetch(
+    `/corporate-schedule-archives/${params.id}?${query}`,
   );
 
   return res.json();
@@ -67,9 +66,7 @@ export async function getInformation(): Promise<
     sort: ["createdAt:desc"],
   });
 
-  const res = await fetch(
-    `${process.env.DB_HOST}/corporate-informations?${query}`,
-  );
+  const res = await strapiFetch(`/corporate-informations?${query}`);
 
   return res.json();
 }

@@ -3,6 +3,7 @@ import qs from "qs";
 import type { ApiResponse, Meta } from "platform";
 
 import type { EventPassport } from "./models";
+import { strapiFetch } from "@/shared/strapi";
 
 interface getEventPassportsParams {
   limit?: number;
@@ -16,9 +17,7 @@ export async function getEventPassports(
       limit: params?.limit || 100,
     },
   });
-  const res = await fetch(
-    `${process.env.DB_HOST}/corporate-event-passport?${query}`,
-  );
+  const res = await strapiFetch(`/corporate-event-passport?${query}`);
 
   return res.json();
 }

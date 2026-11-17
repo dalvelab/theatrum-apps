@@ -13,6 +13,7 @@
       "outputs": [".next/**", "!.next/cache/**", "build/**", ".cache/**"],
       "env": [
         "DB_HOST",
+        "STRAPI_API_TOKEN",
         "NEXT_PUBLIC_FILES_ENDPOINT",
         "NEXT_PUBLIC_METRIKA",
         "NEXT_PUBLIC_API_HOST",
