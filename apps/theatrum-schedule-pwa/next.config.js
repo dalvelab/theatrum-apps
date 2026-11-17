@@ -1,3 +1,4 @@
+const path = require("node:path");
 const defaultCache = require("next-pwa/cache");
 
 // Эти запросы service worker не кэширует, а всегда отправляет в сеть:
@@ -32,6 +33,8 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
+  // Корень монорепо: иначе Next 15 может взять чужой lockfile выше по дереву
+  outputFileTracingRoot: path.join(__dirname, "../.."),
   transpilePackages: ["ui", "platform"],
   // Линтинг вынесен в Biome (biome.json), next lint не используется
   eslint: {
