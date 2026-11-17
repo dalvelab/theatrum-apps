@@ -41,7 +41,7 @@ export default function Archive({
         >
           <Heading as="h2">Архив расписания</Heading>
           <Flex mt={10} gap={7} flexWrap="wrap">
-            {dates.data.map((date) => {
+            {(dates?.data ?? []).map((date) => {
               const monthIndex = Number(date.split("-")[0]);
               const year = date.split("-")[1];
 

@@ -43,7 +43,7 @@ export default function SingleScheduleEvent({
     setSelectedEvent(data);
   }
 
-  const scheduleGrid = getScheduleByDays(events.data);
+  const scheduleGrid = getScheduleByDays(events?.data ?? []);
   const date = router.query.id as string;
 
   const month = rusMonths[Number(date.split("-")[0]) - 1];

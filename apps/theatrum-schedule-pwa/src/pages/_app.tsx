@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { chakraTheatrumConfig } from "ui";
 
-import { Menu } from "@/shared/components";
+import { ErrorBoundary, Menu } from "@/shared/components";
 
 const theme = extendTheme({ ...chakraTheatrumConfig });
 
@@ -43,14 +43,16 @@ export default function App({
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
         <meta name="theme-color" content="#FFFFFF" />
       </Head>
-      <SessionProvider session={session}>
-        <ChakraProvider theme={theme}>
-          <chakra.main mt={[0, 0, 0, 16, 16]}>
-            <Menu />
-            <Component {...pageProps} />
-          </chakra.main>
-        </ChakraProvider>
-      </SessionProvider>
+      <ErrorBoundary>
+        <SessionProvider session={session}>
+          <ChakraProvider theme={theme}>
+            <chakra.main mt={[0, 0, 0, 16, 16]}>
+              <Menu />
+              <Component {...pageProps} />
+            </chakra.main>
+          </ChakraProvider>
+        </SessionProvider>
+      </ErrorBoundary>
     </>
   );
 }

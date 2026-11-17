@@ -51,7 +51,7 @@ export default function Information({
             gap={5}
             pb={10}
           >
-            {posts.data.map((post) => (
+            {(posts?.data ?? []).map((post) => (
               <Flex
                 key={post.id}
                 flexDir="column"

@@ -50,9 +50,11 @@ export default function Arhive({
             ]}
             gap={5}
           >
-            {passports.data.events.map(({ title, document }, index) => (
-              <CardPassport key={index} title={title} link={document.url} />
-            ))}
+            {(passports?.data?.events ?? []).map(
+              ({ title, document }, index) => (
+                <CardPassport key={index} title={title} link={document.url} />
+              ),
+            )}
           </Grid>
         </Container>
       </chakra.section>
