@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/performance/noImgElement: intentional raw <img> usage in this file */
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { SessionProvider } from "next-auth/react";
 import { chakra, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { chakraTheatrumConfig } from "ui";
@@ -21,6 +22,11 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
+  const router = useRouter();
+  // Меню (и отступ под десктопное меню) есть на всех страницах, кроме входа:
+  // остальные закрыты middleware и открываются только с сессией.
+  const hasNav = router.pathname !== "/auth";
+
   return (
     <>
       <Head>
@@ -55,7 +61,7 @@ export default function App({
         <SessionProvider session={session}>
           <ChakraProvider theme={theme}>
             <chakra.main
-              mt={[0, 0, 0, 16, 16]}
+              mt={hasNav ? [0, 0, 0, 16, 16] : 0}
               // Страницы уже имеют нижний отступ под таб-бар, добавляем safe area (home-индикатор iPhone)
               pb={["env(safe-area-inset-bottom)", null, null, 0]}
             >
