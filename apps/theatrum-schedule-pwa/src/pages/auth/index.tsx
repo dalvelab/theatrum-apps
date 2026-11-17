@@ -1,3 +1,5 @@
+import type { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth/next";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -14,6 +16,9 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { isEmpty } from "platform";
+
+import { safeCallbackUrl } from "@/shared/safeCallbackUrl";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function Auth() {
   const router = useRouter();
@@ -34,7 +39,7 @@ export default function Auth() {
     });
 
     if (res?.ok) {
-      router.replace("/");
+      router.replace(safeCallbackUrl(router.query.callbackUrl));
     } else if (res?.status === 401 || res?.status === 403) {
       toast({
         title: "Произошла ошибка",
@@ -119,3 +124,24 @@ export default function Auth() {
     </chakra.section>
   );
 }
+
+// Уже вошедшему пользователю форма не нужна: сразу уводим туда, откуда
+// его отправили на вход (или на главную).
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
+  const session = await getServerSession(req, res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: safeCallbackUrl(query.callbackUrl),
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
