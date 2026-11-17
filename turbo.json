@@ -1,15 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "envMode": "loose",
+  "tasks": {
     "build": {
-      "dotEnv": [
+      "dependsOn": ["^build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
         ".env.production.local",
         ".env.local",
         ".env.production",
         ".env"
       ],
-      "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "build/**", ".cache/**"],
       "env": [
         "DB_HOST",
