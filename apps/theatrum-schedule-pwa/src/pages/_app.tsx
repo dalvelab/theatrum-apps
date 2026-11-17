@@ -7,7 +7,15 @@ import { chakraTheatrumConfig } from "ui";
 
 import { ErrorBoundary, Menu } from "@/shared/components";
 
-const theme = extendTheme({ ...chakraTheatrumConfig });
+const theme = extendTheme({
+  ...chakraTheatrumConfig,
+  styles: {
+    global: {
+      // Светло-серый фон приложения, на нём белые карточки — как в iOS
+      body: { bgColor: "#F2F2F7" },
+    },
+  },
+});
 
 export default function App({
   Component,
@@ -20,7 +28,7 @@ export default function App({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
@@ -46,7 +54,11 @@ export default function App({
       <ErrorBoundary>
         <SessionProvider session={session}>
           <ChakraProvider theme={theme}>
-            <chakra.main mt={[0, 0, 0, 16, 16]}>
+            <chakra.main
+              mt={[0, 0, 0, 16, 16]}
+              // Страницы уже имеют нижний отступ под таб-бар, добавляем safe area (home-индикатор iPhone)
+              pb={["env(safe-area-inset-bottom)", null, null, 0]}
+            >
               <Menu />
               <Component {...pageProps} />
             </chakra.main>

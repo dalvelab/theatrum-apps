@@ -1,11 +1,12 @@
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { Container, Grid, Heading, chakra } from "@chakra-ui/react";
+import { Container, Heading, chakra } from "@chakra-ui/react";
 import type { ApiResponse, Meta } from "platform";
 
-import { getEventPassports, CardPassport } from "@/entities";
+import { getEventPassports } from "@/entities";
 import type { EventPassport } from "@/entities";
 import { AuthGuard } from "@/shared/AuthGuard";
+import { ListGroup, ListRow } from "@/shared/components";
 
 export default function Arhive({
   passports,
@@ -27,7 +28,6 @@ export default function Arhive({
         pt={10}
         pb={40}
         pos="relative"
-        bgColor="white"
         position="relative"
         h="auto"
         minH="100vh"
@@ -39,23 +39,18 @@ export default function Arhive({
           flexDir="column"
         >
           <Heading as="h2">Паспорта спектаклей</Heading>
-          <Grid
-            mt={7}
-            templateColumns={[
-              "1fr",
-              "1fr 1fr",
-              "1fr 1fr",
-              "1fr 1fr 1fr",
-              "1fr 1fr 1fr",
-            ]}
-            gap={5}
-          >
-            {(passports?.data?.events ?? []).map(
-              ({ title, document }, index) => (
-                <CardPassport key={index} title={title} link={document.url} />
-              ),
-            )}
-          </Grid>
+          <chakra.div mt={6}>
+            <ListGroup>
+              {(passports?.data?.events ?? []).map(({ title, document }) => (
+                <ListRow
+                  key={document.url}
+                  href={document.url}
+                  title={title}
+                  external
+                />
+              ))}
+            </ListGroup>
+          </chakra.div>
         </Container>
       </chakra.section>
     </AuthGuard>

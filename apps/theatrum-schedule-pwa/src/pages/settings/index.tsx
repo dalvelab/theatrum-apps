@@ -1,10 +1,11 @@
 import Head from "next/head";
 import {
-  Button,
   Container,
   Flex,
   Heading,
   Spinner,
+  Switch,
+  Text,
   chakra,
 } from "@chakra-ui/react";
 
@@ -32,7 +33,6 @@ export default function Settings() {
         pt={10}
         pb={20}
         pos="relative"
-        bgColor="white"
         position="relative"
         h="auto"
         minH="100vh"
@@ -44,21 +44,39 @@ export default function Settings() {
           flexDir="column"
         >
           <Heading as="h2">Настройки</Heading>
-          <Flex pt={5}>
+          {/* Строка настроек с переключателем, как в iOS Settings */}
+          <Flex
+            mt={6}
+            px={4}
+            minH="56px"
+            py={3}
+            gap={3}
+            alignItems="center"
+            bgColor="white"
+            borderRadius="2xl"
+            maxW={["full", "full", "640px"]}
+          >
+            <Flex flexDir="column" flex={1}>
+              <Text fontSize="lg" fontWeight="medium">
+                Уведомления
+              </Text>
+              <Text fontSize="sm" color="gray.500">
+                {isSupported
+                  ? "Об изменениях в расписании"
+                  : "Не поддерживаются на этом устройстве"}
+              </Text>
+            </Flex>
             {loading ? (
-              <Spinner size="xl" />
-            ) : isSupported ? (
-              subscription ? (
-                <Button colorScheme="red" onClick={unsubscribe}>
-                  Выключить уведомления
-                </Button>
-              ) : (
-                <Button colorScheme="green" onClick={subscribe}>
-                  Включить уведомления
-                </Button>
-              )
+              <Spinner size="sm" color="brand.200" />
             ) : (
-              <p>Пуш-уведомления не поддерживаются</p>
+              <Switch
+                size="lg"
+                colorScheme="teal"
+                isChecked={Boolean(subscription)}
+                isDisabled={!isSupported}
+                onChange={() => (subscription ? unsubscribe() : subscribe())}
+                aria-label="Уведомления"
+              />
             )}
           </Flex>
         </Container>

@@ -70,7 +70,6 @@ export default function ArchivedEventsForSingleMonth({
         pt={10}
         pb={20}
         pos="relative"
-        bgColor="white"
         position="relative"
         h="auto"
         minH="100vh"
@@ -84,17 +83,30 @@ export default function ArchivedEventsForSingleMonth({
           <Heading as="h2">
             Расписание за {month} {year}
           </Heading>
-          <Flex mt={10} gap={7} flexWrap="wrap">
+          <Flex mt={4} flexDir="column" gap={6}>
             {isEmpty(scheduleGrid) && (
               <Text fontSize="2xl">Архив пока пуст</Text>
             )}
             {scheduleGrid.map((grid, index) => (
               <Flex flexDir="column" key={index}>
-                <Heading as="h3" size="xl" fontWeight="medium">
+                {/* Заголовок дня прилипает к верху при прокрутке, как в нативных календарях */}
+                <Heading
+                  as="h3"
+                  fontSize="lg"
+                  fontWeight="semibold"
+                  pos="sticky"
+                  top={[0, 0, 0, "65px"]}
+                  zIndex={1}
+                  py={2}
+                  mx={-4}
+                  px={4}
+                  bgColor="rgba(242, 242, 247, 0.9)"
+                  backdropFilter="blur(12px)"
+                >
                   {getformatDateLocale(grid[0].attributes.date)}
                 </Heading>
                 <Grid
-                  mt={6}
+                  mt={2}
                   gridTemplateColumns={[
                     "1fr",
                     "1fr",
@@ -102,7 +114,7 @@ export default function ArchivedEventsForSingleMonth({
                     "1fr 1fr",
                     "1fr 1fr 1fr",
                   ]}
-                  gap={6}
+                  gap={3}
                 >
                   {grid.map(({ id, attributes }) => (
                     <CardSchedule
